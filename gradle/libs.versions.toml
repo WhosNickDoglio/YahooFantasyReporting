@@ -1,0 +1,22 @@
+[versions]
+ksoup = "0.2.5"
+kotlin = "2.2.20"
+jdk = "24"
+
+[plugins]
+kotlin-jvm = { id = "org.jetbrains.kotlin.jvm", version.ref = "kotlin" }
+kotlin-serialization = { id = "org.jetbrains.kotlin.plugin.serialization", version.ref = "kotlin" }
+metro = { id = "dev.zacsweers.metro", version = "0.6.9" }
+burst = { id = "app.cash.burst" }
+
+[libraries]
+ksoup = { module = "com.fleeksoft.ksoup:ksoup", version.ref = "ksoup" }
+ksoup-network = { module = "com.fleeksoft.ksoup:ksoup-network", version.ref = "ksoup" }
+
+kotlinx-date = { module = "org.jetbrains.kotlinx:kotlinx-datetime", version = "0.7.1" }
+kotlinx-serialization = { module = "org.jetbrains.kotlinx:kotlinx-serialization-core", version = "1.9.0" }
+kotlinx-serialization-csv = { module = "de.brudaswen.kotlinx.serialization:kotlinx-serialization-csv", version = "2.1.0" }
+
+junit = { module = "junit:junit", version = "4.13.2" }
+burst = { module = "app.cash.burst:burst-gradle-plugin", version = "2.10.2" }
+assertk = { module = "com.willowtreeapps.assertk:assertk", version = "0.28.1" }
