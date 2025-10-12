@@ -13,7 +13,7 @@ application {
 kotlin {
     jvmToolchain {
         vendor = JvmVendorSpec.AZUL
-        languageVersion = JavaLanguageVersion.of(24)
+        languageVersion = JavaLanguageVersion.of(libs.versions.jdk.get().toString())
     }
     explicitApi()
 }
@@ -24,6 +24,10 @@ dependencies {
     implementation(libs.kotlinx.serialization.csv)
     implementation(libs.kotlinx.serialization)
     implementation(libs.kotlinx.date)
+    implementation(libs.google.sheets)
+    implementation(libs.google.ouath)
+    implementation(libs.google.api.client)
+    implementation(libs.slf4j)
 
     testImplementation(libs.junit)
     testImplementation(libs.assertk)

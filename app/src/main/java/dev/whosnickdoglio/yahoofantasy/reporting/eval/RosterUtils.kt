@@ -10,4 +10,6 @@ internal fun PlayerRowRawInfo.isEmptyStartingSpot(): Boolean {
     return isEmpty && isStarting
 }
 
-internal fun PlayerRowRawInfo.isStarting(): Boolean = !position.equals("BN") && !position.equals("IL")
+internal fun PlayerRowRawInfo.isStarting(): Boolean = !position.equals("BN") && !isOnInjuryList()
+
+internal fun PlayerRowRawInfo.isOnInjuryList(): Boolean = position?.contains("IL") == true

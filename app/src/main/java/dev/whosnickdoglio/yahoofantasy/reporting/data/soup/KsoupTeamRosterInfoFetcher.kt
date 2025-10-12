@@ -41,56 +41,9 @@ internal class KsoupTeamRosterInfoFetcher(
 
         return RosterInfo(
             name = doc.title().substringAfter("-").substringBefore("|").trim(),
-            players = rows.map { it.toPlayerRowRawInfo() }
-                .filter { it.playerName?.isNotEmpty() == true }
+            players = rows.map { it.toPlayerRowRawInfo() }.filter { it.playerName?.isNotEmpty() == true }
                 .filter { it.playerName != "Players" },
             url = url,
         )
-    }
-}
-
-
-internal fun Element.toPlayerRowRawInfo(): PlayerRowRawInfo {
-    val elements = childElementsList().map { it.text() }
-    val playerName = elements.getOrNull(1)
-    val firstPassPlayerNameSanitization = playerName?.substringBeforeLast("-")
-        // Remove nonsense
-        ?.replace("No New Player Notes", "", ignoreCase = true)
-        ?.replace("New Player Note", "", ignoreCase = true)
-        ?.replace("Player Note ", "", ignoreCase = true)
-        ?.replace("Video Forecast", "", ignoreCase = true)
-    // TODO remove team abbreviations
-
-    val playerHealthStatus = when {
-        firstPassPlayerNameSanitization?.contains("GTD") == true -> PlayerHealthStatus.GAME_TIME_DECISION
-        firstPassPlayerNameSanitization?.contains("INJ") == true -> PlayerHealthStatus.INJURED
-        else -> PlayerHealthStatus.HEALTHY
-    }
-
-    return PlayerRowRawInfo(
-        position = elements.getOrNull(0),
-        playerName = firstPassPlayerNameSanitization?.replace(playerHealthStatus.value, ""),
-        healthStatus = playerHealthStatus,
-        positionEligibility = playerName?.sanitizePlayerPositionEligibility(), // TODO
-        action = elements.getOrNull(2),
-        opponent = elements.getOrNull(3),
-    )
-}
-
-internal enum class PlayerHealthStatus(val value: String) {
-    HEALTHY(""), GAME_TIME_DECISION("GTD"), INJURED("INJ")
-}
-
-
-private fun String?.sanitizePlayerPositionEligibility(): List<String> {
-    val containsNumbers = this?.any { it.isDigit() }
-    val firstPass = this?.substringAfterLast("-")?.trim().orEmpty()
-
-    return if (containsNumbers == false) {
-        firstPass.split(",")
-    } else {
-        val indexOfFirstNumber = firstPass.indexOfFirst { it.isDigit() }
-        val final = firstPass.substring(0, indexOfFirstNumber).split(",")
-        final
     }
 }
