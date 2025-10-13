@@ -10,7 +10,7 @@ class RosterUtilsTest {
     // isOnInjuryList
 
     @Test
-    fun `oops`() {
-        TODO("Not yet implemented")
+    fun `hasGameToday`() {
+
     }
 }

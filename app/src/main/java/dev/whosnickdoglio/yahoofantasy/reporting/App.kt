@@ -20,6 +20,7 @@ internal class App(
 
     suspend fun main() {
         println("Checking rosters for $yesterday")
+        val reports = mutableListOf<GoogleSheetsTeamReport>()
         for (i in 1..leagueInfo.numberOfTeams) {
             val rosterInfo = fetcher.fetchRosterInfo(i)
             val evaluation = rosterEvaluator.evaluate(rosterInfo.players)
@@ -31,16 +32,17 @@ internal class App(
             )
 
             if (evaluation is EvaluationResult.UnsetRoster) {
-                println("Reporting to Google Sheets...")
-                googleSheets.sendReport(
+                reports.add(
                     GoogleSheetsTeamReport(
                         date = yesterday,
                         teamName = rosterInfo.name,
-                        violation = evaluation.violations,
+                        violation = emptyList(),
                         url = rosterInfo.url,
                     )
                 )
             }
         }
+        println("Reporting to Google Sheets...")
+        googleSheets.sendReport(reports)
     }
 }
