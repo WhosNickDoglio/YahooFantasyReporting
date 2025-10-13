@@ -11,9 +11,9 @@ internal class RosterEvaluator(private val rosterCheckers: Set<RosterChecker>) {
         val benchPlayersWithGamesToday =
             roster.filter { rosterSpot -> rosterSpot.position.equals("BN") && rosterSpot.healthStatus == PlayerHealthStatus.HEALTHY }
                 .any { rosterSpot -> rosterSpot.hasGameToday() }
-        val emptyStartingSpots = roster.filter { rosterSpot -> rosterSpot.isEmptyStartingSpot() }
+        val noGamesStartingSpots = roster.filter { rosterSpot -> rosterSpot.opponent == null }
 
-        if (!benchPlayersWithGamesToday || emptyStartingSpots.isEmpty()) return EvaluationResult.SetRoster
+        if (!benchPlayersWithGamesToday || noGamesStartingSpots.isEmpty()) return EvaluationResult.SetRoster
 
         val violations = rosterCheckers.mapNotNull { checker -> checker.check(roster) }
 

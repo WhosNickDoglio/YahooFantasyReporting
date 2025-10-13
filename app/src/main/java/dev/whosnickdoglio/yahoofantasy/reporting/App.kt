@@ -22,16 +22,16 @@ internal class App(
         println("Checking rosters for $yesterday")
         val reports = mutableListOf<GoogleSheetsTeamReport>()
         for (i in 1..leagueInfo.numberOfTeams) {
-            val rosterInfo = fetcher.fetchRosterInfo(i)
-            val evaluation = rosterEvaluator.evaluate(rosterInfo.players)
+            val rosterInfo = fetcher.fetchRosterInfo(teamId = i)
+            val result = rosterEvaluator.evaluate(rosterInfo.players)
             println(
-                when (evaluation) {
+                when (result) {
                     is EvaluationResult.SetRoster -> "Roster is set for ${rosterInfo.name}! ${rosterInfo.url}"
-                    is EvaluationResult.UnsetRoster -> "${rosterInfo.name} has violations: ${evaluation.violations.joinToString()} ${rosterInfo.url}"
+                    is EvaluationResult.UnsetRoster -> "${rosterInfo.name} has violations: ${result.violations.joinToString()} ${rosterInfo.url}"
                 }
             )
 
-            if (evaluation is EvaluationResult.UnsetRoster) {
+            if (result is EvaluationResult.UnsetRoster) {
                 reports.add(
                     GoogleSheetsTeamReport(
                         date = yesterday,

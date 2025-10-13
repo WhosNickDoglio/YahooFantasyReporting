@@ -10,7 +10,7 @@ import dev.zacsweers.metro.Inject
 @ContributesIntoSet(AppScope::class)
 internal class ActivePlayerOnBenchChecker : RosterChecker {
     override fun check(roster: List<PlayerRowRawInfo>): Violation? {
-        val emptyStartingSpots = roster.filter { it.isEmptyStartingSpot() }
+        val emptyStartingSpots = roster.filter { it.isAvailableStartingSpot() }
         val hasBenchPlayersWhoCanStart =
             roster.filter { it.hasGameToday() && it.healthStatus == PlayerHealthStatus.HEALTHY && it.position == "BN" }
 
