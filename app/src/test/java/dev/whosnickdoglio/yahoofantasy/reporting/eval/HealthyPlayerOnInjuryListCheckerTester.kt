@@ -6,7 +6,7 @@ import assertk.assertions.isNull
 import dev.whosnickdoglio.yahoofantasy.reporting.data.PlayerHealthStatus
 import org.junit.Test
 
-class HealthyPlayerOnInjuryListCheckTester {
+class HealthyPlayerOnInjuryListCheckerTester {
 
     private val checker = HealthyPlayerOnInjuryListChecker()
 

@@ -7,8 +7,7 @@ internal fun PlayerRowRawInfo.hasGameToday(): Boolean = opponent?.isNotEmpty() =
 internal fun PlayerRowRawInfo.isAvailableStartingSpot(): Boolean {
     val isEmpty = playerName?.contains("Empty") == true
     val isStarting = isStarting()
-    val hasNoOpponent = opponent == null
-    return isStarting && (isEmpty || hasNoOpponent)
+    return isStarting && (isEmpty || !hasGameToday())
 }
 
 internal fun PlayerRowRawInfo.isStarting(): Boolean = !position.equals("BN") && !isOnInjuryList()
