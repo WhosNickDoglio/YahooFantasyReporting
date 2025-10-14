@@ -1,0 +1,9 @@
+package dev.whosnickdoglio.yahoofantasy.reporting.data
+
+internal data class FakeLeagueInfo(
+    override val name: String = "Mitch Rob",
+    override val baseUrl: String = "example.com",
+    override val numberOfTeams: Int = 12,
+    override val spreadSheetInfo: SpreadSheetInfo = SpreadSheetInfo("", ""),
+    override val injuryListCount: Int = 4
+) : LeagueInfo
