@@ -13,7 +13,7 @@ application {
 kotlin {
     jvmToolchain {
         vendor = JvmVendorSpec.AZUL
-        languageVersion = JavaLanguageVersion.of(libs.versions.jdk.get().toString())
+        languageVersion = JavaLanguageVersion.of(libs.versions.jdk.get())
     }
     explicitApi()
 }

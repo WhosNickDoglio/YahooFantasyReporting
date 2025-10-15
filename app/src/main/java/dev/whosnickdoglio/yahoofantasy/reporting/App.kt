@@ -18,6 +18,7 @@ internal class App(
     private val googleSheets: GoogleSheets,
 ) {
 
+    // TODO separate logging for easier tests
     suspend fun main() {
         println("Checking rosters for $yesterday")
         val reports = mutableListOf<GoogleSheetsTeamReport>()
@@ -42,7 +43,11 @@ internal class App(
                 )
             }
         }
-        println("Reporting to Google Sheets...")
-        googleSheets.sendReport(reports)
+        if (reports.isNotEmpty()) {
+            println("Reporting to Google Sheets...")
+            googleSheets.sendReport(reports)
+        } else {
+            println("No violations found $yesterday")
+        }
     }
 }

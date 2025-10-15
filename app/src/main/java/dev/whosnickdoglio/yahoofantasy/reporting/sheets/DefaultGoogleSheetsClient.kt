@@ -17,19 +17,16 @@ internal class DefaultGoogleSheetsClient(
     private val leagueInfo: LeagueInfo,
 ) : GoogleSheets {
     override suspend fun sendReport(teamReport: List<GoogleSheetsTeamReport>) {
-        if (teamReport.isEmpty()) {
-            println("No reports to send")
-        } else {
-            with(sheets.spreadsheets().values()) {
-                append(
-                    leagueInfo.spreadSheetInfo.id,
-                    leagueInfo.spreadSheetInfo.range,
-                    ValueRange().setValues(
-                            teamReport.map { it.toList() }),
-                ).setValueInputOption("USER_ENTERED")
+        require(teamReport.isNotEmpty()) { "Team report cannot be empty" }
+        with(sheets.spreadsheets().values()) {
+            append(
+                leagueInfo.spreadSheetInfo.id,
+                leagueInfo.spreadSheetInfo.range,
+                ValueRange().setValues(
+                    teamReport.map { it.toList() }),
+            ).setValueInputOption("USER_ENTERED")
 
-            }.execute()
-        }
+        }.execute()
     }
 }
 
