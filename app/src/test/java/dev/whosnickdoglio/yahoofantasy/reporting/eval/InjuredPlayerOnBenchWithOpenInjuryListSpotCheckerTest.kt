@@ -12,9 +12,11 @@ class InjuredPlayerOnBenchWithOpenInjuryListSpotCheckerTest {
     @Test
     fun `empty injury list with injured player on bench returns violation`() {
         val checker = InjuredPlayerOnBenchWithOpenInjuryListSpotChecker(FakeLeagueInfo())
-        val result = checker.check(Roster(
-            benchPlayers = listOf(Player(position = "BN", healthStatus = PlayerHealthStatus.INJURED))
-        ))
+        val result = checker.check(
+            Roster(
+                Player(position = "BN", healthStatus = PlayerHealthStatus.INJURED)
+            )
+        )
 
         assertThat(result).isEqualTo(Violation.IL_PLAYER_ON_BENCH_WITH_OPEN_IL_SPOT)
     }
@@ -22,19 +24,16 @@ class InjuredPlayerOnBenchWithOpenInjuryListSpotCheckerTest {
     @Test
     fun `full injury list with injured player on bench returns no violation`() {
         val checker = InjuredPlayerOnBenchWithOpenInjuryListSpotChecker(FakeLeagueInfo())
-        val result = checker.check(Roster(
-            benchPlayers = listOf(
-                Player(healthStatus = PlayerHealthStatus.HEALTHY),
+        val result = checker.check(
+            Roster(
                 Player(healthStatus = PlayerHealthStatus.HEALTHY),
                 Player(healthStatus = PlayerHealthStatus.INJURED),
-            ),
-            injuryList = listOf(
-                Player(position = "IL",  healthStatus = PlayerHealthStatus.INJURED),
-                Player(position = "IL",  healthStatus = PlayerHealthStatus.INJURED),
-                Player(position = "IL",  healthStatus = PlayerHealthStatus.INJURED),
-                Player(position = "IL",  healthStatus = PlayerHealthStatus.INJURED),
+                Player(position = "IL", healthStatus = PlayerHealthStatus.INJURED),
+                Player(position = "IL", healthStatus = PlayerHealthStatus.INJURED),
+                Player(position = "IL", healthStatus = PlayerHealthStatus.INJURED),
+                Player(position = "IL", healthStatus = PlayerHealthStatus.INJURED),
             )
-        ))
+        )
 
         assertThat(result).isNull()
     }
@@ -42,19 +41,16 @@ class InjuredPlayerOnBenchWithOpenInjuryListSpotCheckerTest {
     @Test
     fun `full injury list with no injured bench players returns no violations`() {
         val checker = InjuredPlayerOnBenchWithOpenInjuryListSpotChecker(FakeLeagueInfo())
-        val result = checker.check(Roster(
-            benchPlayers = listOf(
+        val result = checker.check(
+            Roster(
                 Player(healthStatus = PlayerHealthStatus.HEALTHY),
                 Player(healthStatus = PlayerHealthStatus.HEALTHY),
-                Player(healthStatus = PlayerHealthStatus.HEALTHY),
-            ),
-            injuryList = listOf(
-                Player(position = "IL",  healthStatus = PlayerHealthStatus.INJURED),
-                Player(position = "IL",  healthStatus = PlayerHealthStatus.INJURED),
-                Player(position = "IL",  healthStatus = PlayerHealthStatus.INJURED),
-                Player(position = "IL",  healthStatus = PlayerHealthStatus.INJURED),
+                Player(position = "IL", healthStatus = PlayerHealthStatus.INJURED),
+                Player(position = "IL", healthStatus = PlayerHealthStatus.INJURED),
+                Player(position = "IL", healthStatus = PlayerHealthStatus.INJURED),
+                Player(position = "IL", healthStatus = PlayerHealthStatus.INJURED),
             )
-        ))
+        )
 
         assertThat(result).isNull()
     }

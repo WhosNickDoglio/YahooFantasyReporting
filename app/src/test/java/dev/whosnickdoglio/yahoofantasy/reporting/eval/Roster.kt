@@ -4,14 +4,11 @@ import dev.whosnickdoglio.yahoofantasy.reporting.data.PlayerHealthStatus
 import dev.whosnickdoglio.yahoofantasy.reporting.data.PlayerRowRawInfo
 
 
+// TODO do I need this
 internal fun Roster(
-    starters: List<PlayerRowRawInfo> = emptyList(),
-    benchPlayers: List<PlayerRowRawInfo> = emptyList(),
-    injuryList: List<PlayerRowRawInfo> = emptyList(),
-    ): List<PlayerRowRawInfo> = buildList { 
-        addAll(starters)
-        addAll(benchPlayers)
-        addAll(injuryList)
+    vararg players: PlayerRowRawInfo = emptyArray(),
+): List<PlayerRowRawInfo> = buildList {
+        addAll(players.toSet())
     }
 
 internal fun EmptyRosterSpot(

@@ -18,20 +18,19 @@ class HealthyPlayerOnInjuryListCheckerTester {
 
     @Test
     fun `injury list only has injured players on it`() {
-        val result = checker.check(Roster(injuryList = buildList {
-            add(Player(position = "IL", healthStatus = PlayerHealthStatus.INJURED))
-            add(Player(position = "IL", healthStatus = PlayerHealthStatus.INJURED))
-            add(Player(position = "IL", healthStatus = PlayerHealthStatus.INJURED))
-        }))
+        val result = checker.check(Roster(
+            Player(position = "IL", healthStatus = PlayerHealthStatus.INJURED),
+            Player(position = "IL", healthStatus = PlayerHealthStatus.INJURED),
+        ))
         assertThat(result).isNull()
     }
 
     @Test
     fun `injury list has a healthy player on it`() {
-        val result = checker.check(Roster(injuryList = buildList {
-            add(Player(position = "IL", healthStatus = PlayerHealthStatus.INJURED))
-            add(Player(position = "IL", healthStatus = PlayerHealthStatus.HEALTHY))
-        }))
+        val result = checker.check(Roster(
+            Player(position = "IL", healthStatus = PlayerHealthStatus.INJURED),
+            Player(position = "IL", healthStatus = PlayerHealthStatus.HEALTHY),
+        ))
         assertThat(result).isEqualTo(Violation.HEALTHY_ON_IL)
     }
 }

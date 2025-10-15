@@ -12,33 +12,39 @@ class InjuredPlayersInStartingLineupCheckerTest {
 
     @Test
     fun `starting lineup is empty`() {
-        val result = checker.check(Roster(starters = buildList {
-            addAll(List(10) {
-                EmptyRosterSpot()
-            })
-        }))
+        val result = checker.check(
+            Roster(
+                EmptyRosterSpot(),
+                EmptyRosterSpot(),
+                EmptyRosterSpot(),
+                EmptyRosterSpot(),
+                EmptyRosterSpot(),
+            )
+        )
         assertThat(result).isNull()
     }
 
     @Test
     fun `starting lineup only has healthy players on it`() {
-        val result = checker.check(Roster(injuryList = buildList {
-            add(Player(position = "PG"))
-            add(Player(position = "G"))
-            add(Player(position = "Util"))
-            add(Player(position = "C"))
-        }))
+        val result = checker.check(
+            Roster(
+                Player(position = "PG"),
+                Player(position = "Util"),
+                Player(position = "C"),
+            )
+        )
         assertThat(result).isNull()
     }
 
     @Test
     fun `starting lineup  has a injured player on it`() {
-        val result = checker.check(Roster(injuryList = buildList {
-            add(Player(position = "PG", healthStatus = PlayerHealthStatus.INJURED))
-            add(Player(position = "G"))
-            add(Player(position = "Util"))
-            add(Player(position = "C"))
-        }))
+        val result = checker.check(
+            Roster(
+                Player(position = "PG", healthStatus = PlayerHealthStatus.INJURED),
+                Player(position = "Util"),
+                Player(position = "C"),
+            )
+        )
         assertThat(result).isEqualTo(Violation.IL_IN_STARTING_LINEUP)
     }
 
