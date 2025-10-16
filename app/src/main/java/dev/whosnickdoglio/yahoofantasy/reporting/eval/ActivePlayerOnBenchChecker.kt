@@ -9,24 +9,52 @@ import dev.zacsweers.metro.Inject
 @Inject
 @ContributesIntoSet(AppScope::class)
 internal class ActivePlayerOnBenchChecker : RosterChecker {
+    // TODO need to figure out a good way to check if we can move things around to make it work
     override fun check(roster: List<PlayerRowRawInfo>): Violation? {
-        val emptyStartingSpots = roster.filter { it.isAvailableStartingSpot() }
+        val mutableRoster = roster.toMutableList()
+        val availableStartingSpots = mutableRoster.filter { it.isAvailableStartingSpot() }
+
+        var violation: Violation? = null
+
+        val firstPass = mutableRoster.checkForEasyMoveFromBench(availableStartingSpots)
+
+        if (firstPass != null) return firstPass
+
+        availableStartingSpots.forEach { availableSpot ->
+            val availableIndex = mutableRoster.indexOf(availableSpot)
+            val openPosition = availableSpot.position
+            val firstMovablePlayer = mutableRoster.firstOrNull {
+                it.isStarting() && it.hasGameToday() && it.fullPositionalEligibility()
+                    .contains(openPosition) && availableSpot.fullPositionalEligibility().contains(it.position)
+            } ?: return@forEach
+
+            val oldPosition = firstMovablePlayer.position
+            val oldIndex = mutableRoster.indexOf(firstMovablePlayer)
+
+            mutableRoster[oldIndex] = firstMovablePlayer.copy(position = availableSpot.position)
+            mutableRoster[availableIndex] = availableSpot.copy(position = oldPosition)
+
+            violation = mutableRoster.checkForEasyMoveFromBench(mutableRoster.filter { it.isAvailableStartingSpot() })
+        }
+
+        return violation
+    }
+
+    private fun List<PlayerRowRawInfo>.checkForEasyMoveFromBench(availableStartingSpots: List<PlayerRowRawInfo>): Violation? {
         val hasBenchPlayersWhoCanStart =
-            roster.filter { it.hasGameToday() && it.healthStatus == PlayerHealthStatus.HEALTHY && it.position == "BN" }
+            filter { it.hasGameToday() && it.healthStatus == PlayerHealthStatus.HEALTHY && it.position == "BN" }
 
-        val openPositions = emptyStartingSpots.map { it.position }
+        val openPositions = availableStartingSpots.map { it.position }
 
-        val canMoveBenchPlayerToOpenPosition =
-            hasBenchPlayersWhoCanStart.any { benchPlayer -> benchPlayer.positionEligibility?.any { position -> position in openPositions } == true }
-
-        // account for Util not being in positionEligibility
-        val benchPlayersEligiblePositions = hasBenchPlayersWhoCanStart.flatMap { it.positionEligibility.orEmpty() }
-        // TODO need to figure out a good way to check if we can move things around to make it work
+        val canMoveBenchPlayerToOpenPosition = hasBenchPlayersWhoCanStart.any { benchPlayer ->
+            benchPlayer.fullPositionalEligibility().any { position -> position in openPositions }
+        }
 
         return if (canMoveBenchPlayerToOpenPosition) {
             Violation.ACTIVE_PLAYER_ON_BENCH_WITH_OPEN_STARTING_LINEUP_SPOT
         } else {
             null
         }
+
     }
 }
