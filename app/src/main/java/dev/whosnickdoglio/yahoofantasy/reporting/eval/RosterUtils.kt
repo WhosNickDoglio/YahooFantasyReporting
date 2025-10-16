@@ -13,3 +13,9 @@ internal fun PlayerRowRawInfo.isAvailableStartingSpot(): Boolean {
 internal fun PlayerRowRawInfo.isStarting(): Boolean = !position.equals("BN") && !isOnInjuryList()
 
 internal fun PlayerRowRawInfo.isOnInjuryList(): Boolean = position?.contains("IL") == true
+
+internal fun PlayerRowRawInfo.fullPositionalEligibility(): List<String> = buildList {
+    addAll(positionEligibility?.filterNotNull().orEmpty())
+    // free for all, any position
+    add("Util")
+}

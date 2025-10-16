@@ -1,6 +1,7 @@
 package dev.whosnickdoglio.yahoofantasy.reporting.eval
 
 import assertk.assertThat
+import assertk.assertions.isEqualTo
 import assertk.assertions.isFalse
 import assertk.assertions.isTrue
 import org.junit.Test
@@ -71,5 +72,10 @@ class RosterUtilsTest {
     @Test
     fun `given player on injury list when isOnInjuryList is called returns true`() {
         assertThat(Player(position = "IL").isOnInjuryList()).isTrue()
+    }
+
+    @Test
+    fun `given player with G eligibility when foo is called return all eligible positions including Util`() {
+        assertThat(Player(positionEligibility = listOf("G")).fullPositionalEligibility()).isEqualTo(listOf("G", "Util"))
     }
 }
