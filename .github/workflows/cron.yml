@@ -1,0 +1,17 @@
+name: Check Rosters
+on:
+  schedule:
+    - cron: '0 14 * * *'
+jobs:
+  Build:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        league: [ mitch, redacted, birthday ]
+    steps:
+      - uses: actions/checkout@08c6903cd8c0fde910a37f88322edcfb5dd907a8 # v5.0.0
+      - uses: ./.github/actions/setup
+        with:
+          encryption_key: ${{ secrets.GRADLE_ENCRYPTION_KEY }}
+      - name: Build
+        run: ./gradlew app:run  --args="${{ matrix.league }}"
