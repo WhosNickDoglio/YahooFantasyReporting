@@ -1,6 +1,5 @@
 package dev.whosnickdoglio.yahoofantasy.reporting.sheets
 
-import dev.whosnickdoglio.yahoofantasy.reporting.eval.Violation
 import kotlinx.datetime.LocalDate
 
 internal interface GoogleSheets {
@@ -10,6 +9,9 @@ internal interface GoogleSheets {
 internal data class GoogleSheetsTeamReport(
     val date: LocalDate,
     val teamName: String,
-    val violation: List<Violation>,
+    val healthyOnInjuryList: Boolean,
+    val activePlayerOnBenchWithOpenStartingSpot: Boolean,
+    val injuredPlayerInStartingLineup: Boolean,
+    val injuredPlayerOnBenchWithOpenInjuryListSpot: Boolean,
     val url: String,
 )

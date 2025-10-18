@@ -31,7 +31,10 @@ internal class DefaultGoogleSheetsClient(
 private fun GoogleSheetsTeamReport.toList(): List<String> = listOf(
     date.format(dateFormat),
     teamName,
-    violation.joinToString(", "),
+    healthyOnInjuryList.toString(),
+    activePlayerOnBenchWithOpenStartingSpot.toString(),
+    injuredPlayerInStartingLineup.toString(),
+    injuredPlayerOnBenchWithOpenInjuryListSpot.toString(),
     url,
 )
 

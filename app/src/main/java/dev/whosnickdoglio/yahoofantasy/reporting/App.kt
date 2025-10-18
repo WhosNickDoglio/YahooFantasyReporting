@@ -4,6 +4,7 @@ import dev.whosnickdoglio.yahoofantasy.reporting.data.LeagueInfo
 import dev.whosnickdoglio.yahoofantasy.reporting.data.TeamRosterInfoFetcher
 import dev.whosnickdoglio.yahoofantasy.reporting.eval.EvaluationResult
 import dev.whosnickdoglio.yahoofantasy.reporting.eval.RosterEvaluator
+import dev.whosnickdoglio.yahoofantasy.reporting.eval.Violation
 import dev.whosnickdoglio.yahoofantasy.reporting.log.SimpleLogger
 import dev.whosnickdoglio.yahoofantasy.reporting.sheets.GoogleSheets
 import dev.whosnickdoglio.yahoofantasy.reporting.sheets.GoogleSheetsTeamReport
@@ -34,11 +35,15 @@ internal class App(
             )
 
             if (result is EvaluationResult.UnsetRoster) {
+                val violations = result.violations
                 reports.add(
                     GoogleSheetsTeamReport(
                         date = yesterday,
                         teamName = rosterInfo.name,
-                        violation = result.violations,
+                        healthyOnInjuryList = violations.contains(Violation.HEALTHY_ON_IL),
+                        activePlayerOnBenchWithOpenStartingSpot = violations.contains(Violation.ACTIVE_PLAYER_ON_BENCH_WITH_OPEN_STARTING_LINEUP_SPOT),
+                        injuredPlayerInStartingLineup = violations.contains(Violation.IL_IN_STARTING_LINEUP),
+                        injuredPlayerOnBenchWithOpenInjuryListSpot = violations.contains(Violation.IL_PLAYER_ON_BENCH_WITH_OPEN_IL_SPOT),
                         url = rosterInfo.url,
                     )
                 )
