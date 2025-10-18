@@ -1,6 +1,5 @@
 plugins {
     alias(libs.plugins.kotlin.jvm)
-    alias(libs.plugins.kotlin.serialization)
     alias(libs.plugins.metro)
     alias(libs.plugins.burst)
     application
@@ -25,8 +24,6 @@ kotlin {
 dependencies {
     implementation(libs.ksoup)
     implementation(libs.ksoup.network)
-    implementation(libs.kotlinx.serialization.csv)
-    implementation(libs.kotlinx.serialization)
     implementation(libs.kotlinx.date)
     implementation(libs.google.sheets)
     implementation(libs.google.ouath)
