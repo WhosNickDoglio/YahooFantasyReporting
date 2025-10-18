@@ -4,6 +4,7 @@ import dev.whosnickdoglio.yahoofantasy.reporting.data.LeagueInfo
 import dev.whosnickdoglio.yahoofantasy.reporting.data.TeamRosterInfoFetcher
 import dev.whosnickdoglio.yahoofantasy.reporting.eval.EvaluationResult
 import dev.whosnickdoglio.yahoofantasy.reporting.eval.RosterEvaluator
+import dev.whosnickdoglio.yahoofantasy.reporting.log.SimpleLogger
 import dev.whosnickdoglio.yahoofantasy.reporting.sheets.GoogleSheets
 import dev.whosnickdoglio.yahoofantasy.reporting.sheets.GoogleSheetsTeamReport
 import dev.zacsweers.metro.Inject
@@ -16,16 +17,16 @@ internal class App(
     private val leagueInfo: LeagueInfo,
     private val rosterEvaluator: RosterEvaluator,
     private val googleSheets: GoogleSheets,
+    private val logger: SimpleLogger,
 ) {
 
-    // TODO separate logging for easier tests
     suspend fun main() {
-        println("Checking rosters for $yesterday")
+        logger.log("Checking rosters for $yesterday")
         val reports = mutableListOf<GoogleSheetsTeamReport>()
         for (i in 1..leagueInfo.numberOfTeams) {
             val rosterInfo = fetcher.fetchRosterInfo(teamId = i)
             val result = rosterEvaluator.evaluate(rosterInfo.players)
-            println(
+            logger.log(
                 when (result) {
                     is EvaluationResult.SetRoster -> "Roster is set for ${rosterInfo.name}! ${rosterInfo.url}"
                     is EvaluationResult.UnsetRoster -> "${rosterInfo.name} has violations: ${result.violations.joinToString()} ${rosterInfo.url}"
@@ -44,10 +45,10 @@ internal class App(
             }
         }
         if (reports.isNotEmpty()) {
-            println("Reporting to Google Sheets...")
+            logger.log("Reporting to Google Sheets...")
             googleSheets.sendReport(reports)
         } else {
-            println("No violations found $yesterday")
+            logger.log("No violations found $yesterday")
         }
     }
 }
