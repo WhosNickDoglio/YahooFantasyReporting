@@ -26,7 +26,8 @@ internal class KsoupTeamRosterInfoFetcher(
 
         return RosterInfo(
             name = doc.title().substringAfterLast("-").substringBefore("|").trim(),
-            players = rows.map { it.toPlayerRowRawInfo() }.filter { it.playerName?.isNotEmpty() == true }
+            players = rows.map { it.toPlayerRowRawInfo() }
+                .filter { it.playerName?.isNotEmpty() == true }
                 .filter { it.playerName != "Players" },
             url = url,
         )

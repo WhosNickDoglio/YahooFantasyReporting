@@ -38,7 +38,7 @@ internal class App(
                     GoogleSheetsTeamReport(
                         date = yesterday,
                         teamName = rosterInfo.name,
-                        violation = emptyList(),
+                        violation = result.violations,
                         url = rosterInfo.url,
                     )
                 )
