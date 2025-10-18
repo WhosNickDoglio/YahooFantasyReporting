@@ -9,7 +9,7 @@ import dev.whosnickdoglio.yahoofantasy.reporting.log.SimpleLogger
 import dev.whosnickdoglio.yahoofantasy.reporting.sheets.GoogleSheets
 import dev.whosnickdoglio.yahoofantasy.reporting.sheets.GoogleSheetsTeamReport
 import dev.zacsweers.metro.Inject
-import kotlinx.datetime.LocalDate
+import java.time.LocalDate
 
 @Inject
 internal class App(

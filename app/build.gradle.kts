@@ -24,7 +24,6 @@ kotlin {
 dependencies {
     implementation(libs.ksoup)
     implementation(libs.ksoup.network)
-    implementation(libs.kotlinx.date)
     implementation(libs.google.sheets)
     implementation(libs.google.ouath)
     implementation(libs.google.api.client)

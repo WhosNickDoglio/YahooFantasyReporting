@@ -9,8 +9,7 @@ import dev.whosnickdoglio.yahoofantasy.reporting.data.TeamRosterInfoFetcher
 import dev.whosnickdoglio.yahoofantasy.reporting.data.RosterInfo
 import dev.zacsweers.metro.AppScope
 import dev.zacsweers.metro.ContributesBinding
-import kotlinx.datetime.LocalDate
-import kotlinx.datetime.format
+import java.time.LocalDate
 
 @ContributesBinding(AppScope::class)
 internal class KsoupTeamRosterInfoFetcher(
@@ -19,7 +18,7 @@ internal class KsoupTeamRosterInfoFetcher(
 ) : TeamRosterInfoFetcher {
 
     override suspend fun fetchRosterInfo(teamId: Int): RosterInfo {
-        val url = "${leagueInfo.baseUrl}/$teamId/team?&date=${date.format(LocalDate.Formats.ISO)}"
+        val url = "${leagueInfo.baseUrl}/$teamId/team?&date=$date"
         val doc = Ksoup.parseGetRequest(url)
         val table = doc.select(Evaluator.Id("statTable0"))
         val rows: List<Element> = table.select("tr")

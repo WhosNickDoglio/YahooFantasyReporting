@@ -5,7 +5,7 @@ import dev.whosnickdoglio.yahoofantasy.reporting.data.LeagueInfo
 import dev.zacsweers.metro.AppScope
 import dev.zacsweers.metro.DependencyGraph
 import dev.zacsweers.metro.Provides
-import kotlinx.datetime.LocalDate
+import java.time.LocalDate
 
 @DependencyGraph(AppScope::class)
 internal interface AppDependencyGraph {

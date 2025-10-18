@@ -1,6 +1,6 @@
 package dev.whosnickdoglio.yahoofantasy.reporting.sheets
 
-import kotlinx.datetime.LocalDate
+import java.time.LocalDate
 
 internal interface GoogleSheets {
     suspend fun sendReport(teamReport: List<GoogleSheetsTeamReport>)

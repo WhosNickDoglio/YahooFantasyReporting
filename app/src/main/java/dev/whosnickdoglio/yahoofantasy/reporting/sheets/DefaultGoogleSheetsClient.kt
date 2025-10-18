@@ -5,9 +5,6 @@ import com.google.api.services.sheets.v4.model.ValueRange
 import dev.whosnickdoglio.yahoofantasy.reporting.data.LeagueInfo
 import dev.zacsweers.metro.AppScope
 import dev.zacsweers.metro.ContributesBinding
-import kotlinx.datetime.LocalDate
-import kotlinx.datetime.format
-import kotlinx.datetime.format.char
 
 @ContributesBinding(AppScope::class)
 internal class DefaultGoogleSheetsClient(
@@ -29,7 +26,7 @@ internal class DefaultGoogleSheetsClient(
 }
 
 private fun GoogleSheetsTeamReport.toList(): List<String> = listOf(
-    date.format(dateFormat),
+    date.toString(),
     teamName,
     healthyOnInjuryList.toString(),
     activePlayerOnBenchWithOpenStartingSpot.toString(),
@@ -37,11 +34,3 @@ private fun GoogleSheetsTeamReport.toList(): List<String> = listOf(
     injuredPlayerOnBenchWithOpenInjuryListSpot.toString(),
     url,
 )
-
-private val dateFormat = LocalDate.Format {
-    monthNumber()
-    char('-')
-    day()
-    char('-')
-    year()
-}
