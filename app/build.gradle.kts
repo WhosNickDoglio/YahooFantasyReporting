@@ -6,6 +6,10 @@ plugins {
     application
 }
 
+metro {
+    contributesAsInject = true
+}
+
 application {
     mainClass = "dev.whosnickdoglio.yahoofantasy.reporting.MainKt"
 }

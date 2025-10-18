@@ -6,7 +6,7 @@ jdk = "24"
 [plugins]
 kotlin-jvm = { id = "org.jetbrains.kotlin.jvm", version.ref = "kotlin" }
 kotlin-serialization = { id = "org.jetbrains.kotlin.plugin.serialization", version.ref = "kotlin" }
-metro = { id = "dev.zacsweers.metro", version = "0.6.10" }
+metro = { id = "dev.zacsweers.metro", version = "0.7.0" }
 burst = { id = "app.cash.burst" }
 
 [libraries]

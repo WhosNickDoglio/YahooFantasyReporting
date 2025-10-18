@@ -5,9 +5,7 @@ import dev.whosnickdoglio.yahoofantasy.reporting.data.PlayerHealthStatus
 import dev.whosnickdoglio.yahoofantasy.reporting.data.PlayerRowRawInfo
 import dev.zacsweers.metro.AppScope
 import dev.zacsweers.metro.ContributesIntoSet
-import dev.zacsweers.metro.Inject
 
-@Inject
 @ContributesIntoSet(AppScope::class)
 internal class InjuredPlayerOnBenchWithOpenInjuryListSpotChecker(private val leagueInfo: LeagueInfo) : RosterChecker {
     override fun check(roster: List<PlayerRowRawInfo>): Violation? {

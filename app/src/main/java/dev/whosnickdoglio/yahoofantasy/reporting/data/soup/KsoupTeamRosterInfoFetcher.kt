@@ -9,11 +9,9 @@ import dev.whosnickdoglio.yahoofantasy.reporting.data.TeamRosterInfoFetcher
 import dev.whosnickdoglio.yahoofantasy.reporting.data.RosterInfo
 import dev.zacsweers.metro.AppScope
 import dev.zacsweers.metro.ContributesBinding
-import dev.zacsweers.metro.Inject
 import kotlinx.datetime.LocalDate
 import kotlinx.datetime.format
 
-@Inject
 @ContributesBinding(AppScope::class)
 internal class KsoupTeamRosterInfoFetcher(
     private val date: LocalDate,

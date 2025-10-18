@@ -5,12 +5,10 @@ import com.google.api.services.sheets.v4.model.ValueRange
 import dev.whosnickdoglio.yahoofantasy.reporting.data.LeagueInfo
 import dev.zacsweers.metro.AppScope
 import dev.zacsweers.metro.ContributesBinding
-import dev.zacsweers.metro.Inject
 import kotlinx.datetime.LocalDate
 import kotlinx.datetime.format
 import kotlinx.datetime.format.char
 
-@Inject
 @ContributesBinding(AppScope::class)
 internal class DefaultGoogleSheetsClient(
     private val sheets: Sheets,
