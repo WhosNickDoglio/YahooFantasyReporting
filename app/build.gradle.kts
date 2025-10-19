@@ -7,9 +7,7 @@ plugins {
     application
 }
 
-convention {
-    enableCodeCoverageWithKover()
-}
+convention { enableCodeCoverageWithKover() }
 
 metro { contributesAsInject = true }
 
