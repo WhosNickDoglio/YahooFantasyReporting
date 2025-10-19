@@ -6,6 +6,8 @@ on:
 jobs:
   Build:
     runs-on: ubuntu-latest
+    env:
+      GOOGLE_CREDENTIALS: ${{ secrets.GOOGLE_CREDENTIALS }}
     strategy:
       matrix:
         league: [ mitch, redacted, birthday ]
