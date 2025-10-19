@@ -56,6 +56,7 @@ internal class App(
                             violations.contains(Violation.IL_IN_STARTING_LINEUP),
                         injuredPlayerOnBenchWithOpenInjuryListSpot =
                             violations.contains(Violation.IL_PLAYER_ON_BENCH_WITH_OPEN_IL_SPOT),
+                        teamId = info.id,
                         url = info.url,
                     )
                 }

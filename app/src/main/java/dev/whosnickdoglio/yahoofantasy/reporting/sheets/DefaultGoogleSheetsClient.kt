@@ -39,5 +39,6 @@ private fun GoogleSheetsTeamReport.toList(): List<String> =
         activePlayerOnBenchWithOpenStartingSpot.toString(),
         injuredPlayerInStartingLineup.toString(),
         injuredPlayerOnBenchWithOpenInjuryListSpot.toString(),
+        teamId.toString(),
         url,
     )

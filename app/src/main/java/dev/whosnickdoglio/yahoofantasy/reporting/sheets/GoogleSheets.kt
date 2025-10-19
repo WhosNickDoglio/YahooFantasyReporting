@@ -15,5 +15,6 @@ internal data class GoogleSheetsTeamReport(
     val activePlayerOnBenchWithOpenStartingSpot: Boolean,
     val injuredPlayerInStartingLineup: Boolean,
     val injuredPlayerOnBenchWithOpenInjuryListSpot: Boolean,
+    val teamId: Int,
     val url: String,
 )

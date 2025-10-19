@@ -9,6 +9,7 @@ internal interface TeamRosterInfoFetcher {
 internal data class RosterInfo(
     val name: String,
     val players: List<PlayerRowRawInfo>,
+    val id: Int,
     val url: String,
 )
 

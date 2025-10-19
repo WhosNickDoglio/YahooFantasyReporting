@@ -90,7 +90,7 @@ internal class SanitizationTest {
 
     @Burst
     @Test
-        fun sanitizePlayerHealthStatus(player: SanitizeHealthStatus) {
+    fun sanitizePlayerHealthStatus(player: SanitizeHealthStatus) {
         assertThat(player.input.sanitizePlayerHealthStatus()).isEqualTo(player.expected)
     }
 
