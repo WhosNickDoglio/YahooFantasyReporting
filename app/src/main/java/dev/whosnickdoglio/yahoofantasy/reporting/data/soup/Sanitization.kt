@@ -67,7 +67,10 @@ internal fun List<Element>.findOpponent(): String {
             .map { element -> element.text() }
             .filterNot { text -> text.any { char -> char.isDigit() } }
             .filterNot { text -> text.contains("\uE061") }
-            .filter { text -> text.isEmpty() || text.all { char ->  if (char.isLetter()) char.isUpperCase() else true } }
+            .filter { text ->
+                text.isEmpty() ||
+                    text.all { char -> if (char.isLetter()) char.isUpperCase() else true }
+            }
 
     return possibilities.single()
 }
