@@ -41,19 +41,35 @@ private val nbaTeamAbbreviations =
         "WAS",
     )
 
-internal fun Element.toPlayerRowRawInfo(): PlayerRowRawInfo {
+internal fun Element.toPlayerRowRawInfo(): PlayerRowRawInfo? {
     val elements = childElementsList().map { it.text() }
     val playerName = elements.getOrNull(1)
     val firstPassPlayerNameSanitization = playerName.sanitizePlayerName()
     val playerHealthStatus = playerName.getPlayerHealthStatus()
+
+    val badPlayerNames = listOf("", "Players")
+
+    if (playerName in badPlayerNames) return null
 
     return PlayerRowRawInfo(
         position = elements.getOrNull(0),
         playerName = firstPassPlayerNameSanitization?.replace(playerHealthStatus.value, ""),
         healthStatus = playerHealthStatus,
         positionEligibility = playerName?.sanitizePlayerPositionEligibility(),
-        opponent = elements.getOrNull(6), // TODO might be 6 or 3
+        // Going to need to do more work here
+        opponent = childElementsList().findOpponent(), // TODO might be 6 or 3
     )
+}
+
+internal fun List<Element>.findOpponent(): String {
+    val possibilities =
+        listOfNotNull(getOrNull(3), getOrNull(5), getOrNull(6))
+            .map { element -> element.text() }
+            .filterNot { text -> text.any { char -> char.isDigit() } }
+            .filterNot { text -> text.contains("\uE061") }
+            .filter { text -> text.isEmpty() || text.all { char ->  if (char.isLetter()) char.isUpperCase() else true } }
+
+    return possibilities.single()
 }
 
 internal fun String?.removeTeamAbbreviations(): String? {

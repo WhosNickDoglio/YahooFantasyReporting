@@ -31,11 +31,7 @@ internal class KsoupTeamRosterInfoFetcher(
 
             return@withContext RosterInfo(
                 name = doc.title().substringAfterLast("-").substringBefore("|").trim(),
-                players =
-                    rows
-                        .map { it.toPlayerRowRawInfo() }
-                        .filter { it.playerName?.isNotEmpty() == true }
-                        .filter { it.playerName != "Players" },
+                players = rows.mapNotNull { it.toPlayerRowRawInfo() },
                 url = url,
             )
         }
