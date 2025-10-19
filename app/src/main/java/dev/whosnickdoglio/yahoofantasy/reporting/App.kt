@@ -25,25 +25,28 @@ internal class App(
 
     suspend fun main() {
         logger.log("Checking rosters in ${leagueInfo.name} for $yesterday")
-        val reports = mutableListOf<GoogleSheetsTeamReport>()
-        for (i in 1..leagueInfo.numberOfTeams) {
-            val rosterInfo = fetcher.fetchRosterInfo(teamId = i)
-            val result = rosterEvaluator.evaluate(rosterInfo.players)
-            logger.log(
-                when (result) {
-                    is EvaluationResult.SetRoster ->
-                        "Roster is set for ${rosterInfo.name}! ${rosterInfo.url}"
-                    is EvaluationResult.UnsetRoster ->
-                        "${rosterInfo.name} has violations: ${result.violations.joinToString()} ${rosterInfo.url}"
+        val reports =
+            (1..leagueInfo.numberOfTeams)
+                .toList()
+                .map { id -> fetcher.fetchRosterInfo(id) }
+                .map { info -> Pair(info, rosterEvaluator.evaluate(info.players)) }
+                .onEach { (info, result) ->
+                    logger.log(
+                        when (result) {
+                            is EvaluationResult.SetRoster ->
+                                "Roster is set for ${info.name}! ${info.url}"
+                            is EvaluationResult.UnsetRoster ->
+                                "${info.name} has violations: ${result.violations.joinToString()} ${info.url}"
+                        }
+                    )
                 }
-            )
-
-            if (result is EvaluationResult.UnsetRoster) {
-                val violations = result.violations
-                reports.add(
+                .filter { pair -> pair.second is EvaluationResult.UnsetRoster }
+                .map { (info, result) ->
+                    require(result is EvaluationResult.UnsetRoster)
+                    val violations = result.violations
                     GoogleSheetsTeamReport(
                         date = yesterday,
-                        teamName = rosterInfo.name,
+                        teamName = info.name,
                         healthyOnInjuryList = violations.contains(Violation.HEALTHY_ON_IL),
                         activePlayerOnBenchWithOpenStartingSpot =
                             violations.contains(
@@ -53,11 +56,10 @@ internal class App(
                             violations.contains(Violation.IL_IN_STARTING_LINEUP),
                         injuredPlayerOnBenchWithOpenInjuryListSpot =
                             violations.contains(Violation.IL_PLAYER_ON_BENCH_WITH_OPEN_IL_SPOT),
-                        url = rosterInfo.url,
+                        url = info.url,
                     )
-                )
-            }
-        }
+                }
+
         if (reports.isNotEmpty()) {
             logger.log("Reporting to Google Sheets...")
             googleSheets.sendReport(reports)
