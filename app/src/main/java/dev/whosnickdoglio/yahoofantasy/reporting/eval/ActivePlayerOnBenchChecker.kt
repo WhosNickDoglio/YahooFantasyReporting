@@ -1,6 +1,5 @@
 // Copyright (C) 2025 Nicholas Doglio
 // SPDX-License-Identifier: MIT
-
 package dev.whosnickdoglio.yahoofantasy.reporting.eval
 
 import dev.whosnickdoglio.yahoofantasy.reporting.data.PlayerHealthStatus
@@ -21,13 +20,18 @@ internal class ActivePlayerOnBenchChecker : RosterChecker {
 
         if (firstPass != null) return firstPass
 
-        availableStartingSpots.forEach { availableSpot ->
+        for (availableSpot in availableStartingSpots) {
             val availableIndex = mutableRoster.indexOf(availableSpot)
             val openPosition = availableSpot.position
-            val firstMovablePlayer = mutableRoster.firstOrNull {
-                it.isStarting() && it.hasGameToday() && it.fullPositionalEligibility()
-                    .contains(openPosition) && availableSpot.fullPositionalEligibility().contains(it.position)
-            } ?: return@forEach
+            val firstMovablePlayer =
+                mutableRoster.firstOrNull {
+                    it.isStarting() &&
+                        it.hasGameToday() &&
+                        it.fullPositionalEligibility().contains(openPosition) &&
+                        availableSpot.fullPositionalEligibility().contains(it.position)
+                }
+
+            if (firstMovablePlayer == null) continue
 
             val oldPosition = firstMovablePlayer.position
             val oldIndex = mutableRoster.indexOf(firstMovablePlayer)
@@ -35,27 +39,37 @@ internal class ActivePlayerOnBenchChecker : RosterChecker {
             mutableRoster[oldIndex] = firstMovablePlayer.copy(position = availableSpot.position)
             mutableRoster[availableIndex] = availableSpot.copy(position = oldPosition)
 
-            violation = mutableRoster.checkForEasyMoveFromBench(mutableRoster.filter { it.isAvailableStartingSpot() })
+            violation =
+                mutableRoster.checkForEasyMoveFromBench(
+                    mutableRoster.filter { it.isAvailableStartingSpot() }
+                )
         }
 
         return violation
     }
 
-    private fun List<PlayerRowRawInfo>.checkForEasyMoveFromBench(availableStartingSpots: List<PlayerRowRawInfo>): Violation? {
-        val hasBenchPlayersWhoCanStart =
-            filter { it.hasGameToday() && it.healthStatus == PlayerHealthStatus.HEALTHY && it.position == "BN" }
+    private fun List<PlayerRowRawInfo>.checkForEasyMoveFromBench(
+        availableStartingSpots: List<PlayerRowRawInfo>
+    ): Violation? {
+        val hasBenchPlayersWhoCanStart = filter {
+            it.hasGameToday() &&
+                it.healthStatus == PlayerHealthStatus.HEALTHY &&
+                it.position == "BN"
+        }
 
         val openPositions = availableStartingSpots.map { it.position }
 
-        val canMoveBenchPlayerToOpenPosition = hasBenchPlayersWhoCanStart.any { benchPlayer ->
-            benchPlayer.fullPositionalEligibility().any { position -> position in openPositions }
-        }
+        val canMoveBenchPlayerToOpenPosition =
+            hasBenchPlayersWhoCanStart.any { benchPlayer ->
+                benchPlayer.fullPositionalEligibility().any { position ->
+                    position in openPositions
+                }
+            }
 
         return if (canMoveBenchPlayerToOpenPosition) {
             Violation.ACTIVE_PLAYER_ON_BENCH_WITH_OPEN_STARTING_LINEUP_SPOT
         } else {
             null
         }
-
     }
 }

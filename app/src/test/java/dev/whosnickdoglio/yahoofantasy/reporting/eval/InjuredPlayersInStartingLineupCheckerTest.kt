@@ -1,6 +1,5 @@
 // Copyright (C) 2025 Nicholas Doglio
 // SPDX-License-Identifier: MIT
-
 package dev.whosnickdoglio.yahoofantasy.reporting.eval
 
 import assertk.assertThat
@@ -15,53 +14,51 @@ class InjuredPlayersInStartingLineupCheckerTest {
 
     @Test
     fun `starting lineup is empty`() {
-        val result = checker.check(
-            Roster(
-                EmptyRosterSpot(),
-                EmptyRosterSpot(),
-                EmptyRosterSpot(),
-                EmptyRosterSpot(),
-                EmptyRosterSpot(),
+        val result =
+            checker.check(
+                Roster(
+                    EmptyRosterSpot(),
+                    EmptyRosterSpot(),
+                    EmptyRosterSpot(),
+                    EmptyRosterSpot(),
+                    EmptyRosterSpot(),
+                )
             )
-        )
         assertThat(result).isNull()
     }
 
     @Test
     fun `starting lineup only has healthy players on it`() {
-        val result = checker.check(
-            Roster(
-                Player(position = "PG"),
-                Player(position = "Util"),
-                Player(position = "C"),
+        val result =
+            checker.check(
+                Roster(Player(position = "PG"), Player(position = "Util"), Player(position = "C"))
             )
-        )
         assertThat(result).isNull()
     }
 
     @Test
     fun `starting lineup  has a injured player on it`() {
-        val result = checker.check(
-            Roster(
-                Player(position = "PG", healthStatus = PlayerHealthStatus.LONG_TERM_INJURY),
-                Player(position = "Util"),
-                Player(position = "C"),
+        val result =
+            checker.check(
+                Roster(
+                    Player(position = "PG", healthStatus = PlayerHealthStatus.LONG_TERM_INJURY),
+                    Player(position = "Util"),
+                    Player(position = "C"),
+                )
             )
-        )
         assertThat(result).isEqualTo(Violation.IL_IN_STARTING_LINEUP)
     }
 
     @Test
     fun `starting lineup  has a out player on it`() {
-        val result = checker.check(
-            Roster(
-                Player(position = "PG", healthStatus = PlayerHealthStatus.SHORT_TERM_INJURY),
-                Player(position = "Util"),
-                Player(position = "C"),
+        val result =
+            checker.check(
+                Roster(
+                    Player(position = "PG", healthStatus = PlayerHealthStatus.SHORT_TERM_INJURY),
+                    Player(position = "Util"),
+                    Player(position = "C"),
+                )
             )
-        )
         assertThat(result).isEqualTo(Violation.IL_IN_STARTING_LINEUP)
     }
-
-
 }

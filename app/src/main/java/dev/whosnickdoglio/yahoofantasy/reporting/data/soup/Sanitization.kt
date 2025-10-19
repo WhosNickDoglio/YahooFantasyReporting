@@ -1,45 +1,45 @@
 // Copyright (C) 2025 Nicholas Doglio
 // SPDX-License-Identifier: MIT
-
 package dev.whosnickdoglio.yahoofantasy.reporting.data.soup
 
 import com.fleeksoft.ksoup.nodes.Element
 import dev.whosnickdoglio.yahoofantasy.reporting.data.PlayerHealthStatus
 import dev.whosnickdoglio.yahoofantasy.reporting.data.PlayerRowRawInfo
 
-private val nbaTeamAbbreviations = listOf(
-    "ATL",
-    "BOS",
-    "BKN",
-    "CHA",
-    "CHI",
-    "CLE",
-    "DAL",
-    "DEN",
-    "DET",
-    "GSW",
-    "HOU",
-    "IND",
-    "LAC",
-    "LAL",
-    "MEM",
-    "MIA",
-    "MIL",
-    "MIN",
-    "NOP",
-    "NYK",
-    "OKC",
-    "ORL",
-    "PHI",
-    "PHX",
-    "PHO",
-    "POR",
-    "SAC",
-    "SAS",
-    "TOR",
-    "UTA",
-    "WAS",
-)
+private val nbaTeamAbbreviations =
+    listOf(
+        "ATL",
+        "BOS",
+        "BKN",
+        "CHA",
+        "CHI",
+        "CLE",
+        "DAL",
+        "DEN",
+        "DET",
+        "GSW",
+        "HOU",
+        "IND",
+        "LAC",
+        "LAL",
+        "MEM",
+        "MIA",
+        "MIL",
+        "MIN",
+        "NOP",
+        "NYK",
+        "OKC",
+        "ORL",
+        "PHI",
+        "PHX",
+        "PHO",
+        "POR",
+        "SAC",
+        "SAS",
+        "TOR",
+        "UTA",
+        "WAS",
+    )
 
 internal fun Element.toPlayerRowRawInfo(): PlayerRowRawInfo {
     val elements = childElementsList().map { it.text() }
@@ -56,7 +56,7 @@ internal fun Element.toPlayerRowRawInfo(): PlayerRowRawInfo {
     )
 }
 
-internal fun String?.removeTeamAbbreviations(): String?  {
+internal fun String?.removeTeamAbbreviations(): String? {
     var mutableString = this
     nbaTeamAbbreviations.forEach { abbreviation ->
         if (mutableString?.contains(abbreviation) == true) {
@@ -66,27 +66,27 @@ internal fun String?.removeTeamAbbreviations(): String?  {
     return mutableString
 }
 
-internal fun String?.sanitizePlayerName(): String? = this?.substringBeforeLast("-")
-    // Remove nonsense
-    ?.replace("No New Player Notes", "", ignoreCase = true)
-    ?.replace("New Player Note", "", ignoreCase = true)
-    ?.replace("Player Note", "", ignoreCase = true)
-    ?.replace("Video Forecast", "", ignoreCase = true)
-    ?.sanitizePlayerHealthStatus()
-    ?.removeTeamAbbreviations()
-    ?.trim()
+internal fun String?.sanitizePlayerName(): String? =
+    this?.substringBeforeLast("-")
+        // Remove nonsense
+        ?.replace("No New Player Notes", "", ignoreCase = true)
+        ?.replace("New Player Note", "", ignoreCase = true)
+        ?.replace("Player Note", "", ignoreCase = true)
+        ?.replace("Video Forecast", "", ignoreCase = true)
+        ?.sanitizePlayerHealthStatus()
+        ?.removeTeamAbbreviations()
+        ?.trim()
 
-internal fun String?.sanitizePlayerHealthStatus(): String? = this
-    ?.replace("GTD", "")
-    ?.replace("INJ", "")
-    ?.replace("OUT", "")
+internal fun String?.sanitizePlayerHealthStatus(): String? =
+    this?.replace("GTD", "")?.replace("INJ", "")?.replace("OUT", "")
 
-internal fun String?.getPlayerHealthStatus(): PlayerHealthStatus = when {
-    this?.contains("GTD") == true -> PlayerHealthStatus.GAME_TIME_DECISION
-    this?.contains("INJ") == true -> PlayerHealthStatus.LONG_TERM_INJURY
-    this?.contains("OUT") == true -> PlayerHealthStatus.SHORT_TERM_INJURY
-    else -> PlayerHealthStatus.HEALTHY
-}
+internal fun String?.getPlayerHealthStatus(): PlayerHealthStatus =
+    when {
+        this?.contains("GTD") == true -> PlayerHealthStatus.GAME_TIME_DECISION
+        this?.contains("INJ") == true -> PlayerHealthStatus.LONG_TERM_INJURY
+        this?.contains("OUT") == true -> PlayerHealthStatus.SHORT_TERM_INJURY
+        else -> PlayerHealthStatus.HEALTHY
+    }
 
 internal fun String?.sanitizePlayerPositionEligibility(): List<String> {
     val containsNumbers = this?.any { it.isDigit() }

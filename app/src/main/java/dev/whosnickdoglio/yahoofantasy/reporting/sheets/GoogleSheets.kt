@@ -1,6 +1,5 @@
 // Copyright (C) 2025 Nicholas Doglio
 // SPDX-License-Identifier: MIT
-
 package dev.whosnickdoglio.yahoofantasy.reporting.sheets
 
 import java.time.LocalDate

@@ -1,37 +1,23 @@
 // Copyright (C) 2025 Nicholas Doglio
 // SPDX-License-Identifier: MIT
-
 plugins {
-    alias(libs.plugins.kotlin.jvm)
+    alias(libs.plugins.convention.jvm)
     alias(libs.plugins.metro)
     alias(libs.plugins.burst)
     application
 }
 
-metro {
-    contributesAsInject = true
-}
+metro { contributesAsInject = true }
 
-application {
-    mainClass = "dev.whosnickdoglio.yahoofantasy.reporting.MainKt"
-}
-
-kotlin {
-    jvmToolchain {
-        vendor = JvmVendorSpec.AZUL
-        languageVersion = JavaLanguageVersion.of(libs.versions.jdk.get())
-    }
-    explicitApi()
-}
+application { mainClass = "dev.whosnickdoglio.yahoofantasy.reporting.MainKt" }
 
 dependencies {
+    implementation(libs.google.api.client)
+    implementation(libs.google.sheets)
     implementation(libs.ksoup)
     implementation(libs.ksoup.network)
-    implementation(libs.google.sheets)
-    implementation(libs.google.ouath)
-    implementation(libs.google.api.client)
-    implementation(libs.slf4j)
+    runtimeOnly(libs.slf4j)
 
-    testImplementation(libs.junit)
     testImplementation(libs.assertk)
+    testImplementation(libs.junit)
 }

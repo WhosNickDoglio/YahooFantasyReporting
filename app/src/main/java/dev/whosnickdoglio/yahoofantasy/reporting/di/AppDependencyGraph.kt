@@ -1,6 +1,5 @@
 // Copyright (C) 2025 Nicholas Doglio
 // SPDX-License-Identifier: MIT
-
 package dev.whosnickdoglio.yahoofantasy.reporting.di
 
 import dev.whosnickdoglio.yahoofantasy.reporting.App
@@ -19,7 +18,7 @@ internal interface AppDependencyGraph {
     fun interface Factory {
         fun create(
             @Provides yesterday: LocalDate,
-            @Provides leagueInfo: LeagueInfo
+            @Provides leagueInfo: LeagueInfo,
         ): AppDependencyGraph
     }
 }

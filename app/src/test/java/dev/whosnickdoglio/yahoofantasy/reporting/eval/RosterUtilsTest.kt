@@ -1,6 +1,5 @@
 // Copyright (C) 2025 Nicholas Doglio
 // SPDX-License-Identifier: MIT
-
 package dev.whosnickdoglio.yahoofantasy.reporting.eval
 
 import assertk.assertThat
@@ -30,7 +29,6 @@ class RosterUtilsTest {
     fun `given taken starting spot with no opponent when isAvailableStartingSpot is called returns true`() {
         assertThat(Player().isAvailableStartingSpot()).isTrue()
     }
-
 
     @Test
     fun `given taken starting spot with an opponent when isAvailableStartingSpot is called returns false`() {
@@ -79,6 +77,7 @@ class RosterUtilsTest {
 
     @Test
     fun `given player with G eligibility when foo is called return all eligible positions including Util`() {
-        assertThat(Player(positionEligibility = listOf("G")).fullPositionalEligibility()).isEqualTo(listOf("G", "Util"))
+        assertThat(Player(positionEligibility = listOf("G")).fullPositionalEligibility())
+            .isEqualTo(listOf("G", "Util"))
     }
 }

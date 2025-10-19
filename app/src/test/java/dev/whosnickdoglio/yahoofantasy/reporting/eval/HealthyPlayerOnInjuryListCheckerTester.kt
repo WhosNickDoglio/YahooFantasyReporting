@@ -1,6 +1,5 @@
 // Copyright (C) 2025 Nicholas Doglio
 // SPDX-License-Identifier: MIT
-
 package dev.whosnickdoglio.yahoofantasy.reporting.eval
 
 import assertk.assertThat
@@ -21,19 +20,25 @@ class HealthyPlayerOnInjuryListCheckerTester {
 
     @Test
     fun `injury list only has injured players on it`() {
-        val result = checker.check(Roster(
-            Player(position = "IL", healthStatus = PlayerHealthStatus.LONG_TERM_INJURY),
-            Player(position = "IL", healthStatus = PlayerHealthStatus.LONG_TERM_INJURY),
-        ))
+        val result =
+            checker.check(
+                Roster(
+                    Player(position = "IL", healthStatus = PlayerHealthStatus.LONG_TERM_INJURY),
+                    Player(position = "IL", healthStatus = PlayerHealthStatus.LONG_TERM_INJURY),
+                )
+            )
         assertThat(result).isNull()
     }
 
     @Test
     fun `injury list has a healthy player on it`() {
-        val result = checker.check(Roster(
-            Player(position = "IL", healthStatus = PlayerHealthStatus.LONG_TERM_INJURY),
-            Player(position = "IL", healthStatus = PlayerHealthStatus.HEALTHY),
-        ))
+        val result =
+            checker.check(
+                Roster(
+                    Player(position = "IL", healthStatus = PlayerHealthStatus.LONG_TERM_INJURY),
+                    Player(position = "IL", healthStatus = PlayerHealthStatus.HEALTHY),
+                )
+            )
         assertThat(result).isEqualTo(Violation.HEALTHY_ON_IL)
     }
 }

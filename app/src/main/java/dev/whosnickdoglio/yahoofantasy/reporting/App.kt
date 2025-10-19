@@ -1,6 +1,5 @@
 // Copyright (C) 2025 Nicholas Doglio
 // SPDX-License-Identifier: MIT
-
 package dev.whosnickdoglio.yahoofantasy.reporting
 
 import dev.whosnickdoglio.yahoofantasy.reporting.data.LeagueInfo
@@ -32,8 +31,10 @@ internal class App(
             val result = rosterEvaluator.evaluate(rosterInfo.players)
             logger.log(
                 when (result) {
-                    is EvaluationResult.SetRoster -> "Roster is set for ${rosterInfo.name}! ${rosterInfo.url}"
-                    is EvaluationResult.UnsetRoster -> "${rosterInfo.name} has violations: ${result.violations.joinToString()} ${rosterInfo.url}"
+                    is EvaluationResult.SetRoster ->
+                        "Roster is set for ${rosterInfo.name}! ${rosterInfo.url}"
+                    is EvaluationResult.UnsetRoster ->
+                        "${rosterInfo.name} has violations: ${result.violations.joinToString()} ${rosterInfo.url}"
                 }
             )
 
@@ -44,9 +45,14 @@ internal class App(
                         date = yesterday,
                         teamName = rosterInfo.name,
                         healthyOnInjuryList = violations.contains(Violation.HEALTHY_ON_IL),
-                        activePlayerOnBenchWithOpenStartingSpot = violations.contains(Violation.ACTIVE_PLAYER_ON_BENCH_WITH_OPEN_STARTING_LINEUP_SPOT),
-                        injuredPlayerInStartingLineup = violations.contains(Violation.IL_IN_STARTING_LINEUP),
-                        injuredPlayerOnBenchWithOpenInjuryListSpot = violations.contains(Violation.IL_PLAYER_ON_BENCH_WITH_OPEN_IL_SPOT),
+                        activePlayerOnBenchWithOpenStartingSpot =
+                            violations.contains(
+                                Violation.ACTIVE_PLAYER_ON_BENCH_WITH_OPEN_STARTING_LINEUP_SPOT
+                            ),
+                        injuredPlayerInStartingLineup =
+                            violations.contains(Violation.IL_IN_STARTING_LINEUP),
+                        injuredPlayerOnBenchWithOpenInjuryListSpot =
+                            violations.contains(Violation.IL_PLAYER_ON_BENCH_WITH_OPEN_IL_SPOT),
                         url = rosterInfo.url,
                     )
                 )

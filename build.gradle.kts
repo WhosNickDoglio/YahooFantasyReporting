@@ -8,8 +8,15 @@ buildscript {
 }
 
 plugins {
+    alias(libs.plugins.dependencyAnalysis)
+    alias(libs.plugins.doctor)
     alias(libs.plugins.kotlin.jvm) apply false
     alias(libs.plugins.metro) apply false
+    alias(libs.plugins.convention.jvm) apply false
+    alias(libs.plugins.detekt) apply false
+    alias(libs.plugins.lint) apply false
+    alias(libs.plugins.spotless) apply false
+    alias(libs.plugins.sortDependencies) apply false
 }
 
 // https://docs.gradle.org/8.9/userguide/gradle_daemon.html#daemon_jvm_criteria

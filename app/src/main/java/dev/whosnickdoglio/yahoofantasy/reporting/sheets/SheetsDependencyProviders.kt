@@ -1,6 +1,5 @@
 // Copyright (C) 2025 Nicholas Doglio
 // SPDX-License-Identifier: MIT
-
 package dev.whosnickdoglio.yahoofantasy.reporting.sheets
 
 import com.google.api.client.googleapis.javanet.GoogleNetHttpTransport
@@ -16,13 +15,11 @@ import dev.zacsweers.metro.ContributesTo
 import dev.zacsweers.metro.Provides
 import dev.zacsweers.metro.Qualifier
 import java.io.File
-import java.io.InputStream
 
 @ContributesTo(AppScope::class)
 internal interface SheetsDependencyProviders {
 
-    @Provides
-    fun provideGsonFactory(): GsonFactory = GsonFactory.getDefaultInstance()
+    @Provides fun provideGsonFactory(): GsonFactory = GsonFactory.getDefaultInstance()
 
     @Provides
     fun provideHttpTransport(): NetHttpTransport = GoogleNetHttpTransport.newTrustedTransport()
@@ -41,24 +38,28 @@ internal interface SheetsDependencyProviders {
         }
     }
 
-
     @Provides
     fun provideCredentials(@GoogleCredentialsSecret secret: String): Credentials =
         GoogleCredentials.fromStream(secret.byteInputStream())
             .createScoped(listOf(SheetsScopes.SPREADSHEETS, SheetsScopes.DRIVE))
 
     @Provides
-    fun provideInitializer(credentials: Credentials): HttpCredentialsAdapter = HttpCredentialsAdapter(credentials)
+    fun provideInitializer(credentials: Credentials): HttpCredentialsAdapter =
+        HttpCredentialsAdapter(credentials)
 
     @Provides
     fun provideSheetsService(
-        transport: NetHttpTransport, gsonFactory: GsonFactory, credentialsAdapter: HttpCredentialsAdapter
-    ): Sheets = Sheets.Builder(transport, gsonFactory, credentialsAdapter).setApplicationName(APPLICATION_NAME).build()
+        transport: NetHttpTransport,
+        gsonFactory: GsonFactory,
+        credentialsAdapter: HttpCredentialsAdapter,
+    ): Sheets =
+        Sheets.Builder(transport, gsonFactory, credentialsAdapter)
+            .setApplicationName(APPLICATION_NAME)
+            .build()
 
     private companion object {
         private const val APPLICATION_NAME = "Yahoo Fantasy Reporting"
     }
 }
 
-@Qualifier
-private annotation class GoogleCredentialsSecret
+@Qualifier private annotation class GoogleCredentialsSecret

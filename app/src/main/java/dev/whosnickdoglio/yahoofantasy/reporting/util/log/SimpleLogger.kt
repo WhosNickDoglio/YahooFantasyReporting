@@ -1,6 +1,5 @@
 // Copyright (C) 2025 Nicholas Doglio
 // SPDX-License-Identifier: MIT
-
 package dev.whosnickdoglio.yahoofantasy.reporting.util.log
 
 import dev.zacsweers.metro.AppScope
@@ -11,7 +10,7 @@ internal fun interface SimpleLogger {
 }
 
 @ContributesBinding(AppScope::class)
-internal class DefaultSimpleLogger: SimpleLogger {
+internal class DefaultSimpleLogger : SimpleLogger {
     override fun log(string: String) {
         println(string)
     }

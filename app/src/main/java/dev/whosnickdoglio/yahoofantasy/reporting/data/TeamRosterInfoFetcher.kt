@@ -1,6 +1,5 @@
 // Copyright (C) 2025 Nicholas Doglio
 // SPDX-License-Identifier: MIT
-
 package dev.whosnickdoglio.yahoofantasy.reporting.data
 
 internal interface TeamRosterInfoFetcher {
@@ -8,7 +7,9 @@ internal interface TeamRosterInfoFetcher {
 }
 
 internal data class RosterInfo(
-    val name: String, val players: List<PlayerRowRawInfo>, val url: String
+    val name: String,
+    val players: List<PlayerRowRawInfo>,
+    val url: String,
 )
 
 // TODO different DTO here

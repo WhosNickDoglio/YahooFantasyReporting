@@ -1,12 +1,21 @@
 [versions]
 ksoup = "0.2.5"
 kotlin = "2.2.20"
+jdkTarget = "17"
 jdk = "24"
+ktfmt = "0.59"
 
 [plugins]
 kotlin-jvm = { id = "org.jetbrains.kotlin.jvm", version.ref = "kotlin" }
 metro = { id = "dev.zacsweers.metro", version = "0.7.0" }
 burst = { id = "app.cash.burst" }
+convention-jvm = { id = "dev.whosnickdoglio.convention.kotlin", version = "0.1" }
+detekt = { id = "io.gitlab.arturbosch.detekt", version = "1.23.8" }
+lint = { id = "com.android.lint", version = "8.13.0" }
+doctor = { id = "com.osacky.doctor", version = "0.12.1" }
+spotless = { id = "com.diffplug.spotless", version = "8.0.0" }
+dependencyAnalysis = { id = "com.autonomousapps.dependency-analysis", version = "3.1.0" }
+sortDependencies = { id = "com.squareup.sort-dependencies", version = "0.15" }
 
 [libraries]
 ksoup = { module = "com.fleeksoft.ksoup:ksoup", version.ref = "ksoup" }
