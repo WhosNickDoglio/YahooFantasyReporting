@@ -12,7 +12,7 @@ class RosterEvaluatorTest {
     fun `evaluate returns SetRoster when there are no players on the bench with opponents`() {
         val evaluator = RosterEvaluator(emptySet())
 
-        val result = evaluator.evaluate(Roster(Player(position = "BN"), Player(position = "BN")))
+        val result = evaluator.evaluate(listOf(Player(position = "BN"), Player(position = "BN")))
 
         assertThat(result).isEqualTo(EvaluationResult.SetRoster)
     }
@@ -23,7 +23,7 @@ class RosterEvaluatorTest {
 
         val result =
             evaluator.evaluate(
-                Roster(
+                listOf(
                     Player(position = "PG", opponent = "CLE"),
                     Player(position = "C", opponent = "NYK"),
                     Player(position = "BN", opponent = "BKN"),

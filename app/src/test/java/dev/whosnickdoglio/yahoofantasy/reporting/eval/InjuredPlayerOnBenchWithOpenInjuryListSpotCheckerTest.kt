@@ -16,7 +16,7 @@ class InjuredPlayerOnBenchWithOpenInjuryListSpotCheckerTest {
         val checker = InjuredPlayerOnBenchWithOpenInjuryListSpotChecker(FakeLeagueInfo())
         val result =
             checker.check(
-                Roster(Player(position = "BN", healthStatus = PlayerHealthStatus.LONG_TERM_INJURY))
+                listOf(Player(position = "BN", healthStatus = PlayerHealthStatus.LONG_TERM_INJURY))
             )
 
         assertThat(result).isEqualTo(Violation.IL_PLAYER_ON_BENCH_WITH_OPEN_IL_SPOT)
@@ -27,7 +27,7 @@ class InjuredPlayerOnBenchWithOpenInjuryListSpotCheckerTest {
         val checker = InjuredPlayerOnBenchWithOpenInjuryListSpotChecker(FakeLeagueInfo())
         val result =
             checker.check(
-                Roster(
+                listOf(
                     Player(healthStatus = PlayerHealthStatus.HEALTHY),
                     Player(healthStatus = PlayerHealthStatus.LONG_TERM_INJURY),
                     Player(position = "IL", healthStatus = PlayerHealthStatus.LONG_TERM_INJURY),
@@ -45,7 +45,7 @@ class InjuredPlayerOnBenchWithOpenInjuryListSpotCheckerTest {
         val checker = InjuredPlayerOnBenchWithOpenInjuryListSpotChecker(FakeLeagueInfo())
         val result =
             checker.check(
-                Roster(
+                listOf(
                     Player(healthStatus = PlayerHealthStatus.HEALTHY),
                     Player(healthStatus = PlayerHealthStatus.HEALTHY),
                     Player(position = "IL", healthStatus = PlayerHealthStatus.LONG_TERM_INJURY),

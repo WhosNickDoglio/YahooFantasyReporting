@@ -14,7 +14,7 @@ class ActivePlayerOnBenchCheckerTest {
     fun `easy to move shooting guard on bench into open shooting guard position returns violation`() {
         val result =
             checker.check(
-                Roster(
+                listOf(
                     EmptyRosterSpot(position = "SG"),
                     Player(
                         position = "BN",
@@ -32,7 +32,7 @@ class ActivePlayerOnBenchCheckerTest {
     fun `move player from util to fully set lineup returns violation`() {
         val result =
             checker.check(
-                Roster(
+                listOf(
                     EmptyRosterSpot(position = "PG"),
                     EmptyRosterSpot(position = "SG"),
                     Player(position = "Util", positionEligibility = listOf("SG"), opponent = "CLE"),

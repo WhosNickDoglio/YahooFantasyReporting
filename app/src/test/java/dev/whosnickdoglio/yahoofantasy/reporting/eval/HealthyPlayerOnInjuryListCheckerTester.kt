@@ -14,7 +14,7 @@ class HealthyPlayerOnInjuryListCheckerTester {
 
     @Test
     fun `injury list is empty`() {
-        val result = checker.check(Roster())
+        val result = checker.check(listOf())
         assertThat(result).isNull()
     }
 
@@ -22,7 +22,7 @@ class HealthyPlayerOnInjuryListCheckerTester {
     fun `injury list only has injured players on it`() {
         val result =
             checker.check(
-                Roster(
+                listOf(
                     Player(position = "IL", healthStatus = PlayerHealthStatus.LONG_TERM_INJURY),
                     Player(position = "IL", healthStatus = PlayerHealthStatus.LONG_TERM_INJURY),
                 )
@@ -34,7 +34,7 @@ class HealthyPlayerOnInjuryListCheckerTester {
     fun `injury list has a healthy player on it`() {
         val result =
             checker.check(
-                Roster(
+                listOf(
                     Player(position = "IL", healthStatus = PlayerHealthStatus.LONG_TERM_INJURY),
                     Player(position = "IL", healthStatus = PlayerHealthStatus.HEALTHY),
                 )
