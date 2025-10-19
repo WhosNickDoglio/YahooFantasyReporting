@@ -9,64 +9,46 @@ import dev.zacsweers.metro.ContributesIntoSet
 
 @ContributesIntoSet(AppScope::class)
 internal class ActivePlayerOnBenchChecker : RosterChecker {
-    // TODO need to figure out a good way to check if we can move things around to make it work
     override fun check(roster: List<PlayerRowRawInfo>): Violation? {
-        val mutableRoster = roster.toMutableList()
-        val availableStartingSpots = mutableRoster.filter { it.isAvailableStartingSpot() }
+        val activePlayers =
+            roster.filter { it.hasGameToday() && it.healthStatus == PlayerHealthStatus.HEALTHY }
+        val startingSpots = roster.filter { it.isStarting() }.map { it.position }
 
-        var violation: Violation? = null
-
-        val firstPass = mutableRoster.checkForEasyMoveFromBench(availableStartingSpots)
-
-        if (firstPass != null) return firstPass
-
-        for (availableSpot in availableStartingSpots) {
-            val availableIndex = mutableRoster.indexOf(availableSpot)
-            val openPosition = availableSpot.position
-            val firstMovablePlayer =
-                mutableRoster.firstOrNull {
-                    it.isStarting() &&
-                        it.hasGameToday() &&
-                        it.fullPositionalEligibility().contains(openPosition) &&
-                        availableSpot.fullPositionalEligibility().contains(it.position)
-                }
-
-            if (firstMovablePlayer == null) continue
-
-            val oldPosition = firstMovablePlayer.position
-            val oldIndex = mutableRoster.indexOf(firstMovablePlayer)
-
-            mutableRoster[oldIndex] = firstMovablePlayer.copy(position = availableSpot.position)
-            mutableRoster[availableIndex] = availableSpot.copy(position = oldPosition)
-
-            violation =
-                mutableRoster.checkForEasyMoveFromBench(
-                    mutableRoster.filter { it.isAvailableStartingSpot() }
-                )
+        // If there are no active players on the bench, then there is nothing to do
+        if (
+            activePlayers.none { it.position == "BN" } ||
+                // This should not be possible but if there are no starting spots then this check is
+                // invalid
+                startingSpots.isEmpty()
+        ) {
+            return null
         }
 
-        return violation
-    }
-
-    private fun List<PlayerRowRawInfo>.checkForEasyMoveFromBench(
-        availableStartingSpots: List<PlayerRowRawInfo>
-    ): Violation? {
-        val hasBenchPlayersWhoCanStart = filter {
-            it.hasGameToday() &&
-                it.healthStatus == PlayerHealthStatus.HEALTHY &&
-                it.position == "BN"
-        }
-
-        val openPositions = availableStartingSpots.map { it.position }
-
-        val canMoveBenchPlayerToOpenPosition =
-            hasBenchPlayersWhoCanStart.any { benchPlayer ->
-                benchPlayer.fullPositionalEligibility().any { position ->
-                    position in openPositions
-                }
+        val currentActiveStartersCount =
+            roster.count {
+                it.isStarting() &&
+                    it.hasGameToday() &&
+                    it.healthStatus == PlayerHealthStatus.HEALTHY
             }
 
-        return if (canMoveBenchPlayerToOpenPosition) {
+        // A greedy approach to solving this problem. We sort our list of potential starters by the
+        // number of positions they are eligible for. This ensures that we prioritize players with
+        // fewer options first.
+        val potentialStarters = activePlayers.sortedBy { it.fullPositionalEligibility().size }
+        val availableSpots = startingSpots.toMutableList()
+        var maxPossibleActiveStarters = 0
+
+        for (player in potentialStarters) {
+            val eligibleSpot =
+                availableSpots.find { spot -> player.fullPositionalEligibility().contains(spot) }
+
+            if (eligibleSpot != null) {
+                maxPossibleActiveStarters++
+                availableSpots.remove(eligibleSpot)
+            }
+        }
+
+        return if (maxPossibleActiveStarters > currentActiveStartersCount) {
             Violation.ACTIVE_PLAYER_ON_BENCH_WITH_OPEN_STARTING_LINEUP_SPOT
         } else {
             null
