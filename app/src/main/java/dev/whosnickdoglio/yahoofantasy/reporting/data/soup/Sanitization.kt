@@ -79,7 +79,7 @@ internal fun String?.removeTeamAbbreviations(): String? {
     var mutableString = this
     nbaTeamAbbreviations.forEach { abbreviation ->
         if (mutableString?.contains(abbreviation) == true) {
-            mutableString = this?.replace(abbreviation, "")
+            mutableString = mutableString.replace(abbreviation, "")
         }
     }
     return mutableString
@@ -111,11 +111,17 @@ internal fun String?.sanitizePlayerPositionEligibility(): List<String> {
     val containsNumbers = this?.any { it.isDigit() }
     val firstPass = this?.substringAfterLast("-")?.trim().orEmpty()
 
-    return if (containsNumbers == false) {
-        firstPass.split(",")
-    } else {
-        val indexOfFirstNumber = firstPass.indexOfFirst { it.isDigit() }
-        val final = firstPass.take(indexOfFirstNumber).split(",")
-        final
-    }
+    val positionsString =
+        if (containsNumbers == true) {
+            val indexOfFirstNumber = firstPass.indexOfFirst { it.isDigit() }
+            if (indexOfFirstNumber != -1) {
+                firstPass.take(indexOfFirstNumber)
+            } else {
+                firstPass
+            }
+        } else {
+            firstPass
+        }
+
+    return positionsString.split(",").map { it.trim() }
 }

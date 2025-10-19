@@ -51,6 +51,31 @@ internal class SanitizationTest {
         ),
     }
 
+    enum class SanitizeHealthStatus(val input: String, val expected: String) {
+        GTD("OG AnunobyGTD", "OG Anunoby"),
+        INJ("Zach EdeyINJ", "Zach Edey"),
+        OUT("John WallOUT", "John Wall"),
+        HEALTHY("Healthy Player", "Healthy Player"),
+    }
+
+    enum class RemoveTeamAbbr(val input: String, val expected: String) {
+        TEAM_AT_END("Cade Cunningham DET", "Cade Cunningham "),
+        TEAM_IN_MIDDLE("Jalen Brunson NYK - PG", "Jalen Brunson  - PG"),
+        NO_TEAM("No team here", "No team here"),
+        PHOENIX_ABBR("Chris Paul PHO - PG", "Chris Paul  - PG"),
+    }
+
+    enum class SanitizePositionEligibility(val input: String, val expected: List<String>) {
+        MULTIPLE_POS("Cade Cunningham - PG,SG", listOf("PG", "SG")),
+        MULTIPLE_POS_WITH_SPACES("Cade Cunningham - PG, SG", listOf("PG", "SG")),
+        MULTIPLE_POS_WITH_GAME("Cade Cunningham - PG,SG 7:00 pm", listOf("PG", "SG")),
+        MULTIPLE_POS_WITH_GAME_AND_SPACES("Cade Cunningham - PG, SG 7:00 pm", listOf("PG", "SG")),
+        SINGLE_POS("Jalen Duren - C", listOf("C")),
+        NO_DASH("Lebron James", listOf("Lebron James")),
+        EMPTY_STRING("", listOf("")),
+        ONLY_DASH(" - ", listOf("")),
+    }
+
     @Burst
     @Test
     fun getPlayerHealthStatus(playerName: PlayerHealthValues) {
@@ -63,13 +88,21 @@ internal class SanitizationTest {
         assertThat(player.input.sanitizePlayerName()).isEqualTo(player.expected)
     }
 
-    //    @Test
-    //    fun sanitizePlayerPositionEligibility() {
-    //        TODO("Not yet implemented")
-    //    }
-    //
-    //    @Test
-    //    fun `toPlayerRowRawInfo`() {
-    //        TODO("Not yet implemented")
-    //    }
+    @Burst
+    @Test
+        fun sanitizePlayerHealthStatus(player: SanitizeHealthStatus) {
+        assertThat(player.input.sanitizePlayerHealthStatus()).isEqualTo(player.expected)
+    }
+
+    @Burst
+    @Test
+    fun removeTeamAbbreviations(player: RemoveTeamAbbr) {
+        assertThat(player.input.removeTeamAbbreviations()).isEqualTo(player.expected)
+    }
+
+    @Burst
+    @Test
+    fun sanitizePlayerPositionEligibility(player: SanitizePositionEligibility) {
+        assertThat(player.input.sanitizePlayerPositionEligibility()).isEqualTo(player.expected)
+    }
 }
