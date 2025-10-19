@@ -16,17 +16,17 @@ doctor = { id = "com.osacky.doctor", version = "0.12.1" }
 spotless = { id = "com.diffplug.spotless", version = "8.0.0" }
 dependencyAnalysis = { id = "com.autonomousapps.dependency-analysis", version = "3.1.0" }
 sortDependencies = { id = "com.squareup.sort-dependencies", version = "0.15" }
+buildConfig = { id = "com.github.gmazzo.buildconfig", version = "5.7.0" }
 
 [libraries]
 ksoup = { module = "com.fleeksoft.ksoup:ksoup", version.ref = "ksoup" }
 ksoup-network = { module = "com.fleeksoft.ksoup:ksoup-network", version.ref = "ksoup" }
 
 google-api-client = { module = "com.google.api-client:google-api-client", version = "2.8.1" }
-google-ouath = { module = "com.google.oauth-client:google-oauth-client-jetty", version = "1.39.0" }
 google-sheets = { module = "com.google.apis:google-api-services-sheets", version = "v4-rev20250616-2.0.0" }
 
 # https://www.slf4j.org/codes.html#noProviders
-slf4j = {module = "org.slf4j:slf4j-nop", version = "2.0.17"}
+slf4j = { module = "org.slf4j:slf4j-nop", version = "2.0.17" }
 
 junit = { module = "junit:junit", version = "4.13.2" }
 burst = { module = "app.cash.burst:burst-gradle-plugin", version = "2.10.2" }

@@ -2,9 +2,22 @@
 // SPDX-License-Identifier: MIT
 plugins {
     alias(libs.plugins.convention.jvm)
+    alias(libs.plugins.buildConfig)
     alias(libs.plugins.metro)
     alias(libs.plugins.burst)
     application
+}
+
+buildConfig {
+    packageName("dev.whosnickdoglio.yahoofantasy.reporting")
+    useKotlinOutput {
+        topLevelConstants = true
+    }
+    buildConfigField(
+        type = "String",
+        name = "GOOGLE_CREDENTIALS",
+        value = providers.environmentVariable("GOOGLE_CREDENTIALS").orElse("\"\""),
+    )
 }
 
 metro { contributesAsInject = true }

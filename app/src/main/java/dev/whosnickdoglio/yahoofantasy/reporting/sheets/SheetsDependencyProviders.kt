@@ -10,6 +10,7 @@ import com.google.api.services.sheets.v4.SheetsScopes
 import com.google.auth.Credentials
 import com.google.auth.http.HttpCredentialsAdapter
 import com.google.auth.oauth2.GoogleCredentials
+import dev.whosnickdoglio.yahoofantasy.reporting.GOOGLE_CREDENTIALS
 import dev.zacsweers.metro.AppScope
 import dev.zacsweers.metro.ContributesTo
 import dev.zacsweers.metro.Provides
@@ -27,10 +28,10 @@ internal interface SheetsDependencyProviders {
     @Provides
     @GoogleCredentialsSecret
     fun provideGoogleSecret(): String {
-        val secret = System.getenv("GOOGLE_CREDENTIALS")
+        val secret = GOOGLE_CREDENTIALS
 
         // TODO make this less bad
-        return if (secret != null) {
+        return if (secret.isEmpty()) {
             secret
         } else {
             val filePath = System.getenv("GOOGLE_SERVICE_ACCOUNT_JSON_PATH")
