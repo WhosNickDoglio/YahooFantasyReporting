@@ -1,3 +1,6 @@
+// Copyright (C) 2025 Nicholas Doglio
+// SPDX-License-Identifier: MIT
+
 package dev.whosnickdoglio.yahoofantasy.reporting
 
 import dev.whosnickdoglio.yahoofantasy.reporting.data.LeagueInfo
