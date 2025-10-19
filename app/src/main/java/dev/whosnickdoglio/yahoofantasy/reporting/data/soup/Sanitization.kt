@@ -7,7 +7,7 @@ import com.fleeksoft.ksoup.nodes.Element
 import dev.whosnickdoglio.yahoofantasy.reporting.data.PlayerHealthStatus
 import dev.whosnickdoglio.yahoofantasy.reporting.data.PlayerRowRawInfo
 
-private val TeamAbbreviations = listOf(
+private val nbaTeamAbbreviations = listOf(
     "ATL",
     "BOS",
     "BKN",
@@ -55,10 +55,10 @@ internal fun Element.toPlayerRowRawInfo(): PlayerRowRawInfo {
         opponent = elements.getOrNull(6), // TODO might be 6 or 3
     )
 }
-// TODO remove team abbreviations
+
 internal fun String?.removeTeamAbbreviations(): String?  {
     var mutableString = this
-    TeamAbbreviations.forEach { abbreviation ->
+    nbaTeamAbbreviations.forEach { abbreviation ->
         if (mutableString?.contains(abbreviation) == true) {
             mutableString = this?.replace(abbreviation, "")
         }
@@ -76,11 +76,15 @@ internal fun String?.sanitizePlayerName(): String? = this?.substringBeforeLast("
     ?.removeTeamAbbreviations()
     ?.trim()
 
-internal fun String?.sanitizePlayerHealthStatus(): String? = this?.replace("GTD", "")?.replace("INJ", "")
+internal fun String?.sanitizePlayerHealthStatus(): String? = this
+    ?.replace("GTD", "")
+    ?.replace("INJ", "")
+    ?.replace("OUT", "")
 
 internal fun String?.getPlayerHealthStatus(): PlayerHealthStatus = when {
     this?.contains("GTD") == true -> PlayerHealthStatus.GAME_TIME_DECISION
-    this?.contains("INJ") == true -> PlayerHealthStatus.INJURED
+    this?.contains("INJ") == true -> PlayerHealthStatus.LONG_TERM_INJURY
+    this?.contains("OUT") == true -> PlayerHealthStatus.SHORT_TERM_INJURY
     else -> PlayerHealthStatus.HEALTHY
 }
 

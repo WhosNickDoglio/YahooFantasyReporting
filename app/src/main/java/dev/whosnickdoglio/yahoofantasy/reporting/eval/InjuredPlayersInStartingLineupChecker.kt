@@ -12,7 +12,7 @@ import dev.zacsweers.metro.ContributesIntoSet
 internal class InjuredPlayersInStartingLineupChecker: RosterChecker {
     override fun check(roster: List<PlayerRowRawInfo>): Violation? {
         val injuredPlayersStarting =
-            roster.filter { rosterSpot -> rosterSpot.isStarting() && rosterSpot.healthStatus == PlayerHealthStatus.INJURED }
+            roster.filter { rosterSpot -> rosterSpot.isStarting() && rosterSpot.isInjured() }
 
         return if (injuredPlayersStarting.isNotEmpty()) {
             Violation.IL_IN_STARTING_LINEUP
@@ -20,4 +20,7 @@ internal class InjuredPlayersInStartingLineupChecker: RosterChecker {
             null
         }
     }
+
+    private fun PlayerRowRawInfo.isInjured(): Boolean =
+        healthStatus == PlayerHealthStatus.LONG_TERM_INJURY || healthStatus == PlayerHealthStatus.SHORT_TERM_INJURY
 }

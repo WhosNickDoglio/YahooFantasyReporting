@@ -26,7 +26,7 @@ internal class SanitizationTest {
     enum class PlayerHealthValues(val input: String, val expected: PlayerHealthStatus) {
         NO_GAME_HEALTHY("Cade CunninghamPlayer Note DET - PG,SG", PlayerHealthStatus.HEALTHY),
         GAME_HEALTHY("Cade CunninghamPlayer Note DET - PG,SG 7:00 pm vs CHI", PlayerHealthStatus.HEALTHY),
-        NO_GAME_INJURED("Zach EdeyINJNo new player Notes MEM - C", PlayerHealthStatus.INJURED),
+        NO_GAME_INJURED("Zach EdeyINJNo new player Notes MEM - C", PlayerHealthStatus.LONG_TERM_INJURY),
         NO_GAME_GTD("OG AnunobyGTDNew Player Note NYK - SF,PF", PlayerHealthStatus.GAME_TIME_DECISION),
     }
 

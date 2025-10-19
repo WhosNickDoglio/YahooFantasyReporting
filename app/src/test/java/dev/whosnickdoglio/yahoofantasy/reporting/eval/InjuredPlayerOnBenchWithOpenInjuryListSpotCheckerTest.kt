@@ -17,7 +17,7 @@ class InjuredPlayerOnBenchWithOpenInjuryListSpotCheckerTest {
         val checker = InjuredPlayerOnBenchWithOpenInjuryListSpotChecker(FakeLeagueInfo())
         val result = checker.check(
             Roster(
-                Player(position = "BN", healthStatus = PlayerHealthStatus.INJURED)
+                Player(position = "BN", healthStatus = PlayerHealthStatus.LONG_TERM_INJURY)
             )
         )
 
@@ -30,11 +30,11 @@ class InjuredPlayerOnBenchWithOpenInjuryListSpotCheckerTest {
         val result = checker.check(
             Roster(
                 Player(healthStatus = PlayerHealthStatus.HEALTHY),
-                Player(healthStatus = PlayerHealthStatus.INJURED),
-                Player(position = "IL", healthStatus = PlayerHealthStatus.INJURED),
-                Player(position = "IL", healthStatus = PlayerHealthStatus.INJURED),
-                Player(position = "IL", healthStatus = PlayerHealthStatus.INJURED),
-                Player(position = "IL", healthStatus = PlayerHealthStatus.INJURED),
+                Player(healthStatus = PlayerHealthStatus.LONG_TERM_INJURY),
+                Player(position = "IL", healthStatus = PlayerHealthStatus.LONG_TERM_INJURY),
+                Player(position = "IL", healthStatus = PlayerHealthStatus.LONG_TERM_INJURY),
+                Player(position = "IL", healthStatus = PlayerHealthStatus.LONG_TERM_INJURY),
+                Player(position = "IL", healthStatus = PlayerHealthStatus.LONG_TERM_INJURY),
             )
         )
 
@@ -48,10 +48,10 @@ class InjuredPlayerOnBenchWithOpenInjuryListSpotCheckerTest {
             Roster(
                 Player(healthStatus = PlayerHealthStatus.HEALTHY),
                 Player(healthStatus = PlayerHealthStatus.HEALTHY),
-                Player(position = "IL", healthStatus = PlayerHealthStatus.INJURED),
-                Player(position = "IL", healthStatus = PlayerHealthStatus.INJURED),
-                Player(position = "IL", healthStatus = PlayerHealthStatus.INJURED),
-                Player(position = "IL", healthStatus = PlayerHealthStatus.INJURED),
+                Player(position = "IL", healthStatus = PlayerHealthStatus.LONG_TERM_INJURY),
+                Player(position = "IL", healthStatus = PlayerHealthStatus.LONG_TERM_INJURY),
+                Player(position = "IL", healthStatus = PlayerHealthStatus.LONG_TERM_INJURY),
+                Player(position = "IL", healthStatus = PlayerHealthStatus.LONG_TERM_INJURY),
             )
         )
 
