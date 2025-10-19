@@ -1,7 +1,7 @@
 // Copyright (C) 2025 Nicholas Doglio
 // SPDX-License-Identifier: MIT
 
-package dev.whosnickdoglio.yahoofantasy.reporting.log
+package dev.whosnickdoglio.yahoofantasy.reporting.util.log
 
 import dev.zacsweers.metro.AppScope
 import dev.zacsweers.metro.ContributesBinding

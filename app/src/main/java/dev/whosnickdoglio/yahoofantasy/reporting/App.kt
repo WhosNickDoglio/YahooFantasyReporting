@@ -8,9 +8,9 @@ import dev.whosnickdoglio.yahoofantasy.reporting.data.TeamRosterInfoFetcher
 import dev.whosnickdoglio.yahoofantasy.reporting.eval.EvaluationResult
 import dev.whosnickdoglio.yahoofantasy.reporting.eval.RosterEvaluator
 import dev.whosnickdoglio.yahoofantasy.reporting.eval.Violation
-import dev.whosnickdoglio.yahoofantasy.reporting.log.SimpleLogger
 import dev.whosnickdoglio.yahoofantasy.reporting.sheets.GoogleSheets
 import dev.whosnickdoglio.yahoofantasy.reporting.sheets.GoogleSheetsTeamReport
+import dev.whosnickdoglio.yahoofantasy.reporting.util.log.SimpleLogger
 import dev.zacsweers.metro.Inject
 import java.time.LocalDate
 

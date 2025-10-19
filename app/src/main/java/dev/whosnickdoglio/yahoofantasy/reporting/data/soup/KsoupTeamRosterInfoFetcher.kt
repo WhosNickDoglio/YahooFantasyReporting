@@ -10,23 +10,27 @@ import com.fleeksoft.ksoup.select.Evaluator
 import dev.whosnickdoglio.yahoofantasy.reporting.data.LeagueInfo
 import dev.whosnickdoglio.yahoofantasy.reporting.data.TeamRosterInfoFetcher
 import dev.whosnickdoglio.yahoofantasy.reporting.data.RosterInfo
+import dev.whosnickdoglio.yahoofantasy.reporting.util.coroutines.CoroutineDispatcherProvider
 import dev.zacsweers.metro.AppScope
 import dev.zacsweers.metro.ContributesBinding
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.withContext
 import java.time.LocalDate
 
 @ContributesBinding(AppScope::class)
 internal class KsoupTeamRosterInfoFetcher(
     private val date: LocalDate,
     private val leagueInfo: LeagueInfo,
+    private val coroutineDispatcherProvider: CoroutineDispatcherProvider,
 ) : TeamRosterInfoFetcher {
 
-    override suspend fun fetchRosterInfo(teamId: Int): RosterInfo {
+    override suspend fun fetchRosterInfo(teamId: Int): RosterInfo = withContext(coroutineDispatcherProvider.io) {
         val url = "${leagueInfo.baseUrl}/$teamId/team?&date=$date"
         val doc = Ksoup.parseGetRequest(url)
         val table = doc.select(Evaluator.Id("statTable0"))
         val rows: List<Element> = table.select("tr")
 
-        return RosterInfo(
+        return@withContext RosterInfo(
             name = doc.title().substringAfterLast("-").substringBefore("|").trim(),
             players = rows.map { it.toPlayerRowRawInfo() }
                 .filter { it.playerName?.isNotEmpty() == true }
