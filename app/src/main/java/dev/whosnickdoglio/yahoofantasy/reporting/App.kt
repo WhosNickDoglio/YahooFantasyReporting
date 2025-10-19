@@ -23,7 +23,7 @@ internal class App(
     private val logger: SimpleLogger,
 ) {
 
-    suspend fun main() {
+    suspend operator fun invoke() {
         logger.log("Checking rosters in ${leagueInfo.name} for $yesterday")
         val reports =
             (1..leagueInfo.numberOfTeams)

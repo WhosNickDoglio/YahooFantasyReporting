@@ -20,5 +20,5 @@ public suspend fun main(args: Array<String>) {
     val graph =
         createGraphFactory<AppDependencyGraph.Factory>()
             .create(yesterday = yesterday, leagueInfo = leagueInfo)
-    graph.app.main()
+    graph.app()
 }
