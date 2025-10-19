@@ -2,6 +2,7 @@
 
 [![CI](https://github.com/WhosNickDoglio/YahooFantasyReporting/actions/workflows/ci.yml/badge.svg)](https://github.com/WhosNickDoglio/YahooFantasyReporting/actions/workflows/ci.yml)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+[![codecov](https://codecov.io/gh/WhosNickDoglio/YahooFantasyReporting/graph/badge.svg?token=jJpXf3f10z)](https://codecov.io/gh/WhosNickDoglio/YahooFantasyReporting)
  
 # License 
 
