@@ -25,7 +25,7 @@ internal class App(
 ) {
 
     suspend fun main() {
-        logger.log("Checking rosters for $yesterday")
+        logger.log("Checking rosters in ${leagueInfo.name} for $yesterday")
         val reports = mutableListOf<GoogleSheetsTeamReport>()
         for (i in 1..leagueInfo.numberOfTeams) {
             val rosterInfo = fetcher.fetchRosterInfo(teamId = i)
