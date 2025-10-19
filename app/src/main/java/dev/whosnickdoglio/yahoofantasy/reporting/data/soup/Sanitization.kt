@@ -57,7 +57,7 @@ internal fun Element.toPlayerRowRawInfo(): PlayerRowRawInfo? {
         healthStatus = playerHealthStatus,
         positionEligibility = playerName?.sanitizePlayerPositionEligibility(),
         // Going to need to do more work here
-        opponent = childElementsList().findOpponent(), // TODO might be 6 or 3
+        opponent = childElementsList().findOpponent(),
     )
 }
 
