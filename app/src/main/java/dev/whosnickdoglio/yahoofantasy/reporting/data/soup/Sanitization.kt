@@ -62,7 +62,7 @@ internal fun Element.toPlayerRowRawInfo(): PlayerRowRawInfo? {
 }
 
 internal fun List<Element>.findOpponent(): String {
-    if(map { it.text() }.any { text -> text.contains("(Empty)") }) {
+    if (map { it.text() }.any { text -> text.contains("(Empty)") }) {
         return ""
     }
 
