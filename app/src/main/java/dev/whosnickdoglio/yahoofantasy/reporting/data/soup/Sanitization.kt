@@ -62,6 +62,10 @@ internal fun Element.toPlayerRowRawInfo(): PlayerRowRawInfo? {
 }
 
 internal fun List<Element>.findOpponent(): String {
+    if(map { it.text() }.any { text -> text.contains("(Empty)") }) {
+        return ""
+    }
+
     val possibilities =
         listOfNotNull(getOrNull(3), getOrNull(5), getOrNull(6))
             .map { element -> element.text() }
