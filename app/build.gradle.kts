@@ -9,10 +9,11 @@ plugins {
     alias(libs.plugins.metro)
     alias(libs.plugins.burst)
     alias(libs.plugins.ksp)
+    alias(libs.plugins.kover)
     application
 }
 
-convention { enableCodeCoverageWithKover() }
+kover { reports { filters { excludes { classes("*\$Metro*") } } } }
 
 metro { contributesAsInject = true }
 
