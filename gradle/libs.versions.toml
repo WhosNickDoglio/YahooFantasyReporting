@@ -2,12 +2,15 @@
 ksoup = "0.2.5"
 kotlin = "2.2.20"
 jdkTarget = "17"
+mockingbird = "2.1.0"
+coroutines = "1.10.2"
 jdk = "24"
 ktfmt = "0.59"
 
 [plugins]
 kotlin-jvm = { id = "org.jetbrains.kotlin.jvm", version.ref = "kotlin" }
 metro = { id = "dev.zacsweers.metro", version = "0.7.0" }
+ksp = { id = "com.google.devtools.ksp", version = "2.2.20-2.0.4" }
 burst = { id = "app.cash.burst" }
 convention-jvm = { id = "dev.whosnickdoglio.convention.kotlin", version = "0.1" }
 detekt = { id = "io.gitlab.arturbosch.detekt", version = "1.23.8" }
@@ -22,12 +25,18 @@ kover = { id = "org.jetbrains.kotlinx.kover", version = "0.9.3" }
 ksoup = { module = "com.fleeksoft.ksoup:ksoup", version.ref = "ksoup" }
 ksoup-network = { module = "com.fleeksoft.ksoup:ksoup-network", version.ref = "ksoup" }
 
+kotlinx-coroutines-core = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-core", version.ref = "coroutines" }
+kotlinx-coroutines-test = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-test", version.ref = "coroutines" }
+
 google-api-client = { module = "com.google.api-client:google-api-client", version = "2.8.1" }
 google-ouath = { module = "com.google.oauth-client:google-oauth-client-jetty", version = "1.39.0" }
 google-sheets = { module = "com.google.apis:google-api-services-sheets", version = "v4-rev20250616-2.0.0" }
 
 # https://www.slf4j.org/codes.html#noProviders
-slf4j = {module = "org.slf4j:slf4j-nop", version = "2.0.17"}
+slf4j = { module = "org.slf4j:slf4j-nop", version = "2.0.17" }
+
+mockingbird = { module = "com.anthonycr.mockingbird:core", version.ref = "mockingbird" }
+mockingbird-compiler = { module = "com.anthonycr.mockingbird:processor", version.ref = "mockingbird" }
 
 junit = { module = "junit:junit", version = "4.13.2" }
 burst = { module = "app.cash.burst:burst-gradle-plugin", version = "2.10.2" }

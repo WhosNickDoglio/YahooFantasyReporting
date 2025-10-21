@@ -18,6 +18,7 @@ plugins {
     alias(libs.plugins.lint) apply false
     alias(libs.plugins.spotless) apply false
     alias(libs.plugins.sortDependencies) apply false
+    alias(libs.plugins.ksp) apply false
 }
 
 // https://docs.gradle.org/8.9/userguide/gradle_daemon.html#daemon_jvm_criteria
