@@ -23,10 +23,10 @@ internal class InjuredPlayerOnBenchWithOpenInjuryListSpotChecker(
 
         val hasOpenInjuryListSpots = injuryListSpotsTaken.size < leagueInfo.injuryListCount
 
-        if (injuredPlayersOnBench.isNotEmpty() && hasOpenInjuryListSpots) {
-            return Violation.IL_PLAYER_ON_BENCH_WITH_OPEN_IL_SPOT
+        return if (injuredPlayersOnBench.isNotEmpty() && hasOpenInjuryListSpots) {
+            Violation.IL_PLAYER_ON_BENCH_WITH_OPEN_IL_SPOT
+        } else {
+            null
         }
-
-        return null
     }
 }

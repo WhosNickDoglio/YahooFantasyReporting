@@ -3,6 +3,7 @@
 package dev.whosnickdoglio.yahoofantasy.reporting.eval
 
 import assertk.assertThat
+import assertk.assertions.containsSubList
 import assertk.assertions.isEqualTo
 import assertk.assertions.isFalse
 import assertk.assertions.isTrue
@@ -76,8 +77,19 @@ class RosterUtilsTest {
     }
 
     @Test
-    fun `given player with G eligibility when foo is called return all eligible positions including Util`() {
+    fun `given player on injury list plus when isOnInjuryList is called returns true`() {
+        assertThat(Player(position = "IL+").isOnInjuryList()).isTrue()
+    }
+
+    @Test
+    fun `given player with G eligibility when fullPositionalEligibility is called return all eligible positions including Util`() {
         assertThat(Player(positionEligibility = listOf("G")).fullPositionalEligibility())
             .isEqualTo(listOf("G", "Util"))
+    }
+
+    @Test
+    fun `given player with G eligibility when fullPositionalEligibility is called returned list contains G`() {
+        val player = Player(positionEligibility = listOf("G"))
+        assertThat(player.fullPositionalEligibility()).containsSubList(player.positionEligibility!!)
     }
 }

@@ -4,6 +4,7 @@ package dev.whosnickdoglio.yahoofantasy.reporting.eval
 
 import assertk.assertThat
 import assertk.assertions.isEqualTo
+import dev.whosnickdoglio.yahoofantasy.reporting.data.PlayerHealthStatus
 import org.junit.Test
 
 class RosterEvaluatorTest {
@@ -31,5 +32,25 @@ class RosterEvaluatorTest {
             )
 
         assertThat(result).isEqualTo(EvaluationResult.SetRoster)
+    }
+
+    @Test
+    fun `evaluate returns UnsetRoster when a checker finds a violation`() {
+        val violation = Violation.ACTIVE_PLAYER_ON_BENCH_WITH_OPEN_STARTING_LINEUP_SPOT
+        val evaluator = RosterEvaluator(setOf(RosterChecker { _ -> violation }))
+
+        val result =
+            evaluator.evaluate(
+                listOf(
+                    Player(position = "PG"),
+                    Player(
+                        position = "BN",
+                        opponent = "BKN",
+                        healthStatus = PlayerHealthStatus.HEALTHY,
+                    ),
+                )
+            )
+
+        assertThat(result).isEqualTo(EvaluationResult.UnsetRoster(listOf(violation)))
     }
 }
