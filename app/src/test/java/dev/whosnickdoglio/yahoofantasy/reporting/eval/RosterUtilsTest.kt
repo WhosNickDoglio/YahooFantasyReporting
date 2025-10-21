@@ -82,7 +82,7 @@ class RosterUtilsTest {
     }
 
     @Test
-    fun `given player with G eligibility when fullPositionalEligibility is called return all eligible positions including Util`() {
+    fun `given player with G eligibility when fullPositionalEligibility is called return positions including Util`() {
         assertThat(Player(positionEligibility = listOf("G")).fullPositionalEligibility())
             .isEqualTo(listOf("G", "Util"))
     }
