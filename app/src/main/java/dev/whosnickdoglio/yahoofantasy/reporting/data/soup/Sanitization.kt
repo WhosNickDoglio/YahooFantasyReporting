@@ -47,7 +47,7 @@ internal fun Element.toPlayerRowRawInfo(): PlayerRowRawInfo? {
     val firstPassPlayerNameSanitization = playerName.sanitizePlayerName()
     val playerHealthStatus = playerName.getPlayerHealthStatus()
 
-    val badPlayerNames = listOf("", "Players")
+    val badPlayerNames = listOf("", "Players", "Starting Lineup Totals")
 
     if (playerName in badPlayerNames) return null
 
@@ -66,17 +66,26 @@ internal fun List<Element>.findOpponent(): String {
         return ""
     }
 
+    val rawData =
+        listOfNotNull(getOrNull(3), getOrNull(4), getOrNull(5), getOrNull(6)).map { element ->
+            element.text()
+        }
+
     val possibilities =
-        listOfNotNull(getOrNull(3), getOrNull(5), getOrNull(6))
-            .map { element -> element.text() }
+        rawData
             .filterNot { text -> text.any { char -> char.isDigit() } }
             .filterNot { text -> text.contains("\uE061") }
+            .filterNot { text -> text.contains("-") }
             .filter { text ->
                 text.isEmpty() ||
                     text.all { char -> if (char.isLetter()) char.isUpperCase() else true }
             }
 
-    return possibilities.single()
+    val opponent =
+        possibilities.singleOrNull()
+            ?: error("Unable to determine opponent, found ${possibilities.joinToString(", ")}")
+
+    return opponent
 }
 
 internal fun String?.removeTeamAbbreviations(): String? {
