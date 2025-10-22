@@ -109,8 +109,36 @@ internal fun String?.sanitizePlayerName(): String? =
         ?.removeTeamAbbreviations()
         ?.trim()
 
-internal fun String?.sanitizePlayerHealthStatus(): String? =
-    this?.replace("GTD", "")?.replace("INJ", "")?.replace("OUT", "")
+internal fun String?.sanitizePlayerHealthStatus(): String? {
+    var mutableString = this
+
+    // https://stackoverflow.com/a/77368797/8217056
+    fun String.replaceLast(oldValue: String, newValue: String): String {
+        val lastIndex = lastIndexOf(oldValue)
+        if (lastIndex == -1) {
+            return this
+        }
+        val prefix = substring(0, lastIndex)
+        val suffix = substring(lastIndex + oldValue.length)
+        return "$prefix$newValue$suffix"
+    }
+
+    PlayerHealthStatus.entries.forEach { status ->
+        mutableString =
+            if (
+                status == PlayerHealthStatus.SHORT_TERM_INJURY &&
+                    mutableString?.last() == status.value.first()
+            ) {
+                mutableString.replaceLast(status.value, "")
+            } else if (status != PlayerHealthStatus.SHORT_TERM_INJURY) {
+                mutableString?.replace(status.value, "")
+            } else {
+                mutableString
+            }
+    }
+
+    return mutableString
+}
 
 internal fun String?.getPlayerHealthStatus(): PlayerHealthStatus =
     PlayerHealthStatus.entries

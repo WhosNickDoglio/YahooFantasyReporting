@@ -54,7 +54,7 @@ internal class SanitizationTest {
     enum class SanitizeHealthStatus(val input: String, val expected: String) {
         GTD("OG AnunobyGTD", "OG Anunoby"),
         INJ("Zach EdeyINJ", "Zach Edey"),
-        OUT("John WallOUT", "John Wall"),
+        OUT("John WallO", "John Wall"),
         HEALTHY("Healthy Player", "Healthy Player"),
     }
 
