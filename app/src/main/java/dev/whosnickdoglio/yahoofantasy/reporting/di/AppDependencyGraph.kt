@@ -4,15 +4,20 @@ package dev.whosnickdoglio.yahoofantasy.reporting.di
 
 import dev.whosnickdoglio.yahoofantasy.reporting.App
 import dev.whosnickdoglio.yahoofantasy.reporting.data.LeagueInfo
+import dev.whosnickdoglio.yahoofantasy.reporting.util.coroutines.IoDispatcher
 import dev.zacsweers.metro.AppScope
 import dev.zacsweers.metro.DependencyGraph
 import dev.zacsweers.metro.Provides
 import java.time.LocalDate
+import kotlin.coroutines.CoroutineContext
+import kotlinx.coroutines.Dispatchers
 
 @DependencyGraph(AppScope::class)
 internal interface AppDependencyGraph {
 
     val app: App
+
+    @Provides @IoDispatcher fun provideIoCoroutineContext(): CoroutineContext = Dispatchers.IO
 
     @DependencyGraph.Factory
     fun interface Factory {
