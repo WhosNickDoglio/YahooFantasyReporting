@@ -26,5 +26,5 @@ internal enum class PlayerHealthStatus(val value: String) {
     HEALTHY(""),
     GAME_TIME_DECISION("GTD"),
     LONG_TERM_INJURY("INJ"),
-    SHORT_TERM_INJURY("OUT"),
+    SHORT_TERM_INJURY("O"),
 }

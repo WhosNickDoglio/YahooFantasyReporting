@@ -116,7 +116,7 @@ internal fun String?.getPlayerHealthStatus(): PlayerHealthStatus =
     when {
         this?.contains("GTD") == true -> PlayerHealthStatus.GAME_TIME_DECISION
         this?.contains("INJ") == true -> PlayerHealthStatus.LONG_TERM_INJURY
-        this?.contains("OUT") == true -> PlayerHealthStatus.SHORT_TERM_INJURY
+        this?.contains("O") == true -> PlayerHealthStatus.SHORT_TERM_INJURY
         else -> PlayerHealthStatus.HEALTHY
     }
 
