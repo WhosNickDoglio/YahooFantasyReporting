@@ -44,12 +44,13 @@ private val nbaTeamAbbreviations =
 internal fun Element.toPlayerRowRawInfo(): PlayerRowRawInfo? {
     val elements = childElementsList().map { it.text() }
     val playerName = elements.getOrNull(1)
-    val firstPassPlayerNameSanitization = playerName.sanitizePlayerName()
-    val playerHealthStatus = playerName.getPlayerHealthStatus()
 
     val badPlayerNames = listOf("", "Players", "Starting Lineup Totals")
 
     if (playerName in badPlayerNames) return null
+
+    val firstPassPlayerNameSanitization = playerName.sanitizePlayerName()
+    val playerHealthStatus = playerName.getPlayerHealthStatus()
 
     return PlayerRowRawInfo(
         position = elements.getOrNull(0),
