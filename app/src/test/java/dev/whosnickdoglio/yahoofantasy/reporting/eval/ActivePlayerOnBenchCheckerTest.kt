@@ -13,6 +13,22 @@ class ActivePlayerOnBenchCheckerTest {
     private val checker = ActivePlayerOnBenchChecker()
 
     @Test
+    fun `starting spot is empty so return null`() {
+        val result =
+            checker.check(
+                listOf(
+                    Player(
+                        position = "BN",
+                        positionEligibility = listOf("SG", "G"),
+                        opponent = "CLE",
+                    )
+                )
+            )
+
+        assertThat(result).isNull()
+    }
+
+    @Test
     fun `no available starting spots returns null`() {
         val result =
             checker.check(
