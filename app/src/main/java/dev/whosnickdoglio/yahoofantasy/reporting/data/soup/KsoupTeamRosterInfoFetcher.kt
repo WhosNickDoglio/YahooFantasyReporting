@@ -30,9 +30,17 @@ internal class KsoupTeamRosterInfoFetcher(
             val table = doc.select(Evaluator.Id("statTable0"))
             val rows: List<Element> = table.select("tr")
 
+            var opponentIndex: Int? = null
+
             return@withContext RosterInfo(
                 name = doc.title().substringAfterLast("-").substringBefore("|").trim(),
-                players = rows.mapNotNull { it.toPlayerRowRawInfo() },
+                players =
+                    rows.mapNotNull { element ->
+                        element.toPlayerRowRawInfo(
+                            setOpponentIndex = { index -> opponentIndex = index },
+                            getOpponentIndex = { opponentIndex ?: -1 },
+                        )
+                    },
                 id = teamId,
                 url = url,
             )

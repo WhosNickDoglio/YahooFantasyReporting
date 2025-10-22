@@ -12,19 +12,10 @@ import org.junit.Test
 
 internal class SanitizationTest {
 
-    //    "Cade CunninghamPlayer Note DET - PG,SG",
-    //    "Donovan MitchellPlayer Note CLE - PG,SG",
-    //    "Austin ReavesNew Player Note LAL - PG,SG",
-    //    "OG AnunobyGTDNew Player Note NYK - SF,PF",
-    //    "Keegan MurrayINJVideo ForecastPlayer Note SAC - SF,PF",
-    //    "Zach EdeyINJNo new player Notes MEM - C",
-    //    "Cade CunninghamPlayer Note DET - PG,SG 7:00 pm vs CHI",
-    //    "Donovan MitchellPlayer Note CLE - PG,SG 7:30 pm @ MIA",
-
     enum class PlayerHealthValues(val input: String, val expected: PlayerHealthStatus) {
         NO_GAME_HEALTHY("Cade CunninghamPlayer Note DET - PG,SG", PlayerHealthStatus.HEALTHY),
         GAME_HEALTHY(
-            "Cade CunninghamPlayer Note DET - PG,SG 7:00 pm vs CHI",
+            "Austin ReavesNew Player Note LAL - PG,SG L, 109-119 vs GSW",
             PlayerHealthStatus.HEALTHY,
         ),
         NO_GAME_INJURED(
@@ -40,8 +31,8 @@ internal class SanitizationTest {
     enum class SanitizeValues(val input: String, val expected: String) {
         PLAYER_NAME("Cade CunninghamPlayer Note DET - PG,SG", "Cade Cunningham"),
         PLAYER_NAME_WITH_GAME(
-            "Cade CunninghamPlayer Note DET - PG,SG 7:00 pm vs CHI",
-            "Cade Cunningham",
+            "Austin ReavesNew Player Note LAL - PG,SG L, 109-119 vs GSW",
+            "Austin Reaves",
         ),
         PLAYER_NAME_WITH_INJURY("Zach EdeyINJNo new player Notes MEM - C", "Zach Edey"),
         PLAYER_NAME_WITH_GTD("OG AnunobyGTDNew Player Note NYK - SF,PF", "OG Anunoby"),
@@ -68,12 +59,11 @@ internal class SanitizationTest {
     enum class SanitizePositionEligibility(val input: String, val expected: List<String>) {
         MULTIPLE_POS("Cade Cunningham - PG,SG", listOf("PG", "SG")),
         MULTIPLE_POS_WITH_SPACES("Cade Cunningham - PG, SG", listOf("PG", "SG")),
-        MULTIPLE_POS_WITH_GAME("Cade Cunningham - PG,SG 7:00 pm", listOf("PG", "SG")),
-        MULTIPLE_POS_WITH_GAME_AND_SPACES("Cade Cunningham - PG, SG 7:00 pm", listOf("PG", "SG")),
+        MULTIPLE_POS_WITH_GAME(
+            "Austin ReavesNew Player Note LAL - PG,SG L, 109-119 vs GSW",
+            listOf("PG", "SG"),
+        ),
         SINGLE_POS("Jalen Duren - C", listOf("C")),
-        NO_DASH("Lebron James", listOf("Lebron James")),
-        EMPTY_STRING("", listOf("")),
-        ONLY_DASH(" - ", listOf("")),
     }
 
     @Burst

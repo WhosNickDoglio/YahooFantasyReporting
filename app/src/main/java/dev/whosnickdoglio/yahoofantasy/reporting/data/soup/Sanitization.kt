@@ -41,13 +41,20 @@ private val nbaTeamAbbreviations =
         "WAS",
     )
 
-internal fun Element.toPlayerRowRawInfo(): PlayerRowRawInfo? {
+// TODO better error handling, certain things cannot be empty
+internal fun Element.toPlayerRowRawInfo(
+    setOpponentIndex: (Int) -> Unit,
+    getOpponentIndex: () -> Int,
+): PlayerRowRawInfo? {
     val elements = childElementsList().map { it.text() }
     val playerName = elements.getOrNull(1)
 
     val badPlayerNames = listOf("", "Players", "Starting Lineup Totals")
 
-    if (playerName in badPlayerNames) return null
+    if (playerName in badPlayerNames) {
+        if (playerName == "Players") setOpponentIndex(elements.indexOf("Opp") + 1)
+        return null
+    }
 
     val firstPassPlayerNameSanitization = playerName.sanitizePlayerName()
     val playerHealthStatus = playerName.getPlayerHealthStatus()
@@ -58,7 +65,7 @@ internal fun Element.toPlayerRowRawInfo(): PlayerRowRawInfo? {
         healthStatus = playerHealthStatus,
         positionEligibility = playerName?.sanitizePlayerPositionEligibility(),
         // Going to need to do more work here
-        opponent = childElementsList().findOpponent(),
+        opponent = if (getOpponentIndex() != -1) elements.getOrNull(getOpponentIndex()) else null,
     )
 }
 
@@ -95,13 +102,16 @@ internal fun String?.removeTeamAbbreviations(): String? {
 
 internal fun String?.sanitizePlayerName(): String? =
     this?.substringBeforeLast("-")
+        ?.filterNot { char -> char.isDigit() }
         // Remove nonsense
         ?.replace("No New Player Notes", "", ignoreCase = true)
         ?.replace("New Player Note", "", ignoreCase = true)
         ?.replace("Player Note", "", ignoreCase = true)
         ?.replace("Video Forecast", "", ignoreCase = true)
+        ?.replace("vs", "")
         ?.sanitizePlayerHealthStatus()
         ?.removeTeamAbbreviations()
+        ?.substringBeforeLast("-")
         ?.trim()
 
 internal fun String?.sanitizePlayerHealthStatus(): String? {
@@ -145,8 +155,12 @@ internal fun String?.getPlayerHealthStatus(): PlayerHealthStatus =
 
 internal fun String?.sanitizePlayerPositionEligibility(): List<String> {
     val containsNumbers = this?.any { it.isDigit() }
-    val firstPass = this?.substringAfterLast("-")?.trim().orEmpty()
 
+    val firstPass =
+        (if (containsNumbers == true) substringBeforeLast(",") else this)
+            ?.substringAfterLast("-")
+            ?.trim()
+            .orEmpty()
     val positionsString =
         if (containsNumbers == true) {
             val indexOfFirstNumber = firstPass.indexOfFirst { it.isDigit() }
@@ -159,5 +173,10 @@ internal fun String?.sanitizePlayerPositionEligibility(): List<String> {
             firstPass
         }
 
-    return positionsString.split(",").map { it.trim() }
+    return positionsString
+        .split(",")
+        // Drop Win and Loss notation
+        .map { it.replace("W", "").replace("L", "") }
+        .map { it.trim() }
+        .filterNot { it.isEmpty() }
 }
