@@ -113,12 +113,12 @@ internal fun String?.sanitizePlayerHealthStatus(): String? =
     this?.replace("GTD", "")?.replace("INJ", "")?.replace("OUT", "")
 
 internal fun String?.getPlayerHealthStatus(): PlayerHealthStatus =
-    when {
-        this?.contains("GTD") == true -> PlayerHealthStatus.GAME_TIME_DECISION
-        this?.contains("INJ") == true -> PlayerHealthStatus.LONG_TERM_INJURY
-        this?.contains("O") == true -> PlayerHealthStatus.SHORT_TERM_INJURY
-        else -> PlayerHealthStatus.HEALTHY
-    }
+    PlayerHealthStatus.entries
+        // cannot include the healthy in this check as
+        // we determine healthy by the absence of other status'.
+        .filterNot { it == PlayerHealthStatus.HEALTHY }
+        .firstOrNull { status -> this?.contains(status.value) == true }
+        ?: PlayerHealthStatus.HEALTHY
 
 internal fun String?.sanitizePlayerPositionEligibility(): List<String> {
     val containsNumbers = this?.any { it.isDigit() }
