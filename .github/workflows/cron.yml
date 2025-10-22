@@ -10,7 +10,7 @@ jobs:
       GOOGLE_CREDENTIALS: ${{ secrets.GOOGLE_CREDENTIALS }}
     strategy:
       matrix:
-        league: [ mitch, birthday ]
+        league: [ mitch, redacted, birthday ]
     steps:
       - uses: actions/checkout@08c6903cd8c0fde910a37f88322edcfb5dd907a8 # v5.0.0
       - uses: ./.github/actions/setup
