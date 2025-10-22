@@ -17,7 +17,10 @@ internal interface AppDependencyGraph {
 
     val app: App
 
-    @Provides @IoDispatcher fun provideIoCoroutineContext(): CoroutineContext = Dispatchers.IO
+    @Suppress("InjectDispatcher") // silly detekt I am injecting this
+    @Provides
+    @IoDispatcher
+    fun provideIoCoroutineContext(): CoroutineContext = Dispatchers.IO
 
     @DependencyGraph.Factory
     fun interface Factory {
