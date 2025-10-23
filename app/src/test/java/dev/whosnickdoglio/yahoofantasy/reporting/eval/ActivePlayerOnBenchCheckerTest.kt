@@ -316,4 +316,103 @@ class ActivePlayerOnBenchCheckerTest {
 
         assertThat(result).isNull()
     }
+
+    @Suppress("LongMethod") // TODO turn this off for tests
+    @Test
+    fun `complex scenario from x`() {
+        val result =
+            checker.check(
+                listOf(
+                    Player(
+                        position = "PG",
+                        playerName = "Anthony Edwards",
+                        positionEligibility = listOf("PG", "SG"),
+                        opponent = "POR",
+                    ),
+                    Player(
+                        position = "SG",
+                        playerName = "Immanual Quickley",
+                        positionEligibility = listOf("PG", "SG"),
+                        opponent = "ATL",
+                    ),
+                    Player(
+                        position = "G",
+                        playerName = "Tyrese Maxey",
+                        positionEligibility = listOf("PG"),
+                        opponent = "BOS",
+                    ),
+                    Player(
+                        position = "SF",
+                        playerName = "Jalen Johnson",
+                        positionEligibility = listOf("SF", "PF"),
+                        opponent = "TOR",
+                    ),
+                    Player(
+                        position = "PF",
+                        playerName = "Cameron Johnson",
+                        positionEligibility = listOf("SF", "PF"),
+                    ),
+                    Player(
+                        position = "F",
+                        playerName = "Cooper Flagg",
+                        positionEligibility = listOf("SF"),
+                        opponent = "SAS",
+                    ),
+                    Player(
+                        position = "C",
+                        playerName = "Paolo Banchero",
+                        positionEligibility = listOf("PF", "C"),
+                        opponent = "MIA",
+                    ),
+                    Player(
+                        position = "C",
+                        playerName = "Jakob Poeltl",
+                        positionEligibility = listOf("SF", "PF"),
+                        opponent = "ATL",
+                    ),
+                    Player(
+                        position = "Util",
+                        playerName = "Lauri Markkanen",
+                        positionEligibility = listOf("SF", "PF"),
+                        opponent = "LAC",
+                    ),
+                    Player(
+                        position = "Util",
+                        playerName = "Devin Vassell",
+                        positionEligibility = listOf("SG", "SF"),
+                        opponent = "DAL",
+                    ),
+                    Player(
+                        position = "BN",
+                        playerName = "OG Anunoby",
+                        positionEligibility = listOf("SF", "PF"),
+                        opponent = "CLE",
+                    ),
+                    Player(
+                        position = "BN",
+                        playerName = "Cason Wallace",
+                        positionEligibility = listOf("PG", "SG"),
+                    ),
+                    Player(
+                        position = "BN",
+                        playerName = "Cason Wallace",
+                        positionEligibility = listOf("PG", "SG"),
+                    ),
+                    Player(
+                        position = "BN",
+                        playerName = "VJ Edgecombe",
+                        positionEligibility = listOf("PG"),
+                    ),
+                    Player(
+                        position = "IL+",
+                        playerName = "Zach Edey",
+                        positionEligibility = listOf("C"),
+                        healthStatus = PlayerHealthStatus.LONG_TERM_INJURY,
+                    ),
+                )
+            )
+
+        assertThat(result)
+            .isEqualTo(Violation.ACTIVE_PLAYER_ON_BENCH_WITH_OPEN_STARTING_LINEUP_SPOT)
+    }
 }

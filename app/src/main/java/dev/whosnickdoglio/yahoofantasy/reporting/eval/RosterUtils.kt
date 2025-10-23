@@ -16,8 +16,21 @@ internal fun PlayerRowRawInfo.isStarting(): Boolean = !position.equals("BN") && 
 
 internal fun PlayerRowRawInfo.isOnInjuryList(): Boolean = position?.contains("IL") == true
 
+private val guardEligiblePositions = listOf("PG", "SG")
+private val forwardEligiblePositions = listOf("SF", "PF")
+
 internal fun PlayerRowRawInfo.fullPositionalEligibility(): List<String> = buildList {
-    addAll(positionEligibility?.filterNotNull().orEmpty())
+    val defaultEligibility = positionEligibility?.filterNotNull().orEmpty()
+    addAll(defaultEligibility)
+
+    if (guardEligiblePositions.any { defaultEligibility.contains(it) }) {
+        add("G")
+    }
+
+    if (forwardEligiblePositions.any { defaultEligibility.contains(it) }) {
+        add("F")
+    }
+
     // free for all, any position
     add("Util")
 }

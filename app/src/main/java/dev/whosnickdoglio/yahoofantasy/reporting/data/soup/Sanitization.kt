@@ -104,15 +104,20 @@ internal fun String?.sanitizePlayerName(): String? =
     this?.substringBeforeLast("-")
         ?.filterNot { char -> char.isDigit() }
         // Remove nonsense
-        ?.replace("No New Player Notes", "", ignoreCase = true)
-        ?.replace("New Player Note", "", ignoreCase = true)
-        ?.replace("Player Note", "", ignoreCase = true)
-        ?.replace("Video Forecast", "", ignoreCase = true)
+        ?.removeNonsense()
         ?.replace("vs", "")
         ?.sanitizePlayerHealthStatus()
         ?.removeTeamAbbreviations()
         ?.substringBeforeLast("-")
         ?.trim()
+
+internal fun String?.removeNonsense(): String? =
+    this?.replace("No New Player Notes", "", ignoreCase = true)
+        ?.replace("New Player Note", "", ignoreCase = true)
+        ?.replace("Player Note", "", ignoreCase = true)
+        ?.replace("Video Forecast", "", ignoreCase = true)
+        // TODO do I care about this?
+        ?.replace("GTD", "", ignoreCase = true)
 
 internal fun String?.sanitizePlayerHealthStatus(): String? {
     var mutableString = this
@@ -145,13 +150,16 @@ internal fun String?.sanitizePlayerHealthStatus(): String? {
     return mutableString
 }
 
-internal fun String?.getPlayerHealthStatus(): PlayerHealthStatus =
-    PlayerHealthStatus.entries
+internal fun String?.getPlayerHealthStatus(): PlayerHealthStatus {
+    val cleanName = this.removeNonsense()?.substringBefore("-")?.removeTeamAbbreviations()?.trim()
+
+    return PlayerHealthStatus.entries
         // cannot include the healthy in this check as
         // we determine healthy by the absence of other status'.
         .filterNot { it == PlayerHealthStatus.HEALTHY }
-        .firstOrNull { status -> this?.contains(status.value) == true }
+        .firstOrNull { status -> cleanName?.endsWith(status.value) == true }
         ?: PlayerHealthStatus.HEALTHY
+}
 
 internal fun String?.sanitizePlayerPositionEligibility(): List<String> {
     val containsNumbers = this?.any { it.isDigit() }
@@ -177,6 +185,7 @@ internal fun String?.sanitizePlayerPositionEligibility(): List<String> {
         .split(",")
         // Drop Win and Loss notation
         .map { it.replace("W", "").replace("L", "") }
+        .map { it.replace("\uE03E", "") }
         .map { it.trim() }
         .filterNot { it.isEmpty() }
 }

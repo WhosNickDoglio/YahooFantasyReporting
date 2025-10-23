@@ -9,49 +9,55 @@ import dev.zacsweers.metro.ContributesIntoSet
 
 @ContributesIntoSet(AppScope::class)
 internal class ActivePlayerOnBenchChecker : RosterChecker {
+    @Suppress(
+        "CyclomaticComplexMethod",
+        "CognitiveComplexMethod",
+        "ReturnCount",
+    ) // TODO clean this up
     override fun check(roster: List<PlayerRowRawInfo>): Violation? {
-        val activePlayers =
-            roster.filter { it.hasGameToday() && it.healthStatus == PlayerHealthStatus.HEALTHY }
-        val startingSpots = roster.filter { it.isStarting() }.map { it.position }
-
-        // If there are no active players on the bench, then there is nothing to do
-        if (
-            activePlayers.none { it.position == "BN" } ||
-                // This should not be possible but if there are no starting spots then this check is
-                // invalid
-                startingSpots.isEmpty()
-        ) {
-            return null
-        }
-
-        val currentActiveStartersCount =
-            roster.count {
-                it.isStarting() &&
+        val activeBenchPlayers =
+            roster.filter {
+                it.position == "BN" &&
                     it.hasGameToday() &&
                     it.healthStatus == PlayerHealthStatus.HEALTHY
             }
 
-        // A greedy approach to solving this problem. We sort our list of potential starters by the
-        // number of positions they are eligible for. This ensures that we prioritize players with
-        // fewer options first.
-        val potentialStarters = activePlayers.sortedBy { it.fullPositionalEligibility().size }
-        val availableSpots = startingSpots.toMutableList()
-        var maxPossibleActiveStarters = 0
+        val startingLineup = roster.filter { it.isStarting() }
 
-        for (player in potentialStarters) {
-            val eligibleSpot =
-                availableSpots.find { spot -> player.fullPositionalEligibility().contains(spot) }
+        if (activeBenchPlayers.isEmpty() || startingLineup.isEmpty()) return null
 
-            if (eligibleSpot != null) {
-                maxPossibleActiveStarters++
-                availableSpots.remove(eligibleSpot)
+        val spotToPlayer = mutableMapOf<Int, PlayerRowRawInfo>()
+        for ((index, player) in startingLineup.withIndex()) {
+            if (player.hasGameToday() && player.healthStatus == PlayerHealthStatus.HEALTHY) {
+                spotToPlayer[index] = player
             }
         }
 
-        return if (maxPossibleActiveStarters > currentActiveStartersCount) {
-            Violation.ACTIVE_PLAYER_ON_BENCH_WITH_OPEN_STARTING_LINEUP_SPOT
-        } else {
-            null
+        fun canFindAugmentingPath(
+            player: PlayerRowRawInfo,
+            visitedSpots: MutableSet<Int>,
+        ): Boolean {
+            for ((spotIndex, spot) in startingLineup.withIndex()) {
+                if (
+                    player.fullPositionalEligibility().contains(spot.position) &&
+                        spotIndex !in visitedSpots
+                ) {
+                    visitedSpots.add(spotIndex)
+                    val occupant = spotToPlayer[spotIndex]
+                    if (occupant == null || canFindAugmentingPath(occupant, visitedSpots)) {
+                        return true
+                    }
+                }
+            }
+            return false
         }
+
+        activeBenchPlayers.forEach { benchPlayer ->
+            if (canFindAugmentingPath(benchPlayer, mutableSetOf())) {
+                return Violation.ACTIVE_PLAYER_ON_BENCH_WITH_OPEN_STARTING_LINEUP_SPOT
+            }
+        }
+
+        return null
     }
 }

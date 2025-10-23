@@ -18,13 +18,13 @@ internal class SanitizationTest {
             "Austin ReavesNew Player Note LAL - PG,SG L, 109-119 vs GSW",
             PlayerHealthStatus.HEALTHY,
         ),
-        NO_GAME_INJURED(
+        NO_GAME_LONG_TERM_INJURY(
             "Zach EdeyINJNo new player Notes MEM - C",
             PlayerHealthStatus.LONG_TERM_INJURY,
         ),
-        NO_GAME_GTD(
-            "OG AnunobyGTDNew Player Note NYK - SF,PF",
-            PlayerHealthStatus.GAME_TIME_DECISION,
+        NO_GAME_SHORT_TERM_INJURY(
+            "OG AnunobyONew Player Note NYK - SF,PF",
+            PlayerHealthStatus.SHORT_TERM_INJURY,
         ),
     }
 
@@ -43,7 +43,6 @@ internal class SanitizationTest {
     }
 
     enum class SanitizeHealthStatus(val input: String, val expected: String) {
-        GTD("OG AnunobyGTD", "OG Anunoby"),
         INJ("Zach EdeyINJ", "Zach Edey"),
         OUT("John WallO", "John Wall"),
         HEALTHY("Healthy Player", "Healthy Player"),
