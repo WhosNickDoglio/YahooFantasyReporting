@@ -32,7 +32,7 @@ internal class DefaultGoogleSheetsClient(
         }
 }
 
-private fun GoogleSheetsTeamReport.toList(): List<String> =
+internal fun GoogleSheetsTeamReport.toList(): List<String> =
     listOf(
         date.toString(),
         teamName,
