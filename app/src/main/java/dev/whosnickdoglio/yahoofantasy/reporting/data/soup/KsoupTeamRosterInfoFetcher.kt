@@ -2,8 +2,6 @@
 // SPDX-License-Identifier: MIT
 package dev.whosnickdoglio.yahoofantasy.reporting.data.soup
 
-import com.fleeksoft.ksoup.Ksoup
-import com.fleeksoft.ksoup.network.parseGetRequest
 import com.fleeksoft.ksoup.nodes.Element
 import com.fleeksoft.ksoup.select.Evaluator
 import dev.whosnickdoglio.yahoofantasy.reporting.data.LeagueInfo
@@ -21,12 +19,13 @@ internal class KsoupTeamRosterInfoFetcher(
     private val date: LocalDate,
     private val leagueInfo: LeagueInfo,
     @param:IoDispatcher private val ioCoroutineContext: CoroutineContext,
+    private val htmlDocumentFetcher: HtmlDocumentFetcher,
 ) : TeamRosterInfoFetcher {
 
     override suspend fun fetchRosterInfo(teamId: Int): RosterInfo =
         withContext(ioCoroutineContext) {
             val url = "${leagueInfo.baseUrl}/$teamId/team?&date=$date"
-            val doc = Ksoup.parseGetRequest(url)
+            val doc = htmlDocumentFetcher.fetchDocument(url)
             val table = doc.select(Evaluator.Id("statTable0"))
             val rows: List<Element> = table.select("tr")
 
