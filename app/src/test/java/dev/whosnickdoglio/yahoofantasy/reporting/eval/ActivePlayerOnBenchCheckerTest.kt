@@ -317,7 +317,6 @@ class ActivePlayerOnBenchCheckerTest {
         assertThat(result).isNull()
     }
 
-    @Suppress("LongMethod") // TODO turn this off for tests
     @Test
     fun `complex scenario from x`() {
         val result =
