@@ -4,11 +4,11 @@ package dev.whosnickdoglio.yahoofantasy.reporting.sheets
 
 import java.time.LocalDate
 
-public interface GoogleSheets {
-    public suspend fun sendReport(teamReport: List<GoogleSheetsTeamReport>)
+internal interface GoogleSheets {
+    suspend fun sendReport(teamReport: List<GoogleSheetsTeamReport>)
 }
 
-public data class GoogleSheetsTeamReport(
+internal data class GoogleSheetsTeamReport(
     val date: LocalDate,
     val teamName: String,
     val healthyOnInjuryList: Boolean,
