@@ -8,7 +8,7 @@ internal interface GoogleSheets {
     suspend fun sendReport(teamReport: List<GoogleSheetsTeamReport>)
 }
 
-internal data class GoogleSheetsTeamReport(
+public data class GoogleSheetsTeamReport(
     val date: LocalDate,
     val teamName: String,
     val healthyOnInjuryList: Boolean,
