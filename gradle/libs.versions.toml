@@ -36,6 +36,9 @@ google-sheets = { module = "com.google.apis:google-api-services-sheets", version
 # https://www.slf4j.org/codes.html#noProviders
 slf4j = { module = "org.slf4j:slf4j-nop", version = "2.0.17" }
 
+# Only present to trigger automatic renovate updates
+ktfmt = { module = "com.facebook:ktfmt", version.ref = "ktfmt" }
+
 mockingbird = { module = "com.anthonycr.mockingbird:core", version.ref = "mockingbird" }
 mockingbird-compiler = { module = "com.anthonycr.mockingbird:processor", version.ref = "mockingbird" }
 
