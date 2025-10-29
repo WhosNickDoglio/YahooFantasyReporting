@@ -7,18 +7,14 @@ internal interface LeagueInfo {
     val name: String
     val baseUrl: String
     val numberOfTeams: Int
-    val spreadSheetInfo: SpreadSheetInfo
     val injuryListCount: Int
+    val spreadSheetName: String
 
     data object MitchRobLeagueInfo : LeagueInfo {
         override val name: String = "Mitch Rob"
         override val baseUrl: String = "https://basketball.fantasysports.yahoo.com/nba/9615"
         override val numberOfTeams: Int = 12
-        override val spreadSheetInfo: SpreadSheetInfo =
-            SpreadSheetInfo(
-                id = "11LQZQF2CDX4lmChkryV00aD6I2XTi3Fp4BmqNVwtuEI",
-                range = "MitchRob!A1:E1",
-            )
+        override val spreadSheetName: String = "MitchRob"
         override val injuryListCount: Int = 4
     }
 
@@ -26,11 +22,7 @@ internal interface LeagueInfo {
         override val name: String = "Redacted"
         override val baseUrl: String = "https://basketball.fantasysports.yahoo.com/nba/69734"
         override val numberOfTeams: Int = 12
-        override val spreadSheetInfo: SpreadSheetInfo =
-            SpreadSheetInfo(
-                id = "11LQZQF2CDX4lmChkryV00aD6I2XTi3Fp4BmqNVwtuEI",
-                range = "Redacted!A1:E1",
-            )
+        override val spreadSheetName: String = "Redacted"
         override val injuryListCount: Int = 4
     }
 
@@ -38,13 +30,9 @@ internal interface LeagueInfo {
         override val name: String = "Birthday Cake"
         override val baseUrl: String = "https://basketball.fantasysports.yahoo.com/nba/9616"
         override val numberOfTeams: Int = 10
-        override val spreadSheetInfo: SpreadSheetInfo =
-            SpreadSheetInfo(
-                id = "11LQZQF2CDX4lmChkryV00aD6I2XTi3Fp4BmqNVwtuEI",
-                range = "Birthday!A1:E1",
-            )
+        override val spreadSheetName: String = "Birthday"
         override val injuryListCount: Int = 4
     }
 }
 
-internal data class SpreadSheetInfo(val id: String, val range: String)
+internal data class SpreadSheetInfo(val range: String)

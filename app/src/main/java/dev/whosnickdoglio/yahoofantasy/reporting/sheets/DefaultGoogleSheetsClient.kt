@@ -22,8 +22,8 @@ internal class DefaultGoogleSheetsClient(
             require(teamReport.isNotEmpty()) { "Team report cannot be empty" }
             with(sheets.spreadsheets().values()) {
                     append(
-                            leagueInfo.spreadSheetInfo.id,
-                            leagueInfo.spreadSheetInfo.range,
+                            SPREADSHEET_ID,
+                            "${leagueInfo.spreadSheetName}$SPREADSHEET_INPUT_RANGE",
                             ValueRange().setValues(teamReport.map { it.toList() }),
                         )
                         .setValueInputOption("USER_ENTERED")
@@ -31,6 +31,9 @@ internal class DefaultGoogleSheetsClient(
                 .execute()
         }
 }
+
+private const val SPREADSHEET_ID = "11LQZQF2CDX4lmChkryV00aD6I2XTi3Fp4BmqNVwtuEI"
+private const val SPREADSHEET_INPUT_RANGE = "!A1:E1"
 
 internal fun GoogleSheetsTeamReport.toList(): List<String> =
     listOf(
