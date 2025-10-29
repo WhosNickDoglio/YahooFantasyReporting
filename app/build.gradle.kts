@@ -37,7 +37,6 @@ dependencies {
     testImplementation(libs.assertk)
     testImplementation(libs.junit)
     testImplementation(libs.kotlinx.coroutines.test)
-    testImplementation(libs.ksoup.io)
     testImplementation(libs.mockingbird)
 
     kspTest(libs.mockingbird.compiler)
