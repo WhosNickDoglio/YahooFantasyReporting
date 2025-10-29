@@ -2,7 +2,6 @@
 // SPDX-License-Identifier: MIT
 package dev.whosnickdoglio.yahoofantasy.reporting.eval
 
-import dev.whosnickdoglio.yahoofantasy.reporting.data.PlayerHealthStatus
 import dev.whosnickdoglio.yahoofantasy.reporting.data.PlayerRowRawInfo
 import dev.zacsweers.metro.Inject
 
@@ -10,21 +9,6 @@ import dev.zacsweers.metro.Inject
 internal class RosterEvaluator(private val rosterCheckers: Set<RosterChecker>) {
 
     fun evaluate(roster: List<PlayerRowRawInfo>): EvaluationResult {
-        val benchPlayersWithGamesToday =
-            roster
-                .filter { rosterSpot ->
-                    rosterSpot.position.equals("BN") &&
-                        rosterSpot.healthStatus == PlayerHealthStatus.HEALTHY
-                }
-                .any { rosterSpot -> rosterSpot.hasGameToday() }
-        val noGamesStartingSpots =
-            roster.filter { rosterSpot -> rosterSpot.isAvailableStartingSpot() }
-
-        // TODO this breaks HealthyPlayerOnInjuryListChecker
-        if (!benchPlayersWithGamesToday || noGamesStartingSpots.isEmpty()) {
-            return EvaluationResult.SetRoster
-        }
-
         val violations = rosterCheckers.mapNotNull { checker -> checker.check(roster) }
 
         return if (violations.isNotEmpty()) {
