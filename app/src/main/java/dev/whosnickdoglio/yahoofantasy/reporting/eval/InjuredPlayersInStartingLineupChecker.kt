@@ -20,7 +20,10 @@ internal class InjuredPlayersInStartingLineupChecker : RosterChecker {
         }
     }
 
-    private fun PlayerRowRawInfo.isInjured(): Boolean =
-        healthStatus == PlayerHealthStatus.LONG_TERM_INJURY ||
-            healthStatus == PlayerHealthStatus.SHORT_TERM_INJURY
+    private fun PlayerRowRawInfo.isInjured(): Boolean {
+        val shortTermInjuryNoGame =
+            (healthStatus == PlayerHealthStatus.SHORT_TERM_INJURY && hasGameToday())
+
+        return healthStatus == PlayerHealthStatus.LONG_TERM_INJURY || shortTermInjuryNoGame
+    }
 }

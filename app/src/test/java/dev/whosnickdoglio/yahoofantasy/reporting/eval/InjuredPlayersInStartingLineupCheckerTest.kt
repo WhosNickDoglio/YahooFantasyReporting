@@ -37,7 +37,7 @@ class InjuredPlayersInStartingLineupCheckerTest {
     }
 
     @Test
-    fun `starting lineup  has a injured player on it`() {
+    fun `starting lineup has a injured player on it`() {
         val result =
             checker.check(
                 listOf(
@@ -50,7 +50,24 @@ class InjuredPlayersInStartingLineupCheckerTest {
     }
 
     @Test
-    fun `starting lineup  has a out player on it`() {
+    fun `starting lineup  has a out player with a game today on it`() {
+        val result =
+            checker.check(
+                listOf(
+                    Player(
+                        position = "PG",
+                        healthStatus = PlayerHealthStatus.SHORT_TERM_INJURY,
+                        opponent = "CLE",
+                    ),
+                    Player(position = "Util"),
+                    Player(position = "C"),
+                )
+            )
+        assertThat(result).isEqualTo(Violation.IL_IN_STARTING_LINEUP)
+    }
+
+    @Test
+    fun `starting lineup  has a out player with no game today on it`() {
         val result =
             checker.check(
                 listOf(
@@ -59,6 +76,6 @@ class InjuredPlayersInStartingLineupCheckerTest {
                     Player(position = "C"),
                 )
             )
-        assertThat(result).isEqualTo(Violation.IL_IN_STARTING_LINEUP)
+        assertThat(result).isNull()
     }
 }
