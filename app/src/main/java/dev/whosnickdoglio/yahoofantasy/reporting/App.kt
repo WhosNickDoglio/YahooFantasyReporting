@@ -71,6 +71,7 @@ internal class App(
 
         if (reports.isNotEmpty()) {
             logger.log("Reporting to Google Sheets...")
+            googleSheets.sendReport(reports)
         } else {
             logger.log("No violations found $yesterday")
         }
