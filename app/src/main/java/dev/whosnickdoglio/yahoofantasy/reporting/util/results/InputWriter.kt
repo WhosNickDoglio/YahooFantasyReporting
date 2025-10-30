@@ -20,7 +20,7 @@ internal class DefaultInputWriter(
     private val leagueInfo: LeagueInfo,
 ) : InputWriter {
     override suspend fun write(input: List<RosterInfo>) {
-        val jobId = System.getenv("GITHUB_JOB")
+        val jobId = System.getenv("GITHUB_RUN_ID")
         val rawDataFile = File("${leagueInfo.name}_raw_input_$jobId.json")
         rawDataFile.writeText(Json.encodeToString(input))
         logger.log("Successfully wrote raw input to ${rawDataFile.absolutePath}")
