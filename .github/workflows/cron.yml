@@ -19,7 +19,7 @@ jobs:
       - name: 'Run the script'
         run: ./gradlew app:run  --args="${{ matrix.league }}"
       - name: 'Upload Artifact'
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v5
         with:
          path: ./app/raw_input.json
          retention-days: 5
