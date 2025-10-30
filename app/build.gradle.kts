@@ -10,6 +10,7 @@ plugins {
     alias(libs.plugins.burst)
     alias(libs.plugins.ksp)
     alias(libs.plugins.kover)
+    alias(libs.plugins.kotlin.serialization)
     application
 }
 
@@ -29,6 +30,7 @@ dependencies {
     implementation(libs.google.api.client)
     implementation(libs.google.sheets)
     implementation(libs.kotlinx.coroutines.core)
+    implementation(libs.kotlinx.serialization)
     implementation(libs.ksoup)
     implementation(libs.ksoup.network)
 

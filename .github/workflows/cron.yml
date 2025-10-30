@@ -16,5 +16,10 @@ jobs:
       - uses: ./.github/actions/setup
         with:
           encryption_key: ${{ secrets.GRADLE_ENCRYPTION_KEY }}
-      - name: Build
+      - name: 'Run the script'
         run: ./gradlew app:run  --args="${{ matrix.league }}"
+      - name: 'Upload Artifact'
+        uses: actions/upload-artifact@v4
+        with:
+         path: raw_input.json
+         retention-days: 5

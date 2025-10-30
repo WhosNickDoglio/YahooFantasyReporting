@@ -2,10 +2,13 @@
 // SPDX-License-Identifier: MIT
 package dev.whosnickdoglio.yahoofantasy.reporting.data
 
+import kotlinx.serialization.Serializable
+
 internal interface TeamRosterInfoFetcher {
     suspend fun fetchRosterInfo(teamId: Int): RosterInfo
 }
 
+@Serializable
 internal data class RosterInfo(
     val name: String,
     val players: List<PlayerRowRawInfo>,
@@ -14,6 +17,7 @@ internal data class RosterInfo(
 )
 
 // TODO different DTO here
+@Serializable
 internal data class PlayerRowRawInfo(
     val position: String?,
     val playerName: String?,

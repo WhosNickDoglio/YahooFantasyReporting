@@ -10,9 +10,11 @@ import dev.whosnickdoglio.yahoofantasy.reporting.eval.Violation
 import dev.whosnickdoglio.yahoofantasy.reporting.sheets.GoogleSheets
 import dev.whosnickdoglio.yahoofantasy.reporting.sheets.GoogleSheetsTeamReport
 import dev.whosnickdoglio.yahoofantasy.reporting.util.log.SimpleLogger
+import dev.whosnickdoglio.yahoofantasy.reporting.util.results.InputWriter
 import dev.zacsweers.metro.Inject
 import java.time.LocalDate
 
+@Suppress("LongParameterList")
 @Inject
 internal class App(
     private val fetcher: TeamRosterInfoFetcher,
@@ -21,14 +23,20 @@ internal class App(
     private val rosterEvaluator: RosterEvaluator,
     private val googleSheets: GoogleSheets,
     private val logger: SimpleLogger,
+    private val inputWriter: InputWriter,
 ) {
 
     suspend operator fun invoke() {
         logger.log("Checking rosters in ${leagueInfo.name} for $yesterday")
+
+        val rosterInfo =
+            (1..leagueInfo.numberOfTeams).toList().map { id -> fetcher.fetchRosterInfo(id) }
+
+        // writing raw input to disk so we can double-check it
+        inputWriter.write(rosterInfo)
+
         val reports =
-            (1..leagueInfo.numberOfTeams)
-                .toList()
-                .map { id -> fetcher.fetchRosterInfo(id) }
+            rosterInfo
                 .map { info -> Pair(info, rosterEvaluator.evaluate(info.players)) }
                 .onEach { (info, result) ->
                     logger.log(
@@ -63,7 +71,6 @@ internal class App(
 
         if (reports.isNotEmpty()) {
             logger.log("Reporting to Google Sheets...")
-            googleSheets.sendReport(reports)
         } else {
             logger.log("No violations found $yesterday")
         }

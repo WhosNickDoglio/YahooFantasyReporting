@@ -9,6 +9,7 @@ ktfmt = "0.59"
 
 [plugins]
 kotlin-jvm = { id = "org.jetbrains.kotlin.jvm", version.ref = "kotlin" }
+kotlin-serialization = { id = "org.jetbrains.kotlin.plugin.serialization", version.ref = "kotlin" }
 metro = { id = "dev.zacsweers.metro", version = "0.7.2" }
 ksp = { id = "com.google.devtools.ksp", version = "2.3.0" }
 burst = { id = "app.cash.burst" }
@@ -27,6 +28,7 @@ ksoup-network = { module = "com.fleeksoft.ksoup:ksoup-network", version.ref = "k
 
 kotlinx-coroutines-core = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-core", version.ref = "coroutines" }
 kotlinx-coroutines-test = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-test", version.ref = "coroutines" }
+kotlinx-serialization = { module = "org.jetbrains.kotlinx:kotlinx-serialization-json", version = "1.9.0" }
 
 google-api-client = { module = "com.google.api-client:google-api-client", version = "2.8.1" }
 google-sheets = { module = "com.google.apis:google-api-services-sheets", version = "v4-rev20250616-2.0.0" }

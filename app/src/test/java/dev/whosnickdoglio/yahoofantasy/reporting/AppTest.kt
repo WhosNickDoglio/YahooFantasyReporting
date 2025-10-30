@@ -18,6 +18,7 @@ import dev.whosnickdoglio.yahoofantasy.reporting.eval.RosterEvaluator
 import dev.whosnickdoglio.yahoofantasy.reporting.sheets.GoogleSheets
 import dev.whosnickdoglio.yahoofantasy.reporting.sheets.GoogleSheetsTeamReport
 import dev.whosnickdoglio.yahoofantasy.reporting.util.log.SimpleLogger
+import dev.whosnickdoglio.yahoofantasy.reporting.util.results.InputWriter
 import java.time.LocalDate
 import kotlinx.coroutines.test.runTest
 import org.junit.Test
@@ -28,6 +29,8 @@ class AppTest {
 
     @Verify private val logger: SimpleLogger = fake()
 
+    @Verify private val writer: InputWriter = fake()
+
     @Suppress("LongParameterList")
     private fun TestApp(
         fetcher: TeamRosterInfoFetcher = FakeTeamRosterInfoFetcher(),
@@ -36,7 +39,9 @@ class AppTest {
         rosterEvaluator: RosterEvaluator = RosterEvaluator(emptySet()),
         googleSheets: GoogleSheets = sheetsClient,
         simpleLogger: SimpleLogger = logger,
-    ): App = App(fetcher, date, leagueInfo, rosterEvaluator, googleSheets, simpleLogger)
+        inputWriter: InputWriter = writer,
+    ): App =
+        App(fetcher, date, leagueInfo, rosterEvaluator, googleSheets, simpleLogger, inputWriter)
 
     @Test
     fun `google sheets api call is not made when there are no violations`() = runTest {
