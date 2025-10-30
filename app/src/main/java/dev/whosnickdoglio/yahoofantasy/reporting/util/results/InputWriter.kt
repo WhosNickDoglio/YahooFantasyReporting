@@ -18,6 +18,6 @@ internal class DefaultInputWriter(private val logger: SimpleLogger) : InputWrite
     override suspend fun write(input: List<RosterInfo>) {
         val rawDataFile = File("raw_input.json")
         rawDataFile.writeText(Json.encodeToString(input))
-        logger.log("Successfully wrote raw input to ${rawDataFile.path}")
+        logger.log("Successfully wrote raw input to ${rawDataFile.absolutePath}")
     }
 }
