@@ -11,7 +11,7 @@ internal interface LeagueInfo {
     val spreadSheetName: String
 
     data object MitchRobLeagueInfo : LeagueInfo {
-        override val name: String = "Mitch Rob"
+        override val name: String = "mitch"
         override val baseUrl: String = "https://basketball.fantasysports.yahoo.com/nba/9615"
         override val numberOfTeams: Int = 12
         override val spreadSheetName: String = "MitchRob"
@@ -19,7 +19,7 @@ internal interface LeagueInfo {
     }
 
     data object Redacted : LeagueInfo {
-        override val name: String = "Redacted"
+        override val name: String = "redacted"
         override val baseUrl: String = "https://basketball.fantasysports.yahoo.com/nba/69734"
         override val numberOfTeams: Int = 12
         override val spreadSheetName: String = "Redacted"
@@ -27,7 +27,7 @@ internal interface LeagueInfo {
     }
 
     data object BirthdayCakeOreo : LeagueInfo {
-        override val name: String = "Birthday Cake"
+        override val name: String = "birthday"
         override val baseUrl: String = "https://basketball.fantasysports.yahoo.com/nba/9616"
         override val numberOfTeams: Int = 10
         override val spreadSheetName: String = "Birthday"

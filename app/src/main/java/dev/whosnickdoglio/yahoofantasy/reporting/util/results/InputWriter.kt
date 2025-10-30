@@ -2,6 +2,7 @@
 // SPDX-License-Identifier: MIT
 package dev.whosnickdoglio.yahoofantasy.reporting.util.results
 
+import dev.whosnickdoglio.yahoofantasy.reporting.data.LeagueInfo
 import dev.whosnickdoglio.yahoofantasy.reporting.data.RosterInfo
 import dev.whosnickdoglio.yahoofantasy.reporting.util.log.SimpleLogger
 import dev.zacsweers.metro.AppScope
@@ -14,9 +15,12 @@ internal fun interface InputWriter {
 }
 
 @ContributesBinding(AppScope::class)
-internal class DefaultInputWriter(private val logger: SimpleLogger) : InputWriter {
+internal class DefaultInputWriter(
+    private val logger: SimpleLogger,
+    private val leagueInfo: LeagueInfo,
+) : InputWriter {
     override suspend fun write(input: List<RosterInfo>) {
-        val rawDataFile = File("raw_input.json")
+        val rawDataFile = File("${leagueInfo.name}_raw_input.json")
         rawDataFile.writeText(Json.encodeToString(input))
         logger.log("Successfully wrote raw input to ${rawDataFile.absolutePath}")
     }
