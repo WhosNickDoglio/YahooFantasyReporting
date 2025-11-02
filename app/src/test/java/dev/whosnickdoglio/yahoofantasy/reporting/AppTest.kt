@@ -146,6 +146,13 @@ class AppTest {
             logger.log(eq("Reporting to Google Sheets..."))
         }
     }
+
+    @Test
+    fun `input writer is called once when the app is run`() = runTest {
+        val app = TestApp(fetcher = FakeTeamRosterInfoFetcher())
+        app()
+        verify(writer) { writer.write(any(emptyList())) }
+    }
 }
 
 private class FakeTeamRosterInfoFetcher(
