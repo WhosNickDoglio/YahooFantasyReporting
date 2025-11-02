@@ -2,7 +2,7 @@
 ksoup = "0.2.5"
 kotlin = "2.2.21"
 jdkTarget = "17"
-mockingbird = "2.2.0"
+mockingbird = "2.3.0"
 coroutines = "1.10.2"
 jdk = "24"
 ktfmt = "0.59"
