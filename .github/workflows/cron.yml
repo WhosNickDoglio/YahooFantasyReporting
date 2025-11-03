@@ -23,4 +23,4 @@ jobs:
         with:
          name: '${{ matrix.league }}_${{ github.run_id }}'
          path: ./app/${{ matrix.league }}_raw_input_${{ github.run_id }}.json
-         retention-days: 5
+         retention-days: 14
