@@ -8,6 +8,7 @@ import dev.whosnickdoglio.yahoofantasy.reporting.util.log.SimpleLogger
 import dev.zacsweers.metro.AppScope
 import dev.zacsweers.metro.ContributesBinding
 import java.io.File
+import java.time.LocalDate
 import kotlinx.serialization.json.Json
 
 internal fun interface InputWriter {
@@ -18,10 +19,11 @@ internal fun interface InputWriter {
 internal class DefaultInputWriter(
     private val logger: SimpleLogger,
     private val leagueInfo: LeagueInfo,
+    private val date: LocalDate,
 ) : InputWriter {
     override suspend fun write(input: List<RosterInfo>) {
         val jobId = System.getenv("GITHUB_RUN_ID")
-        val rawDataFile = File("${leagueInfo.name}_raw_input_$jobId.json")
+        val rawDataFile = File("${leagueInfo.name}_${jobId}_$date.json")
         rawDataFile.writeText(Json.encodeToString(input))
         logger.log("Successfully wrote raw input to ${rawDataFile.absolutePath}")
     }
