@@ -116,8 +116,6 @@ internal fun String?.removeNonsense(): String? =
         ?.replace("New Player Note", "", ignoreCase = true)
         ?.replace("Player Note", "", ignoreCase = true)
         ?.replace("Video Forecast", "", ignoreCase = true)
-        // TODO do I care about this?
-        ?.replace("GTD", "", ignoreCase = true)
 
 internal fun String?.sanitizePlayerHealthStatus(): String? {
     var mutableString = this

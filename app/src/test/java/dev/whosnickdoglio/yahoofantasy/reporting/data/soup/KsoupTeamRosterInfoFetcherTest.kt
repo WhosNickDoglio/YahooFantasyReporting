@@ -83,6 +83,7 @@ class KsoupTeamRosterInfoFetcherTest {
                             Player(
                                 position = "Util",
                                 playerName = "Zaccharie Risacher",
+                                healthStatus = PlayerHealthStatus.GAME_TIME_DECISION,
                                 positionEligibility = listOf("SF", "PF"),
                             ),
                             Player(
@@ -98,6 +99,7 @@ class KsoupTeamRosterInfoFetcherTest {
                             Player(
                                 position = "BN",
                                 playerName = "Yves Missi",
+                                healthStatus = PlayerHealthStatus.GAME_TIME_DECISION,
                                 positionEligibility = listOf("C"),
                             ),
                             Player(
