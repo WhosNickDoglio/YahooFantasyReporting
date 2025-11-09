@@ -17,7 +17,9 @@ jobs:
         with:
           encryption_key: ${{ secrets.GRADLE_ENCRYPTION_KEY }}
       - name: 'Run the script'
-        run: ./gradlew app:run  --args="${{ matrix.league }}"
+        run: |
+          ./gradlew app:installDist
+          ./app/build/install/app/bin/app ${{ matrix.league }}
       - name: 'Upload Artifact'
         uses: actions/upload-artifact@v5
         with:
