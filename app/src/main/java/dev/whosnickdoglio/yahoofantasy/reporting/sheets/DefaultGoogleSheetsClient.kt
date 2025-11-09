@@ -1,7 +1,5 @@
 // Copyright (C) 2025 Nicholas Doglio
 // SPDX-License-Identifier: MIT
-@file:Suppress("UnusedPrivateProperty")
-
 package dev.whosnickdoglio.yahoofantasy.reporting.sheets
 
 import com.google.api.services.sheets.v4.Sheets

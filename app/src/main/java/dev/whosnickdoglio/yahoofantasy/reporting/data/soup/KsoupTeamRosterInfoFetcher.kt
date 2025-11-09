@@ -2,7 +2,6 @@
 // SPDX-License-Identifier: MIT
 package dev.whosnickdoglio.yahoofantasy.reporting.data.soup
 
-import com.fleeksoft.ksoup.nodes.Element
 import com.fleeksoft.ksoup.select.Evaluator
 import dev.whosnickdoglio.yahoofantasy.reporting.data.LeagueInfo
 import dev.whosnickdoglio.yahoofantasy.reporting.data.RosterInfo
@@ -27,7 +26,7 @@ internal class KsoupTeamRosterInfoFetcher(
             val url = "${leagueInfo.baseUrl}/$teamId/team?&date=$date"
             val doc = htmlDocumentFetcher.fetchDocument(url)
             val table = doc.select(Evaluator.Id("statTable0"))
-            val rows: List<Element> = table.select("tr")
+            val rows = table.select("tr")
 
             var opponentIndex: Int? = null
 
