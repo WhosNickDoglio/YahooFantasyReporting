@@ -25,7 +25,6 @@ tasks.withType(Detekt::class).configureEach {
 }
 
 dependencies {
-    implementation(libs.clikt)
     implementation(libs.google.api.client)
     implementation(libs.google.sheets)
     implementation(libs.kotlinx.coroutines.core)
@@ -33,7 +32,6 @@ dependencies {
     implementation(libs.ksoup)
     implementation(libs.ksoup.network)
 
-    // https://www.slf4j.org/codes.html#noProviders
     runtimeOnly(libs.slf4j)
 
     testImplementation(libs.assertk)

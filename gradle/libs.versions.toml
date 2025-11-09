@@ -26,8 +26,6 @@ kover = { id = "org.jetbrains.kotlinx.kover", version = "0.9.3" }
 ksoup = { module = "com.fleeksoft.ksoup:ksoup", version.ref = "ksoup" }
 ksoup-network = { module = "com.fleeksoft.ksoup:ksoup-network", version.ref = "ksoup" }
 
-clikt = { module = "com.github.ajalt.clikt:clikt", version = "5.0.3" }
-
 kotlinx-coroutines-core = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-core", version.ref = "coroutines" }
 kotlinx-coroutines-test = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-test", version.ref = "coroutines" }
 kotlinx-serialization = { module = "org.jetbrains.kotlinx:kotlinx-serialization-json", version = "1.9.0" }
