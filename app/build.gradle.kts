@@ -2,8 +2,6 @@
 // SPDX-License-Identifier: MIT
 import io.gitlab.arturbosch.detekt.Detekt
 
-// Copyright (C) 2025 Nicholas Doglio
-// SPDX-License-Identifier: MIT
 plugins {
     alias(libs.plugins.convention.jvm)
     alias(libs.plugins.metro)
