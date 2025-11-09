@@ -24,5 +24,5 @@ jobs:
         uses: actions/upload-artifact@v5
         with:
          name: '${{ matrix.league }}_${{ github.run_id }}'
-         path: ./app/${{ matrix.league }}_raw_input_${{ github.run_id }}.json
+         path: ./${{ matrix.league }}_raw_input_${{ github.run_id }}.json
          retention-days: 14
