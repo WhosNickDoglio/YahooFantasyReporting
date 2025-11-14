@@ -11,10 +11,12 @@ internal interface GoogleSheets {
 public data class GoogleSheetsTeamReport(
     val date: LocalDate,
     val teamName: String,
-    val healthyOnInjuryList: Boolean,
-    val activePlayerOnBenchWithOpenStartingSpot: Boolean,
-    val injuredPlayerInStartingLineup: Boolean,
-    val injuredPlayerOnBenchWithOpenInjuryListSpot: Boolean,
+    val healthyOnInjuryList: Int,
+    val activePlayerOnBenchWithOpenStartingSpot: Int,
+    val injuredPlayerInStartingLineup: Int,
+    val injuredPlayerOnBenchWithOpenInjuryListSpot: Int,
     val teamId: Int,
     val url: String,
 )
+
+internal fun Boolean.toInt(): Int = if (this) 1 else 0

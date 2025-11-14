@@ -82,10 +82,10 @@ class AppTest {
                         GoogleSheetsTeamReport(
                             date = LocalDate.of(2025, 11, 12),
                             teamName = "foo",
-                            healthyOnInjuryList = false,
-                            activePlayerOnBenchWithOpenStartingSpot = true,
-                            injuredPlayerInStartingLineup = false,
-                            injuredPlayerOnBenchWithOpenInjuryListSpot = false,
+                            healthyOnInjuryList = 0,
+                            activePlayerOnBenchWithOpenStartingSpot = 1,
+                            injuredPlayerInStartingLineup = 0,
+                            injuredPlayerOnBenchWithOpenInjuryListSpot = 0,
                             teamId = 12,
                             url = "foo.com",
                         )

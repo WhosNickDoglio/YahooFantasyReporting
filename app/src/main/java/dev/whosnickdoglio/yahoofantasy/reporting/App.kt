@@ -9,6 +9,7 @@ import dev.whosnickdoglio.yahoofantasy.reporting.eval.RosterEvaluator
 import dev.whosnickdoglio.yahoofantasy.reporting.eval.Violation
 import dev.whosnickdoglio.yahoofantasy.reporting.sheets.GoogleSheets
 import dev.whosnickdoglio.yahoofantasy.reporting.sheets.GoogleSheetsTeamReport
+import dev.whosnickdoglio.yahoofantasy.reporting.sheets.toInt
 import dev.whosnickdoglio.yahoofantasy.reporting.util.log.SimpleLogger
 import dev.whosnickdoglio.yahoofantasy.reporting.util.results.InputWriter
 import dev.zacsweers.metro.Inject
@@ -55,15 +56,19 @@ internal class App(
                     GoogleSheetsTeamReport(
                         date = yesterday,
                         teamName = info.name,
-                        healthyOnInjuryList = violations.contains(Violation.HEALTHY_ON_IL),
+                        healthyOnInjuryList = violations.contains(Violation.HEALTHY_ON_IL).toInt(),
                         activePlayerOnBenchWithOpenStartingSpot =
-                            violations.contains(
-                                Violation.ACTIVE_PLAYER_ON_BENCH_WITH_OPEN_STARTING_LINEUP_SPOT
-                            ),
+                            violations
+                                .contains(
+                                    Violation.ACTIVE_PLAYER_ON_BENCH_WITH_OPEN_STARTING_LINEUP_SPOT
+                                )
+                                .toInt(),
                         injuredPlayerInStartingLineup =
-                            violations.contains(Violation.IL_IN_STARTING_LINEUP),
+                            violations.contains(Violation.IL_IN_STARTING_LINEUP).toInt(),
                         injuredPlayerOnBenchWithOpenInjuryListSpot =
-                            violations.contains(Violation.IL_PLAYER_ON_BENCH_WITH_OPEN_IL_SPOT),
+                            violations
+                                .contains(Violation.IL_PLAYER_ON_BENCH_WITH_OPEN_IL_SPOT)
+                                .toInt(),
                         teamId = info.id,
                         url = info.url,
                     )
