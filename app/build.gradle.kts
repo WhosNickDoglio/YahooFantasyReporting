@@ -18,8 +18,6 @@ metro { contributesAsInject = true }
 
 application { mainClass = "dev.whosnickdoglio.yahoofantasy.reporting.MainKt" }
 
-spotless { kotlin { targetExclude("**/generated/**") } }
-
 tasks.withType(Detekt::class).configureEach {
     exclude { spec -> spec.file.path.contains("build/generated") }
 }
