@@ -2,6 +2,7 @@
 // SPDX-License-Identifier: MIT
 
 rootProject.name = "YahooFantasyReporting"
+
 pluginManagement {
     repositories {
         exclusiveContent {
@@ -47,4 +48,4 @@ develocity {
 
 enableFeaturePreview("TYPESAFE_PROJECT_ACCESSORS")
 
-include("app")
+include(":app", ":kover-aggregate")
