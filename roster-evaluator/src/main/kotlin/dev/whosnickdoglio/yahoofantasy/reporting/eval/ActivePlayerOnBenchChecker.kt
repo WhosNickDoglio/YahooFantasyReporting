@@ -8,7 +8,7 @@ import dev.zacsweers.metro.AppScope
 import dev.zacsweers.metro.ContributesIntoSet
 
 @ContributesIntoSet(AppScope::class)
-internal class ActivePlayerOnBenchChecker : RosterChecker {
+public class ActivePlayerOnBenchChecker : RosterChecker {
     @Suppress(
         "CyclomaticComplexMethod",
         "CognitiveComplexMethod",

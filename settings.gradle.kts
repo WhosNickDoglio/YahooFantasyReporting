@@ -55,7 +55,7 @@ include(
     ":league-info",
     ":metro-annotations",
     ":yahoo-data-fetcher",
-    ":input-writer"
+    ":input-writer",
+    ":google-sheets-api",
+    ":roster-evaluator"
 )
-
-include("google-sheets-api")

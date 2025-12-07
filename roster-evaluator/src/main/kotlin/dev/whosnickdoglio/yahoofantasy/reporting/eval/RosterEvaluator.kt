@@ -6,9 +6,9 @@ import dev.whosnickdoglio.yahoofantasy.reporting.data.PlayerRowRawInfo
 import dev.zacsweers.metro.Inject
 
 @Inject
-internal class RosterEvaluator(private val rosterCheckers: Set<RosterChecker>) {
+public class RosterEvaluator(private val rosterCheckers: Set<RosterChecker>) {
 
-    fun evaluate(roster: List<PlayerRowRawInfo>): EvaluationResult {
+    public fun evaluate(roster: List<PlayerRowRawInfo>): EvaluationResult {
         val violations = rosterCheckers.mapNotNull { checker -> checker.check(roster) }
 
         return if (violations.isNotEmpty()) {
@@ -19,8 +19,8 @@ internal class RosterEvaluator(private val rosterCheckers: Set<RosterChecker>) {
     }
 }
 
-internal sealed interface EvaluationResult {
-    data object SetRoster : EvaluationResult
+public sealed interface EvaluationResult {
+    public data object SetRoster : EvaluationResult
 
-    data class UnsetRoster(val violations: List<Violation>) : EvaluationResult
+    public data class UnsetRoster(val violations: List<Violation>) : EvaluationResult
 }

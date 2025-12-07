@@ -16,4 +16,5 @@ dependencies {
     kover(projects.yahooDataFetcher)
     kover(projects.inputWriter)
     kover(projects.googleSheetsApi)
+    kover(projects.rosterEvaluator)
 }

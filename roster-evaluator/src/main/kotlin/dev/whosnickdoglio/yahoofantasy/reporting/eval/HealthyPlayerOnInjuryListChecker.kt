@@ -8,7 +8,7 @@ import dev.zacsweers.metro.AppScope
 import dev.zacsweers.metro.ContributesIntoSet
 
 @ContributesIntoSet(AppScope::class)
-internal class HealthyPlayerOnInjuryListChecker : RosterChecker {
+public class HealthyPlayerOnInjuryListChecker : RosterChecker {
     override fun check(roster: List<PlayerRowRawInfo>): Violation? {
         val healthyPlayersOnInjuryList =
             roster.filter { rosterSpot ->

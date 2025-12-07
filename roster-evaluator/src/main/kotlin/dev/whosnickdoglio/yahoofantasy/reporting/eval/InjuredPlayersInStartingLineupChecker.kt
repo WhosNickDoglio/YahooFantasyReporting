@@ -8,7 +8,7 @@ import dev.zacsweers.metro.AppScope
 import dev.zacsweers.metro.ContributesIntoSet
 
 @ContributesIntoSet(AppScope::class)
-internal class InjuredPlayersInStartingLineupChecker : RosterChecker {
+public class InjuredPlayersInStartingLineupChecker : RosterChecker {
     override fun check(roster: List<PlayerRowRawInfo>): Violation? {
         val injuredPlayersStarting =
             roster.filter { rosterSpot -> rosterSpot.isStarting() && rosterSpot.isInjured() }
