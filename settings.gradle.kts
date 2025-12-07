@@ -55,4 +55,5 @@ include(
     ":league-info",
     ":metro-annotations",
     ":yahoo-data-fetcher",
+    ":input-writer"
 )

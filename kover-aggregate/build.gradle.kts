@@ -14,4 +14,5 @@ dependencies {
     kover(projects.leagueInfo)
     kover(projects.metroAnnotations)
     kover(projects.yahooDataFetcher)
+    kover(projects.inputWriter)
 }

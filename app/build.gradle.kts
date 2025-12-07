@@ -29,6 +29,7 @@ dependencies {
     implementation(libs.kotlinx.serialization)
     implementation(libs.ksoup)
     implementation(libs.ksoup.network)
+    implementation(projects.inputWriter)
     implementation(projects.leagueInfo)
     implementation(projects.metroAnnotations)
     implementation(projects.simpleLogger)

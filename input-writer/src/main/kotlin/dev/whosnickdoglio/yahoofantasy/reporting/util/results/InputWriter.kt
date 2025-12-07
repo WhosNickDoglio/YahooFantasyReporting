@@ -10,12 +10,12 @@ import dev.zacsweers.metro.ContributesBinding
 import java.io.File
 import kotlinx.serialization.json.Json
 
-internal fun interface InputWriter {
-    suspend fun write(input: List<RosterInfo>)
+public fun interface InputWriter {
+    public suspend fun write(input: List<RosterInfo>)
 }
 
 @ContributesBinding(AppScope::class)
-internal class DefaultInputWriter(
+public class DefaultInputWriter(
     private val logger: SimpleLogger,
     private val leagueInfo: LeagueInfo,
 ) : InputWriter {
