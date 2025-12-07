@@ -1,16 +1,17 @@
 // Copyright (C) 2025 Nicholas Doglio
 // SPDX-License-Identifier: MIT
+
 package dev.whosnickdoglio.yahoofantasy.reporting.data
 
 // TODO dynamically get game key
-internal interface LeagueInfo {
-    val name: String
-    val baseUrl: String
-    val numberOfTeams: Int
-    val injuryListCount: Int
-    val spreadSheetName: String
+public interface LeagueInfo {
+    public val name: String
+    public val baseUrl: String
+    public val numberOfTeams: Int
+    public val injuryListCount: Int
+    public val spreadSheetName: String
 
-    data object MitchRobLeagueInfo : LeagueInfo {
+    public data object MitchRobLeagueInfo : LeagueInfo {
         override val name: String = "mitch"
         override val baseUrl: String = "https://basketball.fantasysports.yahoo.com/nba/9615"
         override val numberOfTeams: Int = 12
@@ -18,7 +19,7 @@ internal interface LeagueInfo {
         override val injuryListCount: Int = 4
     }
 
-    data object Redacted : LeagueInfo {
+    public data object Redacted : LeagueInfo {
         override val name: String = "redacted"
         override val baseUrl: String = "https://basketball.fantasysports.yahoo.com/nba/69734"
         override val numberOfTeams: Int = 12
@@ -26,7 +27,7 @@ internal interface LeagueInfo {
         override val injuryListCount: Int = 4
     }
 
-    data object BirthdayCakeOreo : LeagueInfo {
+    public data object BirthdayCakeOreo : LeagueInfo {
         override val name: String = "birthday"
         override val baseUrl: String = "https://basketball.fantasysports.yahoo.com/nba/9616"
         override val numberOfTeams: Int = 10
@@ -34,5 +35,3 @@ internal interface LeagueInfo {
         override val injuryListCount: Int = 4
     }
 }
-
-internal data class SpreadSheetInfo(val range: String)

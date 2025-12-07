@@ -7,8 +7,3 @@ plugins {
 }
 
 metro { contributesAsInject = true }
-
-dependencies {
-    // https://www.slf4j.org/codes.html#noProviders
-    runtimeOnly(libs.slf4j)
-}
