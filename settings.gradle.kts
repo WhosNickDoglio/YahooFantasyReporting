@@ -49,7 +49,7 @@ develocity {
 enableFeaturePreview("TYPESAFE_PROJECT_ACCESSORS")
 
 include(
-    ":app",
+    ":data-collector",
     ":kover-aggregate",
     ":simple-logger",
     ":league-info",

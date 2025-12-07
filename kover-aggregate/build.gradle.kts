@@ -9,7 +9,7 @@ kover { reports { filters { excludes { classes("*\$Metro*") } } } }
 This module just exists so Kover can create a merged report for code coverage.
  */
 dependencies {
-    kover(projects.app)
+    kover(projects.dataCollector)
     kover(projects.simpleLogger)
     kover(projects.leagueInfo)
     kover(projects.metroAnnotations)

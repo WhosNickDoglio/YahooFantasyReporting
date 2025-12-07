@@ -17,10 +17,10 @@ jobs:
         with:
           encryption_key: ${{ secrets.GRADLE_ENCRYPTION_KEY }}
       - name: 'Run the script'
-        run: ./gradlew app:run  --args="${{ matrix.league }}"
+        run: ./gradlew data-collector:run  --args="${{ matrix.league }}"
       - name: 'Upload Artifact'
         uses: actions/upload-artifact@v5
         with:
-         name: '${{ matrix.league }}_${{ github.run_id }}'
-         path: ./app/${{ matrix.league }}_raw_input_${{ github.run_id }}.json
-         retention-days: 14
+          name: '${{ matrix.league }}_${{ github.run_id }}'
+          path: ./data-collector/${{ matrix.league }}_raw_input_${{ github.run_id }}.json
+          retention-days: 14
