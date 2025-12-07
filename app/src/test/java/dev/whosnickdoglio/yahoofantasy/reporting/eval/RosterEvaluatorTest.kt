@@ -9,6 +9,7 @@ import assertk.assertions.isInstanceOf
 import assertk.assertions.size
 import dev.whosnickdoglio.yahoofantasy.reporting.data.FakeLeagueInfo
 import dev.whosnickdoglio.yahoofantasy.reporting.data.LeagueInfo
+import dev.whosnickdoglio.yahoofantasy.reporting.data.Player
 import dev.whosnickdoglio.yahoofantasy.reporting.data.PlayerHealthStatus
 import org.junit.Test
 

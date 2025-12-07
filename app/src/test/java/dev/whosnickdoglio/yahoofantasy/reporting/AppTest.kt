@@ -6,14 +6,14 @@ import com.anthonycr.mockingbird.core.Verify
 import com.anthonycr.mockingbird.core.fake
 import com.anthonycr.mockingbird.core.verify
 import com.anthonycr.mockingbird.core.verifyComplete
+import dev.whosnickdoglio.yahoofantasy.reporting.data.EmptyRosterSpot
 import dev.whosnickdoglio.yahoofantasy.reporting.data.FakeLeagueInfo
 import dev.whosnickdoglio.yahoofantasy.reporting.data.LeagueInfo
+import dev.whosnickdoglio.yahoofantasy.reporting.data.Player
 import dev.whosnickdoglio.yahoofantasy.reporting.data.PlayerRowRawInfo
 import dev.whosnickdoglio.yahoofantasy.reporting.data.RosterInfo
 import dev.whosnickdoglio.yahoofantasy.reporting.data.TeamRosterInfoFetcher
 import dev.whosnickdoglio.yahoofantasy.reporting.eval.ActivePlayerOnBenchChecker
-import dev.whosnickdoglio.yahoofantasy.reporting.eval.EmptyRosterSpot
-import dev.whosnickdoglio.yahoofantasy.reporting.eval.Player
 import dev.whosnickdoglio.yahoofantasy.reporting.eval.RosterEvaluator
 import dev.whosnickdoglio.yahoofantasy.reporting.sheets.GoogleSheets
 import dev.whosnickdoglio.yahoofantasy.reporting.sheets.GoogleSheetsTeamReport

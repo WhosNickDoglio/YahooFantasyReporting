@@ -4,12 +4,12 @@ package dev.whosnickdoglio.yahoofantasy.reporting.data
 
 import kotlinx.serialization.Serializable
 
-internal interface TeamRosterInfoFetcher {
-    suspend fun fetchRosterInfo(teamId: Int): RosterInfo
+public interface TeamRosterInfoFetcher {
+    public suspend fun fetchRosterInfo(teamId: Int): RosterInfo
 }
 
 @Serializable
-internal data class RosterInfo(
+public data class RosterInfo(
     val name: String,
     val players: List<PlayerRowRawInfo>,
     val id: Int,
@@ -18,7 +18,7 @@ internal data class RosterInfo(
 
 // TODO different DTO here
 @Serializable
-internal data class PlayerRowRawInfo(
+public data class PlayerRowRawInfo(
     val position: String?,
     val playerName: String?,
     val healthStatus: PlayerHealthStatus,
@@ -26,7 +26,7 @@ internal data class PlayerRowRawInfo(
     val opponent: String?,
 )
 
-internal enum class PlayerHealthStatus(val value: String) {
+public enum class PlayerHealthStatus(public val value: String) {
     HEALTHY(""),
     GAME_TIME_DECISION("GTD"),
     LONG_TERM_INJURY("INJ"),

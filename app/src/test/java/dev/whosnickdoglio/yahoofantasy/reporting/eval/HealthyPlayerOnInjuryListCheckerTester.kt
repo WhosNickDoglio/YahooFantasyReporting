@@ -5,6 +5,7 @@ package dev.whosnickdoglio.yahoofantasy.reporting.eval
 import assertk.assertThat
 import assertk.assertions.isEqualTo
 import assertk.assertions.isNull
+import dev.whosnickdoglio.yahoofantasy.reporting.data.Player
 import dev.whosnickdoglio.yahoofantasy.reporting.data.PlayerHealthStatus
 import org.junit.Test
 

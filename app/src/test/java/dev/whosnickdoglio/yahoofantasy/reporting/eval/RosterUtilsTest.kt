@@ -7,6 +7,8 @@ import assertk.assertions.containsSubList
 import assertk.assertions.isEqualTo
 import assertk.assertions.isFalse
 import assertk.assertions.isTrue
+import dev.whosnickdoglio.yahoofantasy.reporting.data.EmptyRosterSpot
+import dev.whosnickdoglio.yahoofantasy.reporting.data.Player
 import org.junit.Test
 
 class RosterUtilsTest {

@@ -6,10 +6,10 @@ import assertk.assertThat
 import assertk.assertions.isEqualTo
 import dev.whosnickdoglio.yahoofantasy.reporting.data.FakeLeagueInfo
 import dev.whosnickdoglio.yahoofantasy.reporting.data.LeagueInfo
+import dev.whosnickdoglio.yahoofantasy.reporting.data.Player
 import dev.whosnickdoglio.yahoofantasy.reporting.data.PlayerHealthStatus
 import dev.whosnickdoglio.yahoofantasy.reporting.data.RosterInfo
-import dev.whosnickdoglio.yahoofantasy.reporting.eval.Player
-import dev.whosnickdoglio.yahoofantasy.reporting.getResourceAsText
+import dev.whosnickdoglio.yahoofantasy.reporting.data.getResourceAsText
 import java.time.LocalDate
 import kotlin.coroutines.CoroutineContext
 import kotlinx.coroutines.test.TestScope
