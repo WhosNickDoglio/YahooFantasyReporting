@@ -5,10 +5,8 @@ import io.gitlab.arturbosch.detekt.Detekt
 plugins {
     alias(libs.plugins.convention.jvm)
     alias(libs.plugins.metro)
-    alias(libs.plugins.burst)
     alias(libs.plugins.ksp)
     alias(libs.plugins.kover)
-    alias(libs.plugins.kotlin.serialization)
     application
 }
 
@@ -23,12 +21,8 @@ tasks.withType(Detekt::class).configureEach {
 }
 
 dependencies {
-    implementation(libs.google.api.client)
     implementation(libs.google.sheets)
     implementation(libs.kotlinx.coroutines.core)
-    implementation(libs.kotlinx.serialization)
-    implementation(libs.ksoup)
-    implementation(libs.ksoup.network)
     implementation(projects.googleSheetsApi)
     implementation(projects.inputWriter)
     implementation(projects.leagueInfo)
@@ -42,7 +36,6 @@ dependencies {
 
     testImplementation(testFixtures(projects.leagueInfo))
     testImplementation(testFixtures(projects.yahooDataFetcher))
-    testImplementation(libs.assertk)
     testImplementation(libs.junit)
     testImplementation(libs.kotlinx.coroutines.test)
     testImplementation(libs.mockingbird)

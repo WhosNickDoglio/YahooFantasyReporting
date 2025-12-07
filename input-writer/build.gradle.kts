@@ -11,9 +11,9 @@ plugins {
 metro { contributesAsInject = true }
 
 dependencies {
-    implementation(libs.kotlinx.coroutines.core)
+    api(projects.leagueInfo)
+    api(projects.simpleLogger)
+    api(projects.yahooDataFetcher)
+
     implementation(libs.kotlinx.serialization)
-    implementation(projects.leagueInfo)
-    implementation(projects.simpleLogger)
-    implementation(projects.yahooDataFetcher)
 }
