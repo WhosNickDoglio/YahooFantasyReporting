@@ -6,6 +6,7 @@ plugins {
     alias(libs.plugins.convention.jvm)
     alias(libs.plugins.metro)
     alias(libs.plugins.burst)
+    alias(libs.plugins.kover)
     alias(libs.plugins.ksp)
 }
 

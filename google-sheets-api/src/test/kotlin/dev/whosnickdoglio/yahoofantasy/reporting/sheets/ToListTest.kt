@@ -5,8 +5,8 @@ package dev.whosnickdoglio.yahoofantasy.reporting.sheets
 
 import assertk.assertThat
 import assertk.assertions.containsExactly
-import org.junit.Test
 import java.time.LocalDate
+import org.junit.Test
 
 class ToListTest {
 
