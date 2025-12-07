@@ -30,6 +30,7 @@ dependencies {
     implementation(libs.ksoup)
     implementation(libs.ksoup.network)
     implementation(projects.leagueInfo)
+    implementation(projects.metroAnnotations)
     implementation(projects.simpleLogger)
 
     // https://www.slf4j.org/codes.html#noProviders

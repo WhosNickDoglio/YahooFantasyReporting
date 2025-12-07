@@ -12,4 +12,5 @@ dependencies {
     kover(projects.app)
     kover(projects.simpleLogger)
     kover(projects.leagueInfo)
+    kover(projects.metroAnnotations)
 }

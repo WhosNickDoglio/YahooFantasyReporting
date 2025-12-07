@@ -48,4 +48,4 @@ develocity {
 
 enableFeaturePreview("TYPESAFE_PROJECT_ACCESSORS")
 
-include(":app", ":kover-aggregate", ":simple-logger", ":league-info")
+include(":app", ":kover-aggregate", ":simple-logger", ":league-info", ":metro-annotations")
