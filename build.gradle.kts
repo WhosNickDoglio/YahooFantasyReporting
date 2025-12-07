@@ -1,18 +1,14 @@
 // Copyright (C) 2025 Nicholas Doglio
 // SPDX-License-Identifier: MIT
 
-buildscript {
-    dependencies {
-        classpath(libs.burst)
-    }
-}
+buildscript { dependencies { classpath(libs.burst) } }
 
 plugins {
     alias(libs.plugins.dependencyAnalysis)
     alias(libs.plugins.doctor)
     alias(libs.plugins.kotlin.jvm) apply false
     alias(libs.plugins.kotlin.serialization) apply false
-    alias(libs.plugins.kover) apply false
+    alias(libs.plugins.kover)
     alias(libs.plugins.ktfmt) apply false
     alias(libs.plugins.metro) apply false
     alias(libs.plugins.convention.jvm) apply false
