@@ -35,6 +35,7 @@ dependencies {
     // https://www.slf4j.org/codes.html#noProviders
     runtimeOnly(libs.slf4j)
 
+    testImplementation(testFixtures(projects.leagueInfo))
     testImplementation(libs.assertk)
     testImplementation(libs.junit)
     testImplementation(libs.kotlinx.coroutines.test)
