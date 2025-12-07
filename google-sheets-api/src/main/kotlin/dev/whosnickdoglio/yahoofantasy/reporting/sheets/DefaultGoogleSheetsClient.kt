@@ -11,8 +11,10 @@ import dev.zacsweers.metro.ContributesBinding
 import kotlin.coroutines.CoroutineContext
 import kotlinx.coroutines.withContext
 
+// TODO make internal when Metro supports it (likely with Kotlin 2.3.20)
+//  https://github.com/ZacSweers/metro/issues/98
 @ContributesBinding(AppScope::class)
-internal class DefaultGoogleSheetsClient(
+public class DefaultGoogleSheetsClient(
     private val sheets: Sheets,
     private val leagueInfo: LeagueInfo,
     @param:IoDispatcher private val ioCoroutineContext: CoroutineContext,

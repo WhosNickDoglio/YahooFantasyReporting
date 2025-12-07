@@ -1,11 +1,12 @@
 // Copyright (C) 2025 Nicholas Doglio
 // SPDX-License-Identifier: MIT
+
 package dev.whosnickdoglio.yahoofantasy.reporting.sheets
 
 import assertk.assertThat
 import assertk.assertions.containsExactly
-import java.time.LocalDate
 import org.junit.Test
+import java.time.LocalDate
 
 class ToListTest {
 

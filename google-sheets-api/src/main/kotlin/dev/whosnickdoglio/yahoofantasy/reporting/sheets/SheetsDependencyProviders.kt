@@ -17,16 +17,17 @@ import dev.zacsweers.metro.Qualifier
 import java.io.File
 
 @ContributesTo(AppScope::class)
-internal interface SheetsDependencyProviders {
+public interface SheetsDependencyProviders {
 
-    @Provides fun provideGsonFactory(): GsonFactory = GsonFactory.getDefaultInstance()
+    @Provides public fun provideGsonFactory(): GsonFactory = GsonFactory.getDefaultInstance()
 
     @Provides
-    fun provideHttpTransport(): NetHttpTransport = GoogleNetHttpTransport.newTrustedTransport()
+    public fun provideHttpTransport(): NetHttpTransport =
+        GoogleNetHttpTransport.newTrustedTransport()
 
     @Provides
     @GoogleCredentialsSecret
-    fun provideGoogleSecret(): String {
+    public fun provideGoogleSecret(): String {
         val secret = System.getenv("GOOGLE_CREDENTIALS")
 
         // TODO make this less bad
@@ -39,16 +40,16 @@ internal interface SheetsDependencyProviders {
     }
 
     @Provides
-    fun provideCredentials(@GoogleCredentialsSecret secret: String): Credentials =
+    public fun provideCredentials(@GoogleCredentialsSecret secret: String): Credentials =
         GoogleCredentials.fromStream(secret.byteInputStream())
             .createScoped(listOf(SheetsScopes.SPREADSHEETS, SheetsScopes.DRIVE))
 
     @Provides
-    fun provideInitializer(credentials: Credentials): HttpCredentialsAdapter =
+    public fun provideInitializer(credentials: Credentials): HttpCredentialsAdapter =
         HttpCredentialsAdapter(credentials)
 
     @Provides
-    fun provideSheetsService(
+    public fun provideSheetsService(
         transport: NetHttpTransport,
         gsonFactory: GsonFactory,
         credentialsAdapter: HttpCredentialsAdapter,

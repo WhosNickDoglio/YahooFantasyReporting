@@ -7,16 +7,9 @@ plugins {
     alias(libs.plugins.metro)
     alias(libs.plugins.burst)
     alias(libs.plugins.ksp)
-    alias(libs.plugins.kover)
-    alias(libs.plugins.kotlin.serialization)
-    application
 }
 
-kover { reports { filters { excludes { classes("*\$Metro*") } } } }
-
 metro { contributesAsInject = true }
-
-application { mainClass = "dev.whosnickdoglio.yahoofantasy.reporting.MainKt" }
 
 tasks.withType(Detekt::class).configureEach {
     exclude { spec -> spec.file.path.contains("build/generated") }
@@ -27,20 +20,13 @@ dependencies {
     implementation(libs.google.sheets)
     implementation(libs.kotlinx.coroutines.core)
     implementation(libs.kotlinx.serialization)
-    implementation(libs.ksoup)
-    implementation(libs.ksoup.network)
-    implementation(projects.googleSheetsApi)
-    implementation(projects.inputWriter)
     implementation(projects.leagueInfo)
     implementation(projects.metroAnnotations)
     implementation(projects.simpleLogger)
-    implementation(projects.yahooDataFetcher)
 
     // https://www.slf4j.org/codes.html#noProviders
     runtimeOnly(libs.slf4j)
 
-    testImplementation(testFixtures(projects.leagueInfo))
-    testImplementation(testFixtures(projects.yahooDataFetcher))
     testImplementation(libs.assertk)
     testImplementation(libs.junit)
     testImplementation(libs.kotlinx.coroutines.test)

@@ -15,4 +15,5 @@ dependencies {
     kover(projects.metroAnnotations)
     kover(projects.yahooDataFetcher)
     kover(projects.inputWriter)
+    kover(projects.googleSheetsApi)
 }

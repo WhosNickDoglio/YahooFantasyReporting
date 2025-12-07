@@ -4,8 +4,8 @@ package dev.whosnickdoglio.yahoofantasy.reporting.sheets
 
 import java.time.LocalDate
 
-internal interface GoogleSheets {
-    suspend fun sendReport(teamReport: List<GoogleSheetsTeamReport>)
+public interface GoogleSheets {
+    public suspend fun sendReport(teamReport: List<GoogleSheetsTeamReport>)
 }
 
 public data class GoogleSheetsTeamReport(
@@ -19,4 +19,4 @@ public data class GoogleSheetsTeamReport(
     val url: String,
 )
 
-internal fun Boolean.toInt(): Int = if (this) 1 else 0
+public fun Boolean.toInt(): Int = if (this) 1 else 0
