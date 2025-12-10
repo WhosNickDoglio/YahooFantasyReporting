@@ -57,5 +57,6 @@ include(
     ":yahoo-data-fetcher",
     ":input-writer",
     ":google-sheets-api",
-    ":roster-evaluator"
+    ":roster-evaluator",
+    ":data-reporter",
 )

@@ -10,6 +10,7 @@ This module just exists so Kover can create a merged report for code coverage.
  */
 dependencies {
     kover(projects.dataCollector)
+    kover(projects.dataReporter)
     kover(projects.simpleLogger)
     kover(projects.leagueInfo)
     kover(projects.metroAnnotations)
