@@ -36,7 +36,7 @@ google-sheets = { module = "com.google.apis:google-api-services-sheets", version
 retrofit-bom = { module = "com.squareup.retrofit2:retrofit-bom", version = "3.0.0" }
 retrofit = { module = "com.squareup.retrofit2:retrofit" }
 retrofit-serialization = { module = "com.squareup.retrofit2:converter-kotlinx-serialization" }
-okhttp-bom = { module = "com.squareup.okhttp3:okhttp-bom", version = "5.2.1" }
+okhttp-bom = { module = "com.squareup.okhttp3:okhttp-bom", version = "5.3.2" }
 okhttp = { module = "com.squareup.okhttp3:okhttp" }
 okhttp-logging = { module = "com.squareup.okhttp3:logging-interceptor" }
 
