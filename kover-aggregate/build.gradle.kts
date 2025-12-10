@@ -18,4 +18,5 @@ dependencies {
     kover(projects.inputWriter)
     kover(projects.googleSheetsApi)
     kover(projects.rosterEvaluator)
+    kover(projects.discordApi)
 }

@@ -33,6 +33,13 @@ kotlinx-serialization = { module = "org.jetbrains.kotlinx:kotlinx-serialization-
 google-api-client = { module = "com.google.api-client:google-api-client", version = "2.8.1" }
 google-sheets = { module = "com.google.apis:google-api-services-sheets", version = "v4-rev20251110-2.0.0" }
 
+retrofit-bom = { module = "com.squareup.retrofit2:retrofit-bom", version = "3.0.0" }
+retrofit = { module = "com.squareup.retrofit2:retrofit" }
+retrofit-serialization = { module = "com.squareup.retrofit2:converter-kotlinx-serialization" }
+okhttp-bom = { module = "com.squareup.okhttp3:okhttp-bom", version = "5.2.1" }
+okhttp = { module = "com.squareup.okhttp3:okhttp" }
+okhttp-logging = { module = "com.squareup.okhttp3:logging-interceptor" }
+
 # https://www.slf4j.org/codes.html#noProviders
 slf4j = { module = "org.slf4j:slf4j-nop", version = "2.0.17" }
 

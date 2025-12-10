@@ -19,8 +19,11 @@ tasks.withType(Detekt::class).configureEach {
 }
 
 dependencies {
+    implementation(platform(libs.okhttp.bom))
+    implementation(platform(libs.retrofit.bom))
     implementation(libs.google.sheets)
     implementation(libs.kotlinx.coroutines.core)
+    implementation(projects.discordApi)
     implementation(projects.googleSheetsApi)
     implementation(projects.inputWriter)
     implementation(projects.leagueInfo)

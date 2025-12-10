@@ -59,4 +59,5 @@ include(
     ":google-sheets-api",
     ":roster-evaluator",
     ":data-reporter",
+    ":discord-api",
 )
