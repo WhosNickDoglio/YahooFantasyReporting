@@ -17,9 +17,9 @@ public suspend fun main(args: Array<String>) {
             else -> error("Unknown league $league")
         }
 
-    val yesterday = LocalDate.now().minusDays(1)
+    val threeDaysAgo = LocalDate.now().minusDays(3)
     val graph =
         createGraphFactory<AppDependencyGraph.Factory>()
-            .create(yesterday = yesterday, leagueInfo = leagueInfo)
+            .create(threeDaysAgo = threeDaysAgo, leagueInfo = leagueInfo)
     graph.app()
 }

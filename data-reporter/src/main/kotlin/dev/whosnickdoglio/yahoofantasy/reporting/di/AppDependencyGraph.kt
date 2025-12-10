@@ -26,7 +26,7 @@ internal interface AppDependencyGraph {
     @DependencyGraph.Factory
     fun interface Factory {
         fun create(
-            @Provides yesterday: LocalDate,
+            @Provides threeDaysAgo: LocalDate,
             @Provides leagueInfo: LeagueInfo,
         ): AppDependencyGraph
     }

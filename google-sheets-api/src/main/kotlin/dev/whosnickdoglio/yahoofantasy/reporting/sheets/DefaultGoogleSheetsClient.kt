@@ -8,6 +8,7 @@ import dev.whosnickdoglio.yahoofantasy.reporting.data.LeagueInfo
 import dev.whosnickdoglio.yahoofantasy.reporting.util.coroutines.IoDispatcher
 import dev.zacsweers.metro.AppScope
 import dev.zacsweers.metro.ContributesBinding
+import java.time.LocalDate
 import kotlin.coroutines.CoroutineContext
 import kotlinx.coroutines.withContext
 
@@ -32,6 +33,28 @@ public class DefaultGoogleSheetsClient(
                 }
                 .execute()
         }
+
+    override suspend fun retrieveReports(): List<GoogleSheetsTeamReport> =
+        withContext(ioCoroutineContext) {
+            val sheet =
+                sheets
+                    .spreadsheets()
+                    .values()
+                    .get(SPREADSHEET_ID, leagueInfo.spreadSheetName)
+                    .execute()
+
+            val reports =
+                sheet.values
+                    .filterIsInstance<List<*>>()
+                    .maxByOrNull { it.size }
+                    .orEmpty()
+                    .filterIsInstance<List<String>>()
+                    // Drops the first element which is just a header
+                    .drop(1)
+                    .map { it.toReport() }
+
+            return@withContext reports
+        }
 }
 
 private const val SPREADSHEET_ID = "11LQZQF2CDX4lmChkryV00aD6I2XTi3Fp4BmqNVwtuEI"
@@ -47,4 +70,16 @@ internal fun GoogleSheetsTeamReport.toList(): List<String> =
         injuredPlayerOnBenchWithOpenInjuryListSpot.toString(),
         teamId.toString(),
         url,
+    )
+
+internal fun List<String>.toReport(): GoogleSheetsTeamReport =
+    GoogleSheetsTeamReport(
+        LocalDate.parse(this[0]),
+        this[1],
+        this[2].toInt(),
+        this[3].toInt(),
+        this[4].toInt(),
+        this[5].toInt(),
+        this[6].toInt(),
+        this[7],
     )

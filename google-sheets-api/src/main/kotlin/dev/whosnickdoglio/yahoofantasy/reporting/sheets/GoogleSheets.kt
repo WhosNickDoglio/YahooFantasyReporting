@@ -6,6 +6,8 @@ import java.time.LocalDate
 
 public interface GoogleSheets {
     public suspend fun sendReport(teamReport: List<GoogleSheetsTeamReport>)
+
+    public suspend fun retrieveReports(): List<GoogleSheetsTeamReport>
 }
 
 public data class GoogleSheetsTeamReport(
