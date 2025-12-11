@@ -15,7 +15,7 @@ ksp = { id = "com.google.devtools.ksp", version = "2.3.3" }
 burst = { id = "app.cash.burst" }
 convention-jvm = { id = "dev.whosnickdoglio.convention.kotlin", version = "0.2.0" }
 detekt = { id = "io.gitlab.arturbosch.detekt", version = "1.23.8" }
-lint = { id = "com.android.lint", version = "8.13.1" }
+lint = { id = "com.android.lint", version = "8.13.2" }
 doctor = { id = "com.osacky.doctor", version = "0.12.1" }
 dependencyAnalysis = { id = "com.autonomousapps.dependency-analysis", version = "3.5.1" }
 sortDependencies = { id = "com.squareup.sort-dependencies", version = "0.16" }
