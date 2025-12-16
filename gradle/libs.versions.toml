@@ -9,7 +9,7 @@ jdk = "24"
 [plugins]
 kotlin-jvm = { id = "org.jetbrains.kotlin.jvm", version.ref = "kotlin" }
 kotlin-serialization = { id = "org.jetbrains.kotlin.plugin.serialization", version.ref = "kotlin" }
-metro = { id = "dev.zacsweers.metro", version = "0.9.0" }
+metro = { id = "dev.zacsweers.metro", version = "0.9.1" }
 ksp = { id = "com.google.devtools.ksp", version = "2.3.4" }
 burst = { id = "app.cash.burst" }
 convention-jvm = { id = "dev.whosnickdoglio.convention.kotlin", version = "0.2.0" }
