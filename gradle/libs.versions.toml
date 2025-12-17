@@ -46,5 +46,5 @@ mockingbird = { module = "com.anthonycr.mockingbird:core", version.ref = "mockin
 mockingbird-compiler = { module = "com.anthonycr.mockingbird:processor", version.ref = "mockingbird" }
 
 junit = { module = "junit:junit", version = "4.13.2" }
-burst = { module = "app.cash.burst:burst-gradle-plugin", version = "2.10.2" }
+burst = { module = "app.cash.burst:burst-gradle-plugin", version = "2.11.0" }
 assertk = { module = "com.willowtreeapps.assertk:assertk", version = "0.28.1" }
