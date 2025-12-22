@@ -1,6 +1,5 @@
 // Copyright (C) 2025 Nicholas Doglio
 // SPDX-License-Identifier: MIT
-import io.gitlab.arturbosch.detekt.Detekt
 
 plugins {
     alias(libs.plugins.convention.jvm)
@@ -13,10 +12,6 @@ plugins {
 metro { contributesAsInject = true }
 
 application { mainClass = "dev.whosnickdoglio.yahoofantasy.reporting.MainKt" }
-
-tasks.withType(Detekt::class).configureEach {
-    exclude { spec -> spec.file.path.contains("build/generated") }
-}
 
 dependencies {
     implementation(libs.google.sheets)
