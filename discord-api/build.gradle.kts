@@ -12,6 +12,8 @@ plugins {
 metro { contributesAsInject = true }
 
 dependencies {
+    api(libs.eithernet)
+    api(libs.eithernet.retrofit)
     api(libs.kotlinx.coroutines.core)
     api(projects.leagueInfo)
     api(projects.metroAnnotations)
