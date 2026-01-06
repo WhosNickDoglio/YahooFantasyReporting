@@ -1,8 +1,7 @@
-// Copyright (C) 2025 Nicholas Doglio
+// Copyright (C) 2026 Nicholas Doglio
 // SPDX-License-Identifier: MIT
 package dev.whosnickdoglio.yahoofantasy.reporting
 
-import com.anthonycr.mockingbird.core.Verify
 import com.anthonycr.mockingbird.core.fake
 import com.anthonycr.mockingbird.core.verify
 import com.anthonycr.mockingbird.core.verifyComplete
@@ -25,11 +24,11 @@ import org.junit.Test
 
 class AppTest {
 
-    @Verify private val sheetsClient: GoogleSheets = fake()
+    private val sheetsClient: GoogleSheets = fake()
 
-    @Verify private val logger: SimpleLogger = fake()
+    private val logger: SimpleLogger = fake()
 
-    @Verify private val writer: InputWriter = fake()
+    private val writer: InputWriter = fake()
 
     @Suppress("LongParameterList")
     private fun TestApp(
@@ -77,18 +76,16 @@ class AppTest {
         app()
         verify(sheetsClient) {
             sheetsClient.sendReport(
-                eq(
-                    listOf(
-                        GoogleSheetsTeamReport(
-                            date = LocalDate.of(2025, 11, 12),
-                            teamName = "foo",
-                            healthyOnInjuryList = 0,
-                            activePlayerOnBenchWithOpenStartingSpot = 1,
-                            injuredPlayerInStartingLineup = 0,
-                            injuredPlayerOnBenchWithOpenInjuryListSpot = 0,
-                            teamId = 12,
-                            url = "foo.com",
-                        )
+                listOf(
+                    GoogleSheetsTeamReport(
+                        date = LocalDate.of(2025, 11, 12),
+                        teamName = "foo",
+                        healthyOnInjuryList = 0,
+                        activePlayerOnBenchWithOpenStartingSpot = 1,
+                        injuredPlayerInStartingLineup = 0,
+                        injuredPlayerOnBenchWithOpenInjuryListSpot = 0,
+                        teamId = 12,
+                        url = "foo.com",
                     )
                 )
             )
@@ -100,11 +97,11 @@ class AppTest {
         val app = TestApp(fetcher = FakeTeamRosterInfoFetcher())
         app()
         verify(logger) {
-            logger.log(eq("Checking rosters in Mitch Rob for 2025-11-12"))
+            logger.log("Checking rosters in Mitch Rob for 2025-11-12")
             (1..FakeLeagueInfo().numberOfTeams).forEach { _ ->
-                logger.log(eq("Roster is set for foo! foo.com"))
+                logger.log("Roster is set for foo! foo.com")
             }
-            logger.log(eq("No violations found 2025-11-12"))
+            logger.log("No violations found 2025-11-12")
         }
     }
 
@@ -134,16 +131,14 @@ class AppTest {
             )
         app()
         verify(logger) {
-            logger.log(eq("Checking rosters in Mitch Rob for 2025-11-12"))
+            logger.log("Checking rosters in Mitch Rob for 2025-11-12")
             (1..<FakeLeagueInfo().numberOfTeams).forEach { _ ->
-                logger.log(eq("Roster is set for foo! foo.com"))
+                logger.log("Roster is set for foo! foo.com")
             }
             logger.log(
-                eq(
-                    "foo has violations: ACTIVE_PLAYER_ON_BENCH_WITH_OPEN_STARTING_LINEUP_SPOT foo.com"
-                )
+                "foo has violations: ACTIVE_PLAYER_ON_BENCH_WITH_OPEN_STARTING_LINEUP_SPOT foo.com"
             )
-            logger.log(eq("Reporting to Google Sheets..."))
+            logger.log("Reporting to Google Sheets...")
         }
     }
 
@@ -151,7 +146,7 @@ class AppTest {
     fun `input writer is called once when the app is run`() = runTest {
         val app = TestApp(fetcher = FakeTeamRosterInfoFetcher())
         app()
-        verify(writer) { writer.write(any(emptyList())) }
+        verify(writer) { writer.write(any()) }
     }
 }
 

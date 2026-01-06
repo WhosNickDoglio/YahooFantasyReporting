@@ -1,10 +1,10 @@
-// Copyright (C) 2025 Nicholas Doglio
+// Copyright (C) 2026 Nicholas Doglio
 // SPDX-License-Identifier: MIT
 
 plugins {
     alias(libs.plugins.convention.jvm)
     alias(libs.plugins.metro)
-    alias(libs.plugins.ksp)
+    alias(libs.plugins.mockingbird)
     alias(libs.plugins.kover)
     application
 }
@@ -35,6 +35,4 @@ dependencies {
     testImplementation(libs.junit)
     testImplementation(libs.kotlinx.coroutines.test)
     testImplementation(libs.mockingbird)
-
-    kspTest(libs.mockingbird.compiler)
 }

@@ -1,4 +1,4 @@
-// Copyright (C) 2025 Nicholas Doglio
+// Copyright (C) 2026 Nicholas Doglio
 // SPDX-License-Identifier: MIT
 
 buildscript { dependencies { classpath(libs.burst) } }
@@ -15,7 +15,7 @@ plugins {
     alias(libs.plugins.detekt) apply false
     alias(libs.plugins.lint) apply false
     alias(libs.plugins.sortDependencies) apply false
-    alias(libs.plugins.ksp) apply false
+    alias(libs.plugins.mockingbird) apply false
 }
 
 // https://docs.gradle.org/8.9/userguide/gradle_daemon.html#daemon_jvm_criteria
