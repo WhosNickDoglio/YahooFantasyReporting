@@ -10,7 +10,7 @@ eithernet = "2.0.0"
 [plugins]
 kotlin-jvm = { id = "org.jetbrains.kotlin.jvm", version.ref = "kotlin" }
 kotlin-serialization = { id = "org.jetbrains.kotlin.plugin.serialization", version.ref = "kotlin" }
-metro = { id = "dev.zacsweers.metro", version = "0.10.1" }
+metro = { id = "dev.zacsweers.metro", version = "0.10.2" }
 burst = { id = "app.cash.burst" }
 convention-jvm = { id = "dev.whosnickdoglio.convention.kotlin", version = "0.3.0" }
 detekt = { id = "dev.detekt", version = "2.0.0-alpha.1" }
