@@ -31,5 +31,4 @@ dependencies {
     testImplementation(testFixtures(projects.yahooDataFetcher))
     testImplementation(libs.junit)
     testImplementation(libs.kotlinx.coroutines.test)
-    testImplementation(libs.mockingbird)
 }

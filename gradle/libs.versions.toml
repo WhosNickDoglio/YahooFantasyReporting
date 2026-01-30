@@ -2,7 +2,6 @@
 ksoup = "0.2.5"
 kotlin = "2.3.0"
 jdkTarget = "17"
-mockingbird = "3.1.0"
 coroutines = "1.10.2"
 jdk = "25"
 eithernet = "2.0.0"
@@ -20,7 +19,7 @@ dependencyAnalysis = { id = "com.autonomousapps.dependency-analysis", version = 
 sortDependencies = { id = "com.squareup.sort-dependencies", version = "0.16" }
 kover = { id = "org.jetbrains.kotlinx.kover", version = "0.9.4" }
 ktfmt = { id = "com.ncorti.ktfmt.gradle", version = "0.25.0" }
-mockingbird = { id = "com.anthonycr.plugins.mockingbird", version.ref = "mockingbird" }
+mockingbird = { id = "com.anthonycr.plugins.mockingbird", version = "3.1.0" }
 
 [libraries]
 ksoup = { module = "com.fleeksoft.ksoup:ksoup", version.ref = "ksoup" }
@@ -44,8 +43,6 @@ eithernet-retrofit = { module = "com.slack.eithernet:eithernet-integration-retro
 
 # https://www.slf4j.org/codes.html#noProviders
 slf4j = { module = "org.slf4j:slf4j-nop", version = "2.0.17" }
-
-mockingbird = { module = "com.anthonycr.mockingbird:core", version.ref = "mockingbird" }
 
 junit = { module = "junit:junit", version = "4.13.2" }
 burst = { module = "app.cash.burst:burst-gradle-plugin", version = "2.11.0" }
