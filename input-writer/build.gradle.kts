@@ -1,4 +1,4 @@
-// Copyright (C) 2025 Nicholas Doglio
+// Copyright (C) 2026 Nicholas Doglio
 // SPDX-License-Identifier: MIT
 
 plugins {
@@ -7,8 +7,6 @@ plugins {
     alias(libs.plugins.metro)
     alias(libs.plugins.kotlin.serialization)
 }
-
-metro { contributesAsInject = true }
 
 dependencies {
     api(projects.leagueInfo)
