@@ -1,8 +1,7 @@
-// Copyright (C) 2025 Nicholas Doglio
+// Copyright (C) 2026 Nicholas Doglio
 // SPDX-License-Identifier: MIT
 package dev.whosnickdoglio.yahoofantasy.reporting.sheets
 
-import com.google.api.client.googleapis.javanet.GoogleNetHttpTransport
 import com.google.api.client.http.javanet.NetHttpTransport
 import com.google.api.client.json.gson.GsonFactory
 import com.google.api.services.sheets.v4.Sheets
@@ -21,9 +20,7 @@ public interface SheetsDependencyProviders {
 
     @Provides public fun provideGsonFactory(): GsonFactory = GsonFactory.getDefaultInstance()
 
-    @Provides
-    public fun provideHttpTransport(): NetHttpTransport =
-        GoogleNetHttpTransport.newTrustedTransport()
+    @Provides public fun provideHttpTransport(): NetHttpTransport = NetHttpTransport()
 
     @Provides
     @GoogleCredentialsSecret
