@@ -45,5 +45,5 @@ eithernet-retrofit = { module = "com.slack.eithernet:eithernet-integration-retro
 slf4j = { module = "org.slf4j:slf4j-nop", version = "2.0.17" }
 
 junit = { module = "junit:junit", version = "4.13.2" }
-burst = { module = "app.cash.burst:burst-gradle-plugin", version = "2.11.0" }
+burst = { module = "app.cash.burst:burst-gradle-plugin", version = "2.12.0" }
 assertk = { module = "com.willowtreeapps.assertk:assertk", version = "0.28.1" }
