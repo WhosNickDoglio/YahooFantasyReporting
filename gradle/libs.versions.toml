@@ -30,7 +30,7 @@ kotlinx-coroutines-test = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-t
 kotlinx-serialization = { module = "org.jetbrains.kotlinx:kotlinx-serialization-json", version = "1.10.0" }
 
 google-api-client = { module = "com.google.api-client:google-api-client", version = "2.9.0" }
-google-sheets = { module = "com.google.apis:google-api-services-sheets", version = "v4-rev20251110-2.0.0" }
+google-sheets = { module = "com.google.apis:google-api-services-sheets", version = "v4-rev20260213-2.0.0" }
 
 retrofit-bom = { module = "com.squareup.retrofit2:retrofit-bom", version = "3.0.0" }
 retrofit = { module = "com.squareup.retrofit2:retrofit" }
