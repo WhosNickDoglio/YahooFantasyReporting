@@ -10,10 +10,9 @@ import dev.zacsweers.metro.ContributesIntoSet
 @ContributesIntoSet(AppScope::class)
 public class HealthyPlayerOnInjuryListChecker : RosterChecker {
     override fun check(roster: List<PlayerRowRawInfo>): Violation? {
-        val healthyPlayersOnInjuryList =
-            roster.filter { rosterSpot ->
-                rosterSpot.isOnInjuryList() && rosterSpot.healthStatus == PlayerHealthStatus.HEALTHY
-            }
+        val healthyPlayersOnInjuryList = roster.filter { rosterSpot ->
+            rosterSpot.isOnInjuryList() && rosterSpot.healthStatus == PlayerHealthStatus.HEALTHY
+        }
 
         return if (healthyPlayersOnInjuryList.isNotEmpty()) {
             Violation.HEALTHY_ON_IL

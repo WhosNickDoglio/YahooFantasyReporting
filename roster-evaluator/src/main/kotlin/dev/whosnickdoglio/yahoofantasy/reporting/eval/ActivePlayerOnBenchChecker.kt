@@ -15,12 +15,11 @@ public class ActivePlayerOnBenchChecker : RosterChecker {
         "ReturnCount",
     ) // TODO clean this up
     override fun check(roster: List<PlayerRowRawInfo>): Violation? {
-        val activeBenchPlayers =
-            roster.filter {
-                it.position == "BN" &&
-                    it.hasGameToday() &&
-                    it.healthStatus == PlayerHealthStatus.HEALTHY
-            }
+        val activeBenchPlayers = roster.filter {
+            it.position == "BN" &&
+                it.hasGameToday() &&
+                it.healthStatus == PlayerHealthStatus.HEALTHY
+        }
 
         val startingLineup = roster.filter { it.isStarting() }
 
