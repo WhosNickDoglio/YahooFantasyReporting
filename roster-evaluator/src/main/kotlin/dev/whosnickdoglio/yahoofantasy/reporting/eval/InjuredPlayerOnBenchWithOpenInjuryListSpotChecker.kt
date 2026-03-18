@@ -12,11 +12,10 @@ import dev.zacsweers.metro.ContributesIntoSet
 public class InjuredPlayerOnBenchWithOpenInjuryListSpotChecker(private val leagueInfo: LeagueInfo) :
     RosterChecker {
     override fun check(roster: List<PlayerRowRawInfo>): Violation? {
-        val injuredPlayersOnBench =
-            roster.filter { rosterSpot ->
-                rosterSpot.position == "BN" &&
-                    rosterSpot.healthStatus == PlayerHealthStatus.LONG_TERM_INJURY
-            }
+        val injuredPlayersOnBench = roster.filter { rosterSpot ->
+            rosterSpot.position == "BN" &&
+                rosterSpot.healthStatus == PlayerHealthStatus.LONG_TERM_INJURY
+        }
 
         val injuryListSpotsTaken = roster.filter { rosterSpot -> rosterSpot.isOnInjuryList() }
 

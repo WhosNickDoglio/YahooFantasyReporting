@@ -10,8 +10,9 @@ import dev.zacsweers.metro.ContributesIntoSet
 @ContributesIntoSet(AppScope::class)
 public class InjuredPlayersInStartingLineupChecker : RosterChecker {
     override fun check(roster: List<PlayerRowRawInfo>): Violation? {
-        val injuredPlayersStarting =
-            roster.filter { rosterSpot -> rosterSpot.isStarting() && rosterSpot.isInjured() }
+        val injuredPlayersStarting = roster.filter { rosterSpot ->
+            rosterSpot.isStarting() && rosterSpot.isInjured()
+        }
 
         return if (injuredPlayersStarting.isNotEmpty()) {
             Violation.IL_IN_STARTING_LINEUP
