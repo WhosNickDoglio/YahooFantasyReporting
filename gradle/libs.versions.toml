@@ -18,7 +18,7 @@ doctor = { id = "com.osacky.doctor", version = "0.12.1" }
 dependencyAnalysis = { id = "com.autonomousapps.dependency-analysis", version = "3.6.1" }
 sortDependencies = { id = "com.squareup.sort-dependencies", version = "0.16" }
 kover = { id = "org.jetbrains.kotlinx.kover", version = "0.9.7" }
-ktfmt = { id = "com.ncorti.ktfmt.gradle", version = "0.25.0" }
+ktfmt = { id = "com.ncorti.ktfmt.gradle", version = "0.26.0" }
 mockingbird = { id = "com.anthonycr.plugins.mockingbird", version = "3.1.0" }
 
 [libraries]
