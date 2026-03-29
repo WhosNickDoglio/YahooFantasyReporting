@@ -21,7 +21,6 @@ dependencies {
     implementation(projects.inputWriter)
     implementation(projects.leagueInfo)
     implementation(projects.metroAnnotations)
-    implementation(projects.rosterEvaluator)
     implementation(projects.simpleLogger)
     implementation(projects.yahooDataFetcher)
 
