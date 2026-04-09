@@ -27,7 +27,7 @@ ksoup-network = { module = "com.fleeksoft.ksoup:ksoup-network", version.ref = "k
 
 kotlinx-coroutines-core = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-core", version.ref = "coroutines" }
 kotlinx-coroutines-test = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-test", version.ref = "coroutines" }
-kotlinx-serialization = { module = "org.jetbrains.kotlinx:kotlinx-serialization-json", version = "1.10.0" }
+kotlinx-serialization = { module = "org.jetbrains.kotlinx:kotlinx-serialization-json", version = "1.11.0" }
 
 google-api-client = { module = "com.google.api-client:google-api-client", version = "2.9.0" }
 google-sheets = { module = "com.google.apis:google-api-services-sheets", version = "v4-rev20260213-2.0.0" }
