@@ -1,4 +1,4 @@
-// Copyright (C) 2025 Nicholas Doglio
+// Copyright (C) 2026 Nicholas Doglio
 // SPDX-License-Identifier: MIT
 package dev.whosnickdoglio.yahoofantasy.reporting.data.soup
 
@@ -12,9 +12,7 @@ public fun interface HtmlDocumentFetcher {
     public suspend fun fetchDocument(url: String): Document
 }
 
-// TODO make internal when Metro supports it (likely with Kotlin 2.3.20)
-//  https://github.com/ZacSweers/metro/issues/98
 @ContributesBinding(AppScope::class)
-public class HtmlDocumentFetcherImpl : HtmlDocumentFetcher {
+internal class HtmlDocumentFetcherImpl : HtmlDocumentFetcher {
     override suspend fun fetchDocument(url: String): Document = Ksoup.parseGetRequest(url)
 }

@@ -1,4 +1,4 @@
-// Copyright (C) 2025 Nicholas Doglio
+// Copyright (C) 2026 Nicholas Doglio
 // SPDX-License-Identifier: MIT
 package dev.whosnickdoglio.yahoofantasy.reporting.eval
 
@@ -8,7 +8,7 @@ import dev.zacsweers.metro.AppScope
 import dev.zacsweers.metro.ContributesIntoSet
 
 @ContributesIntoSet(AppScope::class)
-public class InjuredPlayersInStartingLineupChecker : RosterChecker {
+internal class InjuredPlayersInStartingLineupChecker : RosterChecker {
     override fun check(roster: List<PlayerRowRawInfo>): Violation? {
         val injuredPlayersStarting = roster.filter { rosterSpot ->
             rosterSpot.isStarting() && rosterSpot.isInjured()

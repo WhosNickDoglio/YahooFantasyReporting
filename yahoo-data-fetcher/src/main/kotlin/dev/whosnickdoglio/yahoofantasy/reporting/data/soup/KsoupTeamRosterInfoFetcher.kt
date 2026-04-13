@@ -1,4 +1,4 @@
-// Copyright (C) 2025 Nicholas Doglio
+// Copyright (C) 2026 Nicholas Doglio
 // SPDX-License-Identifier: MIT
 package dev.whosnickdoglio.yahoofantasy.reporting.data.soup
 
@@ -13,10 +13,8 @@ import java.time.LocalDate
 import kotlin.coroutines.CoroutineContext
 import kotlinx.coroutines.withContext
 
-// TODO make internal when Metro supports it (likely with Kotlin 2.3.20)
-//  https://github.com/ZacSweers/metro/issues/98
 @ContributesBinding(AppScope::class)
-public class KsoupTeamRosterInfoFetcher(
+internal class KsoupTeamRosterInfoFetcher(
     private val date: LocalDate,
     private val leagueInfo: LeagueInfo,
     @param:IoDispatcher private val ioCoroutineContext: CoroutineContext,

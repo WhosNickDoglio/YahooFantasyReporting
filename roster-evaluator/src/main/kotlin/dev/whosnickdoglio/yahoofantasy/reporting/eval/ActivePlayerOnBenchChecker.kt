@@ -1,4 +1,4 @@
-// Copyright (C) 2025 Nicholas Doglio
+// Copyright (C) 2026 Nicholas Doglio
 // SPDX-License-Identifier: MIT
 package dev.whosnickdoglio.yahoofantasy.reporting.eval
 
@@ -7,6 +7,7 @@ import dev.whosnickdoglio.yahoofantasy.reporting.data.PlayerRowRawInfo
 import dev.zacsweers.metro.AppScope
 import dev.zacsweers.metro.ContributesIntoSet
 
+// TODO fix AppTest and make internal
 @ContributesIntoSet(AppScope::class)
 public class ActivePlayerOnBenchChecker : RosterChecker {
     @Suppress(

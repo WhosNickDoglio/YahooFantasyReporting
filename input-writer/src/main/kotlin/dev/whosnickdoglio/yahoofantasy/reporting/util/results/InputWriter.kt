@@ -1,4 +1,4 @@
-// Copyright (C) 2025 Nicholas Doglio
+// Copyright (C) 2026 Nicholas Doglio
 // SPDX-License-Identifier: MIT
 package dev.whosnickdoglio.yahoofantasy.reporting.util.results
 
@@ -15,7 +15,7 @@ public fun interface InputWriter {
 }
 
 @ContributesBinding(AppScope::class)
-public class DefaultInputWriter(
+internal class DefaultInputWriter(
     private val logger: SimpleLogger,
     private val leagueInfo: LeagueInfo,
 ) : InputWriter {
