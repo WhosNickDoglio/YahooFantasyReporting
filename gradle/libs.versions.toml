@@ -15,7 +15,7 @@ convention-jvm = { id = "dev.whosnickdoglio.convention.kotlin", version = "0.3.0
 detekt = { id = "dev.detekt", version = "2.0.0-alpha.2" }
 lint = { id = "com.android.lint", version = "9.1.0" }
 doctor = { id = "com.osacky.doctor", version = "0.12.1" }
-dependencyAnalysis = { id = "com.autonomousapps.dependency-analysis", version = "3.6.1" }
+dependencyAnalysis = { id = "com.autonomousapps.dependency-analysis", version = "3.7.0" }
 sortDependencies = { id = "com.squareup.sort-dependencies", version = "0.16" }
 kover = { id = "org.jetbrains.kotlinx.kover", version = "0.9.8" }
 ktfmt = { id = "com.ncorti.ktfmt.gradle", version = "0.26.0" }
