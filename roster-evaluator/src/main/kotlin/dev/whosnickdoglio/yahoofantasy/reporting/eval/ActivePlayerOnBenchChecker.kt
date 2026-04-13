@@ -7,9 +7,8 @@ import dev.whosnickdoglio.yahoofantasy.reporting.data.PlayerRowRawInfo
 import dev.zacsweers.metro.AppScope
 import dev.zacsweers.metro.ContributesIntoSet
 
-// TODO fix AppTest and make internal
 @ContributesIntoSet(AppScope::class)
-public class ActivePlayerOnBenchChecker : RosterChecker {
+internal class ActivePlayerOnBenchChecker : RosterChecker {
     @Suppress(
         "CyclomaticComplexMethod",
         "CognitiveComplexMethod",

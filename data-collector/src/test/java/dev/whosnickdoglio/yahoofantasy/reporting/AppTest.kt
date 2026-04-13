@@ -12,12 +12,14 @@ import dev.whosnickdoglio.yahoofantasy.reporting.data.Player
 import dev.whosnickdoglio.yahoofantasy.reporting.data.PlayerRowRawInfo
 import dev.whosnickdoglio.yahoofantasy.reporting.data.RosterInfo
 import dev.whosnickdoglio.yahoofantasy.reporting.data.TeamRosterInfoFetcher
-import dev.whosnickdoglio.yahoofantasy.reporting.eval.ActivePlayerOnBenchChecker
-import dev.whosnickdoglio.yahoofantasy.reporting.eval.RosterEvaluator
+import dev.whosnickdoglio.yahoofantasy.reporting.di.AppDependencyGraph
 import dev.whosnickdoglio.yahoofantasy.reporting.sheets.GoogleSheets
 import dev.whosnickdoglio.yahoofantasy.reporting.sheets.GoogleSheetsTeamReport
 import dev.whosnickdoglio.yahoofantasy.reporting.util.log.SimpleLogger
 import dev.whosnickdoglio.yahoofantasy.reporting.util.results.InputWriter
+import dev.zacsweers.metro.BindingContainer
+import dev.zacsweers.metro.Provides
+import dev.zacsweers.metro.createDynamicGraphFactory
 import java.time.LocalDate
 import kotlinx.coroutines.test.runTest
 import org.junit.Test
@@ -30,21 +32,36 @@ class AppTest {
 
     private val writer: InputWriter = fake()
 
-    @Suppress("LongParameterList")
-    private fun TestApp(
+    @BindingContainer
+    class FakeBindings(
+        private val fetcher: TeamRosterInfoFetcher,
+        private val client: GoogleSheets,
+        private val simpleLogger: SimpleLogger,
+        private val inputWriter: InputWriter,
+    ) {
+        @Provides fun provideFakeTeamFetcher(): TeamRosterInfoFetcher = fetcher
+
+        @Provides fun provideFakeSheetsClient(): GoogleSheets = client
+
+        @Provides fun provideFakeLogger(): SimpleLogger = simpleLogger
+
+        @Provides fun provideFakeWriter(): InputWriter = inputWriter
+    }
+
+    private fun createTestApp(
         fetcher: TeamRosterInfoFetcher = FakeTeamRosterInfoFetcher(),
         date: LocalDate = LocalDate.of(2025, 11, 12),
         leagueInfo: LeagueInfo = FakeLeagueInfo(),
-        rosterEvaluator: RosterEvaluator = RosterEvaluator(emptySet()),
-        googleSheets: GoogleSheets = sheetsClient,
-        simpleLogger: SimpleLogger = logger,
-        inputWriter: InputWriter = writer,
     ): App =
-        App(fetcher, date, leagueInfo, rosterEvaluator, googleSheets, simpleLogger, inputWriter)
+        createDynamicGraphFactory<AppDependencyGraph.Factory>(
+                FakeBindings(fetcher, sheetsClient, logger, writer)
+            )
+            .create(date, leagueInfo)
+            .app
 
     @Test
     fun `google sheets api call is not made when there are no violations`() = runTest {
-        val app = TestApp(fetcher = FakeTeamRosterInfoFetcher())
+        val app = createTestApp(fetcher = FakeTeamRosterInfoFetcher())
         app()
         sheetsClient.verifyComplete()
     }
@@ -52,12 +69,12 @@ class AppTest {
     @Test
     fun `google sheets api call is made when there are violations`() = runTest {
         val app =
-            TestApp(
+            createTestApp(
                 fetcher =
                     FakeTeamRosterInfoFetcher(
                         response = { id ->
                             if (id == 12) {
-                                Info(
+                                createRosterInfo(
                                     id = 12,
                                     players =
                                         listOf(
@@ -66,12 +83,10 @@ class AppTest {
                                         ),
                                 )
                             } else {
-                                Info()
+                                createRosterInfo()
                             }
                         }
-                    ),
-                rosterEvaluator =
-                    RosterEvaluator(rosterCheckers = setOf(ActivePlayerOnBenchChecker())),
+                    )
             )
         app()
         verify(sheetsClient) {
@@ -94,7 +109,7 @@ class AppTest {
 
     @Test
     fun `logger calls are made when there are no violations`() = runTest {
-        val app = TestApp(fetcher = FakeTeamRosterInfoFetcher())
+        val app = createTestApp(fetcher = FakeTeamRosterInfoFetcher())
         app()
         verify(logger) {
             logger.log("Checking rosters in Mitch Rob for 2025-11-12")
@@ -108,12 +123,12 @@ class AppTest {
     @Test
     fun `logger calls are made when there are violations`() = runTest {
         val app =
-            TestApp(
+            createTestApp(
                 fetcher =
                     FakeTeamRosterInfoFetcher(
                         response = { id ->
                             if (id == 12) {
-                                Info(
+                                createRosterInfo(
                                     id = 12,
                                     players =
                                         listOf(
@@ -122,12 +137,10 @@ class AppTest {
                                         ),
                                 )
                             } else {
-                                Info()
+                                createRosterInfo()
                             }
                         }
-                    ),
-                rosterEvaluator =
-                    RosterEvaluator(rosterCheckers = setOf(ActivePlayerOnBenchChecker())),
+                    )
             )
         app()
         verify(logger) {
@@ -144,19 +157,19 @@ class AppTest {
 
     @Test
     fun `input writer is called once when the app is run`() = runTest {
-        val app = TestApp(fetcher = FakeTeamRosterInfoFetcher())
+        val app = createTestApp(fetcher = FakeTeamRosterInfoFetcher())
         app()
         verify(writer) { writer.write(any()) }
     }
 }
 
 private class FakeTeamRosterInfoFetcher(
-    private val response: (teamId: Int) -> RosterInfo = { Info() }
+    private val response: (teamId: Int) -> RosterInfo = { createRosterInfo() }
 ) : TeamRosterInfoFetcher {
     override suspend fun fetchRosterInfo(teamId: Int): RosterInfo = response(teamId)
 }
 
-private fun Info(
+private fun createRosterInfo(
     name: String = "foo",
     players: List<PlayerRowRawInfo> = emptyList(),
     id: Int = 0,
