@@ -2,7 +2,7 @@
 ksoup = "0.2.6"
 kotlin = "2.3.21"
 jdkTarget = "17"
-coroutines = "1.10.2"
+coroutines = "1.11.0"
 jdk = "25"
 eithernet = "2.0.0"
 
