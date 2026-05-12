@@ -42,7 +42,7 @@ eithernet = { module = "com.slack.eithernet:eithernet", version.ref = "eithernet
 eithernet-retrofit = { module = "com.slack.eithernet:eithernet-integration-retrofit", version.ref = "eithernet" }
 
 # https://www.slf4j.org/codes.html#noProviders
-slf4j = { module = "org.slf4j:slf4j-nop", version = "2.0.17" }
+slf4j = { module = "org.slf4j:slf4j-nop", version = "2.0.18" }
 
 junit = { module = "junit:junit", version = "4.13.2" }
 burst = { module = "app.cash.burst:burst-gradle-plugin", version = "2.12.2" }
