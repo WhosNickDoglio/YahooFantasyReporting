@@ -16,7 +16,6 @@ import dev.whosnickdoglio.yahoofantasy.reporting.di.AppDependencyGraph
 import dev.whosnickdoglio.yahoofantasy.reporting.sheets.GoogleSheets
 import dev.whosnickdoglio.yahoofantasy.reporting.sheets.GoogleSheetsTeamReport
 import dev.whosnickdoglio.yahoofantasy.reporting.util.log.SimpleLogger
-import dev.whosnickdoglio.yahoofantasy.reporting.util.results.InputWriter
 import dev.zacsweers.metro.BindingContainer
 import dev.zacsweers.metro.Provides
 import dev.zacsweers.metro.createDynamicGraphFactory
@@ -30,22 +29,17 @@ class AppTest {
 
     private val logger: SimpleLogger = fake()
 
-    private val writer: InputWriter = fake()
-
     @BindingContainer
     class FakeBindings(
         private val fetcher: TeamRosterInfoFetcher,
         private val client: GoogleSheets,
         private val simpleLogger: SimpleLogger,
-        private val inputWriter: InputWriter,
     ) {
         @Provides fun provideFakeTeamFetcher(): TeamRosterInfoFetcher = fetcher
 
         @Provides fun provideFakeSheetsClient(): GoogleSheets = client
 
         @Provides fun provideFakeLogger(): SimpleLogger = simpleLogger
-
-        @Provides fun provideFakeWriter(): InputWriter = inputWriter
     }
 
     private fun createTestApp(
@@ -54,7 +48,7 @@ class AppTest {
         leagueInfo: LeagueInfo = FakeLeagueInfo(),
     ): App =
         createDynamicGraphFactory<AppDependencyGraph.Factory>(
-                FakeBindings(fetcher, sheetsClient, logger, writer)
+                FakeBindings(fetcher, sheetsClient, logger)
             )
             .create(date, leagueInfo)
             .app
@@ -153,13 +147,6 @@ class AppTest {
             )
             logger.log("Reporting to Google Sheets...")
         }
-    }
-
-    @Test
-    fun `input writer is called once when the app is run`() = runTest {
-        val app = createTestApp(fetcher = FakeTeamRosterInfoFetcher())
-        app()
-        verify(writer) { writer.write(any()) }
     }
 }
 

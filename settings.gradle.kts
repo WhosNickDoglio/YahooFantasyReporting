@@ -1,4 +1,4 @@
-// Copyright (C) 2025 Nicholas Doglio
+// Copyright (C) 2026 Nicholas Doglio
 // SPDX-License-Identifier: MIT
 
 rootProject.name = "YahooFantasyReporting"
@@ -55,7 +55,6 @@ include(
     ":league-info",
     ":metro-annotations",
     ":yahoo-data-fetcher",
-    ":input-writer",
     ":google-sheets-api",
     ":roster-evaluator",
     ":data-reporter",

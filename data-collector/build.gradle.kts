@@ -15,7 +15,6 @@ dependencies {
     implementation(libs.google.sheets)
     implementation(libs.kotlinx.coroutines.core)
     implementation(projects.googleSheetsApi)
-    implementation(projects.inputWriter)
     implementation(projects.leagueInfo)
     implementation(projects.metroAnnotations)
     implementation(projects.rosterEvaluator)

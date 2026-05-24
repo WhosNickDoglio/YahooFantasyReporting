@@ -18,7 +18,6 @@ dependencies {
     implementation(libs.kotlinx.coroutines.core)
     implementation(projects.discordApi)
     implementation(projects.googleSheetsApi)
-    implementation(projects.inputWriter)
     implementation(projects.leagueInfo)
     implementation(projects.metroAnnotations)
     implementation(projects.simpleLogger)

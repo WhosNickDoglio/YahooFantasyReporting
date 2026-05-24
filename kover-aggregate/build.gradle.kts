@@ -1,4 +1,4 @@
-// Copyright (C) 2025 Nicholas Doglio
+// Copyright (C) 2026 Nicholas Doglio
 // SPDX-License-Identifier: MIT
 
 plugins { alias(libs.plugins.kover) }
@@ -15,7 +15,6 @@ dependencies {
     kover(projects.leagueInfo)
     kover(projects.metroAnnotations)
     kover(projects.yahooDataFetcher)
-    kover(projects.inputWriter)
     kover(projects.googleSheetsApi)
     kover(projects.rosterEvaluator)
     kover(projects.discordApi)

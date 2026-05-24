@@ -1,4 +1,4 @@
-// Copyright (C) 2025 Nicholas Doglio
+// Copyright (C) 2026 Nicholas Doglio
 // SPDX-License-Identifier: MIT
 package dev.whosnickdoglio.yahoofantasy.reporting
 
@@ -11,7 +11,6 @@ import dev.whosnickdoglio.yahoofantasy.reporting.sheets.GoogleSheets
 import dev.whosnickdoglio.yahoofantasy.reporting.sheets.GoogleSheetsTeamReport
 import dev.whosnickdoglio.yahoofantasy.reporting.sheets.toInt
 import dev.whosnickdoglio.yahoofantasy.reporting.util.log.SimpleLogger
-import dev.whosnickdoglio.yahoofantasy.reporting.util.results.InputWriter
 import dev.zacsweers.metro.Inject
 import java.time.LocalDate
 
@@ -24,7 +23,6 @@ internal class App(
     private val rosterEvaluator: RosterEvaluator,
     private val googleSheets: GoogleSheets,
     private val logger: SimpleLogger,
-    private val inputWriter: InputWriter,
 ) {
 
     suspend operator fun invoke() {
@@ -32,9 +30,6 @@ internal class App(
 
         val rosterInfo =
             (1..leagueInfo.numberOfTeams).toList().map { id -> fetcher.fetchRosterInfo(id) }
-
-        // writing raw input to disk so we can double-check it
-        inputWriter.write(rosterInfo)
 
         val reports =
             rosterInfo
