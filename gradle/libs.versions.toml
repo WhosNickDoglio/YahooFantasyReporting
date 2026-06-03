@@ -1,6 +1,6 @@
 [versions]
 ksoup = "0.2.6"
-kotlin = "2.3.21"
+kotlin = "2.4.0"
 jdkTarget = "17"
 coroutines = "1.11.0"
 jdk = "25"
