@@ -8,10 +8,10 @@ plugins {
 }
 
 dependencies {
-    api(libs.google.api.client)
-    api(libs.google.sheets)
     api(projects.leagueInfo)
     api(projects.metroAnnotations)
+    api(libs.google.api.client)
+    api(libs.google.sheets)
 
     implementation(libs.kotlinx.coroutines.core)
 

@@ -14,14 +14,14 @@ application { mainClass = "dev.whosnickdoglio.yahoofantasy.reporting.MainKt" }
 dependencies {
     implementation(platform(libs.okhttp.bom))
     implementation(platform(libs.retrofit.bom))
-    implementation(libs.google.sheets)
-    implementation(libs.kotlinx.coroutines.core)
     implementation(projects.discordApi)
     implementation(projects.googleSheetsApi)
     implementation(projects.leagueInfo)
     implementation(projects.metroAnnotations)
     implementation(projects.simpleLogger)
     implementation(projects.yahooDataFetcher)
+    implementation(libs.google.sheets)
+    implementation(libs.kotlinx.coroutines.core)
 
     // https://www.slf4j.org/codes.html#noProviders
     runtimeOnly(libs.slf4j)

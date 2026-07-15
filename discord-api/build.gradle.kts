@@ -10,11 +10,11 @@ plugins {
 }
 
 dependencies {
+    api(projects.leagueInfo)
+    api(projects.metroAnnotations)
     api(libs.eithernet)
     api(libs.eithernet.retrofit)
     api(libs.kotlinx.coroutines.core)
-    api(projects.leagueInfo)
-    api(projects.metroAnnotations)
 
     implementation(platform(libs.okhttp.bom))
     implementation(platform(libs.retrofit.bom))

@@ -11,9 +11,9 @@ plugins {
 }
 
 dependencies {
-    api(libs.kotlinx.coroutines.core)
     api(projects.leagueInfo)
     api(projects.metroAnnotations)
+    api(libs.kotlinx.coroutines.core)
 
     implementation(libs.ksoup)
     implementation(libs.ksoup.network)
