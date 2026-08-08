@@ -38,16 +38,15 @@ public class App(
             if (repeatOffenders.isEmpty()) {
                 simpleLogger.log("Everyone set their lineup last night!")
             } else {
-                val report =
-                    buildString {
-                            appendLine("**Public Shaming:**")
-                            appendLine(
-                                "Mitch believes the following managers did not set their lineup last night"
-                            )
-                            appendLine(teamNames)
-                            appendLine("Please set your lineup before games start tonight!")
-                        }
-                        .trimIndent()
+                val report = buildString {
+                    appendLine("**Public Shaming:**")
+                    appendLine(
+                        "Mitch believes the following managers did not set their lineup last night"
+                    )
+                    appendLine(teamNames)
+                    appendLine("Please set your lineup before games start tonight!")
+                }
+                    .trimIndent()
 
                 val response =
                     discordApi.sendMessage(
