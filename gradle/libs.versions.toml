@@ -13,7 +13,7 @@ metro = { id = "dev.zacsweers.metro", version = "1.4.2" }
 burst = { id = "app.cash.burst" }
 convention-jvm = { id = "dev.whosnickdoglio.convention.kotlin", version = "0.4.0" }
 detekt = { id = "dev.detekt", version = "2.0.0-alpha.6" }
-lint = { id = "com.android.lint", version = "9.3.1" }
+lint = { id = "com.android.lint", version = "9.3.2" }
 doctor = { id = "com.osacky.doctor", version = "0.12.1" }
 dependencyAnalysis = { id = "com.autonomousapps.dependency-analysis", version = "3.18.0" }
 sortDependencies = { id = "com.squareup.sort-dependencies", version = "0.21.0" }
