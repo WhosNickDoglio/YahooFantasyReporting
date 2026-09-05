@@ -11,11 +11,11 @@ This module just exists so Kover can create a merged report for code coverage.
 dependencies {
     kover(projects.dataCollector)
     kover(projects.dataReporter)
-    kover(projects.simpleLogger)
+    kover(projects.discordApi)
+    kover(projects.googleSheetsApi)
     kover(projects.leagueInfo)
     kover(projects.metroAnnotations)
-    kover(projects.yahooDataFetcher)
-    kover(projects.googleSheetsApi)
     kover(projects.rosterEvaluator)
-    kover(projects.discordApi)
+    kover(projects.simpleLogger)
+    kover(projects.yahooDataFetcher)
 }
