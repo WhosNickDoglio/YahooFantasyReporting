@@ -1,14 +1,11 @@
-// Copyright (C) 2025 Nicholas Doglio
+// Copyright (C) 2026 Nicholas Doglio
 // SPDX-License-Identifier: MIT
 
 package dev.whosnickdoglio.yahoofantasy.discord
 
 import com.slack.eithernet.integration.retrofit.ApiResultCallAdapterFactory
 import com.slack.eithernet.integration.retrofit.ApiResultConverterFactory
-import dev.zacsweers.metro.AppScope
-import dev.zacsweers.metro.ContributesTo
-import dev.zacsweers.metro.Provides
-import dev.zacsweers.metro.Qualifier
+import dev.zacsweers.metro.*
 import kotlinx.serialization.json.Json
 import okhttp3.MediaType.Companion.toMediaType
 import okhttp3.OkHttpClient
@@ -18,7 +15,8 @@ import retrofit2.converter.kotlinx.serialization.asConverterFactory
 import retrofit2.create
 
 @ContributesTo(AppScope::class)
-public interface DiscordProvider {
+@BindingContainer
+public object DiscordProvider {
 
     @BotToken @Provides public fun provideBotToken(): String = System.getenv("BOT_TOKEN")
 

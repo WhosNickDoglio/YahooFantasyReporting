@@ -9,14 +9,12 @@ import com.google.api.services.sheets.v4.SheetsScopes
 import com.google.auth.Credentials
 import com.google.auth.http.HttpCredentialsAdapter
 import com.google.auth.oauth2.GoogleCredentials
-import dev.zacsweers.metro.AppScope
-import dev.zacsweers.metro.ContributesTo
-import dev.zacsweers.metro.Provides
-import dev.zacsweers.metro.Qualifier
+import dev.zacsweers.metro.*
 import java.io.File
 
 @ContributesTo(AppScope::class)
-public interface SheetsDependencyProviders {
+@BindingContainer
+public object SheetsDependencyProviders {
 
     @Provides public fun provideGsonFactory(): GsonFactory = GsonFactory.getDefaultInstance()
 
@@ -55,9 +53,7 @@ public interface SheetsDependencyProviders {
             .setApplicationName(APPLICATION_NAME)
             .build()
 
-    private companion object {
-        private const val APPLICATION_NAME = "Yahoo Fantasy Reporting"
-    }
+    private const val APPLICATION_NAME = "Yahoo Fantasy Reporting"
 }
 
 @Qualifier private annotation class GoogleCredentialsSecret
