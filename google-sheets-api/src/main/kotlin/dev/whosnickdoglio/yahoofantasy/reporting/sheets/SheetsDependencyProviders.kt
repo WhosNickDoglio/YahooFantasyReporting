@@ -20,6 +20,8 @@ import java.io.File
 @BindingContainer
 public object SheetsDependencyProviders {
 
+    private const val APPLICATION_NAME = "Yahoo Fantasy Reporting"
+
     @Provides public fun provideGsonFactory(): GsonFactory = GsonFactory.getDefaultInstance()
 
     @Provides public fun provideHttpTransport(): NetHttpTransport = NetHttpTransport()
@@ -56,8 +58,6 @@ public object SheetsDependencyProviders {
         Sheets.Builder(transport, gsonFactory, credentialsAdapter)
             .setApplicationName(APPLICATION_NAME)
             .build()
-
-    private const val APPLICATION_NAME = "Yahoo Fantasy Reporting"
 }
 
 @Qualifier private annotation class GoogleCredentialsSecret
