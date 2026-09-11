@@ -1,4 +1,4 @@
-// Copyright (C) 2025 Nicholas Doglio
+// Copyright (C) 2026 Nicholas Doglio
 // SPDX-License-Identifier: MIT
 package dev.whosnickdoglio.yahoofantasy.reporting
 
@@ -13,6 +13,7 @@ public suspend fun main(args: Array<String>) {
             "mitch" -> LeagueInfo.MitchRobLeagueInfo
             "redacted" -> LeagueInfo.Redacted
             "birthday" -> LeagueInfo.BirthdayCakeOreo
+            "peoples" -> LeagueInfo.PeoplesRepublic
             else -> error("Unknown league $league")
         }
 

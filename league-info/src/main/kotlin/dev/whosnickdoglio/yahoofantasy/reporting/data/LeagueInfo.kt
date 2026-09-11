@@ -38,6 +38,20 @@ public interface LeagueInfo {
         override val spreadSheetName: String = "Birthday"
         override val injuryListCount: Int = 4
     }
+
+    public data object PeoplesRepublic : LeagueInfo {
+        override val name: String = "Peoples Republic"
+
+        override val sport: Sport = Sport.Football
+
+        override val baseUrl: String = "${sport.url}/256972"
+
+        override val numberOfTeams: Int = 12
+
+        override val injuryListCount: Int = 2
+
+        override val spreadSheetName: String = "Peoples Republic"
+    }
 }
 
 public enum class Sport(public val url: String) {
