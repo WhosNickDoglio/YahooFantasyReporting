@@ -5,6 +5,7 @@ plugins {
     alias(libs.plugins.convention.jvm)
     alias(libs.plugins.metro)
     alias(libs.plugins.kover)
+    alias(libs.plugins.buildconfig)
 }
 
 dependencies {
