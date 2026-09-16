@@ -1,4 +1,4 @@
-// Copyright (C) 2025 Nicholas Doglio
+// Copyright (C) 2026 Nicholas Doglio
 // SPDX-License-Identifier: MIT
 package dev.whosnickdoglio.yahoofantasy.reporting.eval
 
@@ -16,10 +16,45 @@ internal fun PlayerRowRawInfo.isStarting(): Boolean = !position.equals("BN") && 
 
 internal fun PlayerRowRawInfo.isOnInjuryList(): Boolean = position?.contains("IL") == true
 
+private val basketballPositions =
+    listOf(
+        "G",
+        "PG",
+        "SG",
+        "PF",
+        "F",
+        "C",
+        "Util",
+    )
+
 private val guardEligiblePositions = listOf("PG", "SG")
 private val forwardEligiblePositions = listOf("SF", "PF")
 
+private val footballPositions =
+    listOf(
+        "QB",
+        "RB",
+        "WR",
+        "TE",
+        "W/R/T",
+        "K",
+        "DEF",
+    )
+private val flexEligiblePositions = listOf("RB", "WR", "TE")
+
 internal fun PlayerRowRawInfo.fullPositionalEligibility(): List<String> = buildList {
+    val defaultEligibility = positionEligibility?.filterNotNull().orEmpty()
+
+    if (defaultEligibility.all { basketballPositions.contains(it) }) {
+        addAll(basketballFullPositionalEligibility())
+    }
+
+    if (defaultEligibility.all { footballPositions.contains(it) }) {
+        addAll(footballFullPositionalEligibility())
+    }
+}
+
+private fun PlayerRowRawInfo.basketballFullPositionalEligibility(): List<String> = buildList {
     val defaultEligibility = positionEligibility?.filterNotNull().orEmpty()
     addAll(defaultEligibility)
 
@@ -33,4 +68,13 @@ internal fun PlayerRowRawInfo.fullPositionalEligibility(): List<String> = buildL
 
     // free for all, any position
     add("Util")
+}
+
+private fun PlayerRowRawInfo.footballFullPositionalEligibility(): List<String> = buildList {
+    val defaultEligibility = positionEligibility?.filterNotNull().orEmpty()
+    addAll(defaultEligibility)
+
+    if (flexEligiblePositions.any { defaultEligibility.contains(it) }) {
+        add("W/R/T")
+    }
 }

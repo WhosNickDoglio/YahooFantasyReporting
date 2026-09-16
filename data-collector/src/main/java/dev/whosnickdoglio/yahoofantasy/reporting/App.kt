@@ -28,17 +28,17 @@ internal class App(
     suspend operator fun invoke() {
         logger.log("Checking rosters in ${leagueInfo.name} for $yesterday")
 
-        val rosterInfo =
-            (1..leagueInfo.numberOfTeams).toList().map { id -> fetcher.fetchRosterInfo(id) }
-
         val reports =
-            rosterInfo
+            (1..leagueInfo.numberOfTeams)
+                .toList()
+                .map { id -> fetcher.fetchRosterInfo(id) }
                 .map { info -> Pair(info, rosterEvaluator.evaluate(info.players)) }
                 .onEach { (info, result) ->
                     logger.log(
                         when (result) {
                             is EvaluationResult.SetRoster ->
                                 "Roster is set for ${info.name}! ${info.url}"
+
                             is EvaluationResult.UnsetRoster ->
                                 "${info.name} has violations: ${result.violations.joinToString()} ${info.url}"
                         }
@@ -68,6 +68,7 @@ internal class App(
                         url = info.url,
                     )
                 }
+                .toList()
 
         if (reports.isNotEmpty()) {
             logger.log("Reporting to Google Sheets...")
