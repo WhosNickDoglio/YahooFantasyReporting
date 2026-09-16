@@ -16,6 +16,7 @@ plugins {
     alias(libs.plugins.lint) apply false
     alias(libs.plugins.sortDependencies) apply false
     alias(libs.plugins.mockingbird) apply false
+    alias(libs.plugins.buildconfig) apply false
 }
 
 doctor {
