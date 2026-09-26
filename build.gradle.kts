@@ -5,8 +5,8 @@ buildscript { dependencies { classpath(libs.burst) } }
 
 plugins {
     alias(libs.plugins.dependencyAnalysis)
-    alias(libs.plugins.doctor)
     alias(libs.plugins.kover)
+    //    alias(libs.plugins.doctor)
     alias(libs.plugins.kotlin.jvm) apply false
     alias(libs.plugins.kotlin.serialization) apply false
     alias(libs.plugins.ktfmt) apply false
@@ -18,11 +18,11 @@ plugins {
     alias(libs.plugins.mockingbird) apply false
 }
 
-doctor {
-    javaHome {
-        failOnError = false
-    }
-}
+// doctor {
+//    javaHome {
+//        failOnError = false
+//    }
+// }
 
 // https://docs.gradle.org/8.9/userguide/gradle_daemon.html#daemon_jvm_criteria
 tasks.updateDaemonJvm.configure {
