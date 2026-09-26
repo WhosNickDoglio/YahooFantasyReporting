@@ -7,11 +7,11 @@ inputs:
 runs:
   using: "composite"
   steps:
-    - name: set up JDK 26
+    - name: set up JDK 27
       uses: actions/setup-java@de7274f081f381c8f8158605e0321c36c376e2e6 # v6.0.1
       with:
         distribution: 'zulu'
-        java-version: '26'
+        java-version: '27'
     - name: Set up jemalloc
       uses: kaeawc/setup-jemalloc@a9b92a00f7bc2768fc855b7a235a33043d17492e # v0.0.6
     - name: Setup Gradle
