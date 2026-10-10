@@ -15,7 +15,7 @@ public interface LeagueInfo {
     public data object MitchRobLeagueInfo : LeagueInfo {
         override val name: String = "mitch"
         override val sport: Sport = Sport.Basketball
-        override val baseUrl: String = "${sport.url}/9615"
+        override val baseUrl: String = "${sport.url}/1090"
         override val numberOfTeams: Int = 12
         override val spreadSheetName: String = "MitchRob"
         override val injuryListCount: Int = 4
@@ -24,7 +24,7 @@ public interface LeagueInfo {
     public data object Redacted : LeagueInfo {
         override val name: String = "redacted"
         override val sport: Sport = Sport.Basketball
-        override val baseUrl: String = "${sport.url}/69734"
+        override val baseUrl: String = "${sport.url}/56582"
         override val numberOfTeams: Int = 12
         override val spreadSheetName: String = "Redacted"
         override val injuryListCount: Int = 4
@@ -33,7 +33,7 @@ public interface LeagueInfo {
     public data object BirthdayCakeOreo : LeagueInfo {
         override val name: String = "birthday"
         override val sport: Sport = Sport.Basketball
-        override val baseUrl: String = "${sport.url}/9616"
+        override val baseUrl: String = "${sport.url}/1088"
         override val numberOfTeams: Int = 10
         override val spreadSheetName: String = "Birthday"
         override val injuryListCount: Int = 4
