@@ -1,4 +1,4 @@
-// Copyright (C) 2025 Nicholas Doglio
+// Copyright (C) 2026 Nicholas Doglio
 // SPDX-License-Identifier: MIT
 
 package dev.whosnickdoglio.yahoofantasy.reporting
@@ -12,6 +12,6 @@ public suspend fun main() {
     val threeDaysAgo = LocalDate.now().minusDays(3)
     val graph =
         createGraphFactory<AppDependencyGraph.Factory>()
-            .create(threeDaysAgo = threeDaysAgo, leagueInfo = LeagueInfo.MitchRobLeagueInfo)
+            .create(threeDaysAgo = threeDaysAgo, leagueInfo = LeagueInfo.JHart)
     graph.app()
 }

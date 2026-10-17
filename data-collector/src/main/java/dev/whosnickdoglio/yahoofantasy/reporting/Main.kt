@@ -8,14 +8,17 @@ import dev.zacsweers.metro.createGraphFactory
 import java.time.LocalDate
 
 public suspend fun main(args: Array<String>) {
+    val leagues =
+        listOf(
+            LeagueInfo.JHart,
+            LeagueInfo.Redacted,
+            LeagueInfo.BirthdayCakeOreo,
+            LeagueInfo.PeoplesRepublic,
+        )
+
     val leagueInfo =
-        when (val league = args.first()) {
-            "mitch" -> LeagueInfo.MitchRobLeagueInfo
-            "redacted" -> LeagueInfo.Redacted
-            "birthday" -> LeagueInfo.BirthdayCakeOreo
-            "peoples" -> LeagueInfo.PeoplesRepublic
-            else -> error("Unknown league $league")
-        }
+        leagues.firstOrNull { info -> info.name == args.first() }
+            ?: error("Unknown league ${args.first()}")
 
     val yesterday = LocalDate.now().minusDays(1)
     val graph =

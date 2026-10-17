@@ -12,12 +12,12 @@ public interface LeagueInfo {
     public val injuryListCount: Int
     public val spreadSheetName: String
 
-    public data object MitchRobLeagueInfo : LeagueInfo {
-        override val name: String = "mitch"
+    public data object JHart : LeagueInfo {
+        override val name: String = "jhart"
         override val sport: Sport = Sport.Basketball
         override val baseUrl: String = "${sport.url}/1090"
         override val numberOfTeams: Int = 12
-        override val spreadSheetName: String = "MitchRob"
+        override val spreadSheetName: String = "JHart"
         override val injuryListCount: Int = 4
     }
 
@@ -40,12 +40,12 @@ public interface LeagueInfo {
     }
 
     public data object PeoplesRepublic : LeagueInfo {
-        override val name: String = "Peoples Republic"
+        override val name: String = "peoples"
         override val sport: Sport = Sport.Football
         override val baseUrl: String = "${sport.url}/256972"
         override val numberOfTeams: Int = 12
         override val injuryListCount: Int = 2
-        override val spreadSheetName: String = "Peoples Republic"
+        override val spreadSheetName: String = "2026-2027 Season"
     }
 }
 
