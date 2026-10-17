@@ -12,6 +12,10 @@ public interface LeagueInfo {
     public val injuryListCount: Int
     public val spreadSheetName: String
 
+    public val spreadSheetId: String
+        // Defaults to our basketball spreadsheet
+        get() = "11LQZQF2CDX4lmChkryV00aD6I2XTi3Fp4BmqNVwtuEI"
+
     public data object JHart : LeagueInfo {
         override val name: String = "jhart"
         override val sport: Sport = Sport.Basketball
@@ -46,6 +50,7 @@ public interface LeagueInfo {
         override val numberOfTeams: Int = 12
         override val injuryListCount: Int = 2
         override val spreadSheetName: String = "2026-2027 Season"
+        override val spreadSheetId: String = "1gI9gSdXA574QB8hK3MthEgM27OQe3bNtNbatUtbr_rs"
     }
 }
 
