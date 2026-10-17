@@ -9,12 +9,10 @@ plugins {
     //    alias(libs.plugins.doctor)
     alias(libs.plugins.kotlin.jvm) apply false
     alias(libs.plugins.kotlin.serialization) apply false
-    alias(libs.plugins.ktfmt) apply false
     alias(libs.plugins.metro) apply false
     alias(libs.plugins.convention.jvm) apply false
     alias(libs.plugins.detekt) apply false
     alias(libs.plugins.lint) apply false
-    alias(libs.plugins.sortDependencies) apply false
     alias(libs.plugins.mockingbird) apply false
     alias(libs.plugins.buildconfig) apply false
 }
