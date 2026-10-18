@@ -14,7 +14,7 @@ public interface LeagueInfo {
 
     public val spreadSheetId: String
         // Defaults to our basketball spreadsheet
-        get() = "11LQZQF2CDX4lmChkryV00aD6I2XTi3Fp4BmqNVwtuEI"
+        get() = "1JjpGWRH7ZOK771X022kP3JEy3EvT4hJgjEMCsHmiXjI"
 
     public data object JHart : LeagueInfo {
         override val name: String = "jhart"
