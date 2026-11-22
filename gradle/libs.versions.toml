@@ -17,7 +17,7 @@ lint = { id = "com.android.lint", version = "9.5.0" }
 doctor = { id = "com.osacky.doctor", version = "0.12.1" }
 dependencyAnalysis = { id = "com.autonomousapps.dependency-analysis", version = "3.20.4" }
 kover = { id = "org.jetbrains.kotlinx.kover", version = "0.9.11" }
-mockingbird = { id = "com.anthonycr.plugins.mockingbird", version = "3.4.0" }
+mockingbird = { id = "com.anthonycr.plugins.mockingbird", version = "3.5.0" }
 buildconfig = { id = "com.github.gmazzo.buildconfig", version = "6.1.2" }
 
 [libraries]
